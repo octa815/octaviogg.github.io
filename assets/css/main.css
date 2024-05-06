@@ -144,7 +144,7 @@ input, select, textarea {
 		}
 
 	body {
-		color: #212931;
+		color: #ffffff;
 	}
 
 	body, input, select, textarea {
@@ -292,13 +292,13 @@ input, select, textarea {
 	}
 
 	a {
-		color: #212931;
+		color: #ffffff;/*TODO: Color menu*/
 		border-bottom-color: rgba(33, 41, 49, 0.5);
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #18bfef !important;
+			color: #5b8d9c !important;
 		}
 
 	strong, b {
@@ -306,7 +306,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #212931;
+		color: #ffffff;
 	}
 
 	blockquote {
@@ -3234,13 +3234,14 @@ input, select, textarea {
 			width: 100%;
 			height: 100%;
 			background-color: #212931;
-			background-image: url("../../images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../images/bg.jpg");
+			background-image: url("../../images/overlay.png"), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../gif/Reg.gif");
+			/* background-image: url("../../gif/videogame-rain.gif"); */
 			background-size: auto,								auto,														100% auto;
 			background-position: center,								center,														top center;
 			background-repeat: repeat,								no-repeat,													no-repeat;
 			background-attachment: scroll,								scroll,														scroll;
 			z-index: -1;
-		}
+		}/*TODO:*/
 
 			#wrapper > .bg.fixed {
 				position: fixed;
@@ -3756,7 +3757,7 @@ input, select, textarea {
 /* Main */
 
 	#main {
-		background-color: #ffffff;
+		background-color: transparent; /*TODO:*/
 		position: relative;
 		margin: 0 auto;
 		width: calc(100% - 4rem);
@@ -3766,7 +3767,7 @@ input, select, textarea {
 
 		#main > * {
 			padding: 4rem 4rem 2rem 4rem ;
-			border-top: solid 2px #eeeeee;
+			/* border-top: solid 2px #eeeeee; */
 			margin: 0;
 		}
 
@@ -3863,9 +3864,9 @@ input, select, textarea {
 
 			#main > .posts > article {
 				border-color: #eeeeee;
-				border-left-width: 2px;
+				/* border-left-width: 2px; */
 				border-style: solid;
-				border-top-width: 2px;
+				/* border-top-width: 2px; */
 				text-align: center;
 			}
 
@@ -4562,7 +4563,7 @@ input, select, textarea {
 		transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		display: none;
 		-webkit-overflow-scrolling: touch;
-		background: #ffffff;
+		background: #00000079;
 		box-shadow: none;
 		color: #212931;
 		height: 100%;

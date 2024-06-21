@@ -24,7 +24,7 @@ section, summary, time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	cursor: url(../images/glitch.png),auto;}
+	cursor: url(../images/glitch.png);}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -32,7 +32,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
-	cursor: url(../images/glitch.png),auto;
+	cursor: url(../images/glitch.png);
 }
 
 ol, ul {
@@ -2688,7 +2688,7 @@ input, select, textarea {
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
-		cursor: default;
+		/*cursor: default;*/
 		list-style: none;
 		margin-left: -1rem;
 		padding-left: 0;

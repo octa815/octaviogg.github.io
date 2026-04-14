@@ -1,237 +1,1069 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Octavio Gregorio — Multimedia Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #060810;
+    --surface: #0C0F1E;
+    --surface2: #111527;
+    --border: rgba(0,220,255,0.12);
+    --accent: #00DCFF;
+    --accent2: #FF3F6C;
+    --gold: #E8C547;
+    --text: #D8E4FF;
+    --muted: #acfaab;
+    --font-head: 'Chakra Petch', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-head);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* GRID TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,220,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,220,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(6,8,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--muted); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--accent); }
+
+  .nav-cv {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--accent);
+    padding: 0.45rem 1.1rem;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-cv:hover { background: var(--accent); color: var(--bg); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero h1 .surname {
+    display: block;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .hero h1 .accent-word { color: var(--accent); }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 2rem 0 3rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    font-weight: 700;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-block;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+    animation: scrollLine 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes scrollLine { to { width: 70px; opacity: 0.3; } }
+
+  .hero-number {
+    position: absolute;
+    right: 3rem;
+    bottom: 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 600; }
+
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-name {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .skill-level {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .skill-bar {
+    height: 2px;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 1s ease;
+  }
+
+  .skill-fill.pink { background: var(--accent2); }
+  .skill-fill.gold { background: var(--gold); }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .tag:hover {
+    transform: scale(1.08);
+    border-color: rgba(0,220,255,0.35);
+  }
+
+  .tag.accent { border-color: rgba(0,220,255,0.3); color: var(--accent); }
+  .tag.pink { border-color: rgba(255,63,108,0.3); color: var(--accent2); }
+  .tag.gold { border-color: rgba(232,197,71,0.3); color: var(--gold); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transform-origin: center;
+  }
+
+  .project-card.clickable {
+    cursor: pointer;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover {
+    border-color: rgba(0,220,255,0.32);
+    background: var(--surface2);
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0,220,255,0.08) inset;
+  }
+
+  .project-card:active {
+    transform: translateY(-2px) scale(1.005);
+  }
+
+  .project-card.featured::before { transform: scaleX(1); background: var(--accent2); }
+  .project-card.featured { border-color: rgba(255,63,108,0.2); }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .project-year {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .project-type {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(0,220,255,0.2);
+  }
+
+  .project-type.team { color: var(--gold); border-color: rgba(232,197,71,0.25); }
+  .project-type.personal { color: var(--accent2); border-color: rgba(255,63,108,0.25); }
+
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    flex: 1;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-links a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .project-links a:hover { color: var(--accent); }
+
+  .project-links a::after { content: '→'; font-size: 0.8rem; }
+
+  .project-links a.disabled {
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
+  /* EXPERIENCE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 1px solid var(--border);
+    padding-left: 2.5rem;
+    margin-left: 1rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.9rem;
+    top: 0.4rem;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+
+  .timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-role {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-org {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 600px;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-cta h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-cta p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover { border-color: rgba(0,220,255,0.3); background: var(--surface); }
+
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  .contact-link-value {
+    font-size: 0.9rem;
+  }
+
+  .contact-link-arrow {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 1rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .contact-link:hover .contact-link-arrow { color: var(--accent); transform: translateX(4px); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-scroll, .hero-number { display: none; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 1.5rem; }
+    .divider { margin: 0 1.5rem; }
+  }
+
+  /* FADE IN ANIMATION */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">OGG<span>.dev</span></a>
+  <ul>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="elements.html">Archivador</a></li>
+  </ul>
+  <a class="nav-cv" href="cv_octavio_gregorio.pdf" download>Descargar CV</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-tag">Estudiante de Ingeniería Multimedia · Project Lead · Game Dev</p>
+  <h1>
+    <span>Octavio</span>
+    <span class="surname">Gregorio <span class="accent-word">Guerrero</span></span>
+  </h1>
+  <p class="hero-subtitle">
+    Estudiante de ingeniería multimedia especializado en desarrollo de videojuegos
+    y coordinación de equipos y proyectos.
+  </p>
+  <div class="hero-ctas">
+    <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+    <a href="#contacto" class="btn-outline">Contactar</a>
+  </div>
+  <span class="hero-scroll">:D</span>
+  <span class="hero-number">2021 — 2026</span>
+</div>
+
+<hr class="divider">
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi" class="fade-in">
+  <p class="section-label">Sobre mí</p>
+  <h2 class="section-title">Ingeniero que <br>lidera equipos</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        Estudiante de último año de <strong>Ingeniería Multimedia</strong> en la Universidad de Alicante.
+        A lo largo de la carrera he asumido de forma natural el rol de <strong>coordinador</strong>
+        en todos los proyectos en grupo: organizando tareas, marcando ritmos y asegurando que el producto salga adelante.
+      </p>
+      <p>
+        Me atrae especialmente la <strong>gestión de proyectos tecnológicos</strong>, orientándome mayoritariamente
+        hacia la rama de los videojuegos aunque con una base técnica en desarrollo y web.
+      </p>
+      <p>
+        Tengo iniciativa propia: llevo adelante una pequeña idea de negocio de impresión 3D (<strong>3DOCNA</strong>),
+        que me ha permitido expandir conocimientos de modelado y negocio.
+      </p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">Project Management</span>
+          <span class="skill-level">Principal</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">C / C++</span>
+          <span class="skill-level">Avanzado</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">Web — MERN Stack</span>
+          <span class="skill-level">Intermedio</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill pink" style="width:60%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">3D Design & Print</span>
+          <span class="skill-level">Avanzado</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill gold" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">Game Dev</span>
+          <span class="skill-level">Intermedio</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill pink" style="width:65%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header">
+          <span class="skill-name">Blender / OpenGL</span>
+          <span class="skill-level">Intermedio</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROYECTOS -->
+<section id="proyectos" class="fade-in">
+  <p class="section-label">Trabajo seleccionado</p>
+  <h2 class="section-title">Proyectos</h2>
+
+  <div class="projects-grid">
+
+    <!-- Castle of Shadows -->
+    <div class="project-card featured">
+      <div class="project-meta">
+        <span class="project-year">2025 — 2026</span>
+        <span class="project-type team">Equipo · Zero Studios</span>
+      </div>
+      <h3 class="project-title">Castle of Shadows</h3>
+      <p class="project-desc">
+        Videojuego 3D de acción y mazmorras desarrollado en equipo dentro de Zero Studios,
+        construido sobre un motor gráfico propio en C++ con OpenGL. Mi rol: programador
+        multitarea con orientación al game design, coordinación del equipo y gestión de tareas.
+      </p>
+      <div class="project-tags">
+        <span class="tag accent">C++</span>
+        <span class="tag accent">OpenGL</span>
+        <span class="tag">Motor propio</span>
+        <span class="tag">Game Design</span>
+        <span class="tag">Project Lead</span>
+      </div>
+      <div class="project-links">
+        <a href="https://www.instagram.com/realzerostudios/" target="_blank">Instagram</a>
+      </div>
+    </div>
+
+    <!-- PixelDepot -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-year">2025</span>
+        <span class="project-type team">Equipo · UA</span>
+      </div>
+      <h3 class="project-title">PixelDepot — Plataforma MERN</h3>
+      <p class="project-desc">
+        Plataforma web colaborativa de gestión de assets digitales para una empresa de videojuegos
+        ficticia. Desarrollada con el stack completo MERN.
+        Autenticación, CRUD de assets, filtrado y diseño responsive con criterios WCAG 2.1.
+      </p>
+      <div class="project-tags">
+        <span class="tag pink">React.js</span>
+        <span class="tag pink">Node.js</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Express</span>
+        <span class="tag">WCAG 2.1</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/octa815/UA_PixelDepot" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Tower Hero Game Boy -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-year">2025</span>
+        <span class="project-type team">Equipo · PocketBoy</span>
+      </div>
+      <h3 class="project-title">Tower Hero — Game Boy</h3>
+      <p class="project-desc">
+        Videojuego completo para hardware Game Boy programado en ensamblador Z80.
+        Participante oficial de <strong style="color:var(--gold)">GBRetroDev'25: Heroes of ASM 2</strong>.
+        Desarrollo a bajo nivel: gestión directa de memoria y optimización de recursos
+        en hardware con restricciones severas.
+      </p>
+      <div class="project-tags">
+        <span class="tag">ASM Z80</span>
+        <span class="tag">Bajo nivel</span>
+        <span class="tag">Hardware</span>
+        <span class="tag gold">GBRetroDev'25</span>
+      </div>
+      <div class="project-links">
+        <a href="https://pocketboy-games.itch.io/towerhero" target="_blank">itch.io</a>
+      </div>
+    </div>
+
+    <!-- 2Dymiros -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-year">2024</span>
+        <span class="project-type team">Equipo · CodeBreaker Studios</span>
+      </div>
+      <h3 class="project-title">2Dymiros — Videojuego de cartas</h3>
+      <p class="project-desc">
+        Juego de cartas desarrollado en C++ sin motor gráfico externo para Fundamentos de Videojuegos.
+        Implementación de sistemas de cartas, turnos, IA básica para el oponente
+        y gestión de estados de partida.
+      </p>
+      <div class="project-tags">
+        <span class="tag accent">C++</span>
+        <span class="tag">OOP</span>
+        <span class="tag">Game Logic</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/octa815" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Postproducción / Cortometraje -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-year">2025</span>
+        <span class="project-type team">Equipo · UA</span>
+      </div>
+      <h3 class="project-title">Cortometraje — Postproducción Digital</h3>
+      <p class="project-desc">
+        Grabación y postproducción de un cortometraje en equipo. Rodaje con cámaras
+        profesionales y dispositivos móviles, seguido de edición, corrección de color
+        y postproducción completa en DaVinci Resolve.
+      </p>
+      <div class="project-tags">
+        <span class="tag pink">DaVinci Resolve</span>
+        <span class="tag">Edición de vídeo</span>
+        <span class="tag">Color grading</span>
+        <span class="tag">Producción</span>
+      </div>
+    </div>
+
+    <!-- 3DOCNA -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-year">2026</span>
+        <span class="project-type personal">Proyecto propio</span>
+      </div>
+      <h3 class="project-title">3DOCNA — Impresión 3D</h3>
+      <p class="project-desc">
+        Idea de negocio propio de impresión 3D recién arrancada: pedidos personalizados y catálogo
+        de productos. Trabajo con materiales como TPU, PLA y PETG en una Bambu Lab A1.
+        Gestión íntegra: diseño, producción, pedidos y clientes.
+      </p>
+      <div class="project-tags">
+        <span class="tag gold">Emprendimiento</span>
+        <span class="tag">Blender</span>
+        <span class="tag">OpenSCAD</span>
+        <span class="tag">FDM</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="disabled" aria-disabled="true"> WEB EN CONSTRUCCIÓN</a>
+      </div>
+    </div>
+
+    <!-- Blender / 3D -->
+    <div class="project-card">
+      <div class="project-meta">
+        <span class="project-year">2023</span>
+        <span class="project-type accent">Individual</span>
+      </div>
+      <h3 class="project-title">Blender — Diseño 3D & Scripting</h3>
+      <p class="project-desc">
+        Serie de proyectos 3D: interiorismo del Taj Mahal, animación de robot cuadrúpedo
+        y scripting en Python para generar escenas de lluvia dinámicas dentro de Blender.
+        Render, rigging e iluminación.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Blender</span>
+        <span class="tag">Python</span>
+        <span class="tag">3D Modeling</span>
+        <span class="tag">Rigging</span>
+      </div>
+      <div class="project-links">
+        <a href="https://octa815.github.io/octaviogg.github.io/" target="_blank">Portfolio</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCIA -->
+<section id="experiencia" class="fade-in">
+  <p class="section-label">Formación & Experiencia</p>
+  <h2 class="section-title">Trayectoria</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <p class="timeline-date">2021 — Actualidad</p>
+      <h3 class="timeline-role">Grado en Ingeniería Multimedia</h3>
+      <p class="timeline-org">Universidad de Alicante — EPS</p>
+      <p class="timeline-desc">
+        Formación en desarrollo de software, videojuegos, diseño 3D, web, sistemas gráficos y gestión de proyectos.
+        En múltiples asignaturas he ejercido como coordinador de grupo: planificación de tareas,
+        distribución del trabajo y seguimiento del progreso del equipo.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">2024 — Actualidad</p>
+      <h3 class="timeline-role">Investigación — Prácticas universitarias</h3>
+      <p class="timeline-org">Escuela Politécnica Superior, Universidad de Alicante</p>
+      <p class="timeline-desc">
+        Prácticas en la propia EPS que derivaron en un trabajo de investigación sobre
+        <strong style="color:var(--text)">Arquitectura Híbrida</strong>. Los resultados están siendo
+        aprovechados como base del Trabajo de Fin de Grado (TFG) actualmente en desarrollo.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">2025 — Actualidad</p>
+      <h3 class="timeline-role">Project Lead & Developer</h3>
+      <p class="timeline-org">Zero Studios — Castle of Shadows</p>
+      <p class="timeline-desc">
+        Coordinación del equipo de desarrollo del videojuego Castle of Shadows. Toma de decisiones
+        sobre arquitectura técnica, priorización de funcionalidades y seguimiento de entregables.
+        Rol de programador multitarea con orientación al game design.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">2026</p>
+      <h3 class="timeline-role">Fundador</h3>
+      <p class="timeline-org">3DOCNA — Impresión 3D personalizada</p>
+      <p class="timeline-desc">
+        Idea de negocio propio de impresión 3D recién arrancada. Gestión de diseño de productos,
+        atención a clientes, producción y presencia web.
+      </p>
+    </div>
+
+    <div class="timeline-item">
+      <p class="timeline-date">2020</p>
+      <h3 class="timeline-role">Titulación B2 en Inglés</h3>
+      <p class="timeline-org">EOI Elda (Curso en C1)</p>
+      <p class="timeline-desc">Certificación oficial de nivel B2 en lengua inglesa.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACTO -->
+<section id="contacto" class="fade-in">
+  <p class="section-label">Contacto</p>
+  <div class="contact-grid">
+    <div class="contact-cta">
+      <h2>¿Hablamos de<br><span style="color:var(--accent)">trabajar juntos?</span></h2>
+      <p>
+        Abierto a oportunidades en gestión de proyectos, product management o desarrollo
+        en la industria del videojuego o tech. También disponible para freelance y colaboraciones.
+      </p>
+      <a href="cv_octavio_gregorio.pdf" download class="btn-primary">Descargar CV completo</a>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:octavio.ogg+pf@gmail.com" class="contact-link">
+        <div>
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">octavio.ogg+pf@gmail.com</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://github.com/octa815" target="_blank" class="contact-link">
+        <div>
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/octa815</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://3docna.netlify.app" target="_blank" class="contact-link">
+        <div>
+          <span class="contact-link-label">3D Printing Business</span>
+          <span class="contact-link-value">3docna.netlify.app</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/octavio-gregorio" target="_blank" class="contact-link">
+        <div>
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/octavio-gregorio</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Octavio Gregorio Guerrero — Ingeniero Multimedia</p>
+  <p>Elda, Alicante, España · <a href="https://github.com/octa815" target="_blank">GitHub</a></p>
+</footer>
+
 <script>
-	document.addEventListener("DOMContentLoaded", function() {
-	  var links = document.querySelectorAll(".smooth-scroll");
-	
-	  for (var i = 0; i < links.length; i++) {
-		links[i].addEventListener("click", function(event) {
-		  event.preventDefault();
-		  var targetId = this.getAttribute("href").substring(1);
-		  var targetElement = document.getElementById(targetId);
-		  if (targetElement) {
-			var targetPosition = targetElement.offsetTop;
-			var startPosition = window.pageYOffset;
-			var distance = targetPosition - startPosition;
-			var duration = 1000; // Duración de la animación en milisegundos
-			var startTime = null;
-	
-			function animation(currentTime) {
-			  if (startTime === null) startTime = currentTime;
-			  var timeElapsed = currentTime - startTime;
-			  var progress = Math.min(timeElapsed / duration, 1);
-			  window.scrollTo(0, startPosition + distance * ease(progress));
-	
-			  if (timeElapsed < duration) {
-				requestAnimationFrame(animation);
-			  }
-			}
-	
-			function ease(t) {
-			  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-			}
-	
-			requestAnimationFrame(animation);
-		  }
-		});
-	  }
-	});
-	</script>
-<html>
-	<head>
-		<title>OGG</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-				<!-- Intro -->
-					<div id="intro">
-						<h1>BUENAS!<br />
-						Sigue bajando para descubir mi porfolio</h1>
-						<p>Un recorrido por mis proyectos actuales y futuros.</p>
-						<p>Octavio Gregorio Guerrero</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
+  document.querySelectorAll('.project-card').forEach((card) => {
+    const primaryLink = card.querySelector('.project-links a:not(.disabled)');
+    if (!primaryLink) return;
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">OctavioGG</a>
-					</header>
+    card.classList.add('clickable');
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">Inicio</a></li>
-							<li><a href="#footer" class="smooth-scroll">Info</a></li>
-							<li><a href="#proyectos" class="smooth-scroll">Proyectos</a></li>
-						</ul>
-						<ul class="icons">
-							<!-- <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li> -->
-							<!-- <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li> -->
-							<li><a href="https://instagram.com/octa815" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://github.com/octa815" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
-				
-
-				<!-- Main -->
-					<div id="main">
-
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<span class="date">2024</span>
-									<h2><a href="#">
-									<br />
-									Quien soy?</a></h2>
-									<p>Soy Octavio, y actualmente estoy estudiando Ingeniería Multimedia en la Universidad de Alicante. Aunque, como aficionado al mundo de los videojuegos, siempre estoy dispuesto a explorar otro tipo de ramas y aprender de ellas.</p>
-								</header>
-								<a class="image main"><img src="gif/Pacman.gif" alt="" /></a>
-								<ul class="actions special">
-									<!--<li><a href="#" class="button large">Botón</a></li>-->
-								</ul>
-							</article>
-
-						<!-- Posts -->
-							<section class="posts" id = "proyectos">
-
-
-								<article>
-									<header>
-										<span class="date">2023</span>
-										<h2><a href="interiorismo.html">Interiorismo<br />
-										Blender</a></h2>
-									</header>
-									<a href="interiorismo.html" class="image fit"><img src="proyectos/inter_blend/Día/dia.jpg" alt="" /></a>
-									<p>Modelado del interior y la iluminación dentro de un escenario ficticio del Taj Mahal</p>
-									<ul class="actions special">
-										<li><a href="interiorismo.html" class="button">Detalles</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-										<span class="date">2023</span>
-										<h2><a href="animation.html">Animación<br />
-										en blender</a></h2>
-									</header>
-									<a href="animation.html" class="image fit"><img src="proyectos/anim_blend/Renders/Pensando.jpg" alt="" /></a>
-									<p>Modelado y animación de un robot cuadrúpedo futurista en el espacio dándole un contexto</p>
-									<ul class="actions special">
-										<li><a href="animation.html" class="button">Detalles</a></li>
-									</ul>
-								</article>
-
-
-								<article>
-									<header>
-										<span class="date">2023</span>
-										<h2><a href="scripting.html">Scripting<br /> en Blender</a></h2>
-									</header>
-								
-									<a href="scripting.html" class="image fit">
-										<video autoplay loop muted playsinline height="252">
-											<source src="proyectos/script_blend/0002-0200.mp4" type="video/mp4">
-											Tu navegador no soporta la etiqueta de video.
-										</video>
-									</a>
-									<p>Programación en lenguaje Python de un script para Blender donde se crea una escena de lluvia editable para el usuario.</p>
-									<ul class="actions special">
-										<li><a href="scripting.html" class="button">Detalles</a></li>
-									</ul>
-								</article>
-
-
-
-								<article>
-									<header>
-										<span class="date">2023</span>
-										<h2><a href="#">SUNEGAMI</a></h2>
-									</header>
-									<a href="http://octaviogg.infinityfreeapp.com/" target="_blank" class="image fit"><img src="images/sunegami.jpeg" alt="" /></a>
-									<p>Página web por la parte del cliente y el servidor considerado un producto mínimo viable, es decir un producto con suficientes
-										características para satisfacer a los clientes iniciales, y proporcionar retroalimentación para el desarrollo
-										futuro</p>
-									<ul class="actions special">
-										<li><a href="proyectos/WEB.zip" class="button icon solid fa-download">Descargar archivos</a></li>
-									</ul>
-								</article>
-
-
-
-							</section>
-							<br>
-							
-
-						<!-- Footer -->
-							<!-- <footer> -->
-								<!-- <div class="pagination"> -->
-									<!--<a href="#" class="previous">Prev</a>-->
-									<!-- <a href="#" class="page active">1</a> -->
-									<!-- <a href="#" class="page">2</a> -->
-									<!-- <a href="#" class="page">3</a> -->
-									<!-- <span class="extra">&hellip;</span> -->
-									<!-- <a href="#" class="page">8</a> -->
-									<!-- <a href="#" class="page">9</a> -->
-									<!-- <a href="#" class="page">10</a> -->
-									<!-- <a href="#" class="next">Next</a> -->
-								<!-- </div> -->
-							<!-- </footer> -->
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<section class="split contact">
-							<section>
-								<h3>Dirección</h3>
-								<p><a href="https://maps.app.goo.gl/UzSxrxzNdEm5cjPr8" target="_blank">Carr. de San Vicente del Raspeig, s/n,<br />03690 San Vicente del Raspeig, Alicante</a></p>
-								
-							</section>
-							<section>
-								<h3>Teléfono</h3>
-								<p><a href="tel:+34694455979">694 455 979</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="mailto:octavio.ogg+pf@gmail.com?Subject=¿Tienes%20alguna%20duda?%20Cuéntamelo↓">octavio.ogg+pf@gmail.com</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<!-- <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li> -->
-									<!-- <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li> -->
-									<li><a href="https://instagram.com/octa815" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="https://github.com/octa815" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
-
-				<!-- Copyright -->
-					<div id="copyright">
-						<ul><li>&copy; OGG</li></ul>
-						<!-- <li>Design: <a href="https://html5up.net">HTML5 UP</a></li> -->
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('.project-links a')) return;
+      window.open(primaryLink.href, '_blank', 'noopener');
+    });
+  });
+</script>
+</body>
 </html>

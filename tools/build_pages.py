@@ -13,7 +13,7 @@ LINKEDIN = "https://www.linkedin.com/in/octagg"
 GITHUB = "https://github.com/octa815"
 ITCH = "https://pocketboy-games.itch.io/towerhero"
 PHONE_WA = "34694455979"
-V = "20260923b"  # cache-busting for css/js
+V = "20260923c"  # cache-busting for css/js
 
 from urllib.parse import quote
 MSG_ES = "Hola Octavio, he visto tu portfolio y me encantaría contratarte ;)"

@@ -123,6 +123,36 @@
     matchMedia("(min-width: 861px)").addEventListener("change", (e) => e.matches && setMenu(false));
   }
 
+  // ---- Pixel octopus that trails the cursor (mouse only) ------------------
+  // Reduced motion: no pet at all; the pixel arrow cursor stays.
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches && !reduceMotion.matches) {
+    const pet = document.createElement("div");
+    pet.className = "pet";
+    pet.setAttribute("aria-hidden", "true");
+    pet.innerHTML = '<img class="off" src="assets/img/pet-octo.svg" alt=""><img class="on" src="assets/img/pet-octo-hover.svg" alt="">';
+    document.body.appendChild(pet);
+    const HOT = "a, button, summary, label[for], select, [role='button']";
+    let mx = 0, my = 0, px = 0, py = 0, running = false;
+    const step = () => {
+      px += (mx + 14 - px) * 0.14;
+      py += (my + 16 - py) * 0.14;
+      pet.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+      if (Math.abs(mx + 14 - px) + Math.abs(my + 16 - py) > 0.3) requestAnimationFrame(step);
+      else running = false;
+    };
+    addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse") return;
+      if (!pet.hasAttribute("data-show")) { px = e.clientX + 14; py = e.clientY + 16; }
+      mx = e.clientX; my = e.clientY;
+      pet.setAttribute("data-show", "");
+      pet.toggleAttribute("data-hover", !!(e.target.closest && e.target.closest(HOT)));
+      if (!running) { running = true; requestAnimationFrame(step); }
+    }, { passive: true });
+    document.addEventListener("mouseout", (e) => { if (!e.relatedTarget) pet.removeAttribute("data-show"); });
+    addEventListener("pointerdown", () => pet.setAttribute("data-down", ""));
+    addEventListener("pointerup", () => pet.removeAttribute("data-down"));
+  }
+
   // ---- Scroll-driven bits (one passive listener) --------------------------
   const toTop = $(".to-top");
   let ticking = false;

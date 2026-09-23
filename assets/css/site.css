@@ -1541,15 +1541,42 @@ html:not(.js) .skel::after { display: none; }
 .theme-swap, .theme-swap *, .theme-swap *::before, .theme-swap *::after { transition: none !important; }
 
 /* ---------- Custom cursor (mouse only) ---------- */
+/* Small precise pixel arrow; a pixel octopus (site.js) trails behind it. */
 @media (hover: hover) and (pointer: fine) {
-  html, body { cursor: url("../img/cursor.svg") 2 2, auto; }
+  html, body { cursor: url("../img/cursor.svg") 1 1, auto; }
   a, button, summary, label[for], .chip, [role="button"], select,
   .gallery button, .yt button, input[type="checkbox"] {
-    cursor: url("../img/cursor-pointer.svg") 2 2, pointer;
+    cursor: url("../img/cursor-pointer.svg") 1 1, pointer;
   }
   input[type="text"], input[type="email"], input[type="search"], textarea { cursor: text; }
-  .gallery button { cursor: url("../img/cursor-pointer.svg") 2 2, zoom-in; }
 }
+
+.pet {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 300;
+  width: 26px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  will-change: transform;
+}
+.pet[data-show] { opacity: 1; }
+.pet img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  transition: opacity 200ms ease, transform 250ms var(--ease-out);
+}
+.pet .on { opacity: 0; }
+.pet[data-hover] .off { opacity: 0; }
+.pet[data-hover] .on { opacity: 1; }
+.pet[data-hover] img { transform: scale(1.25); }
+.pet[data-down] img { transform: scale(0.85); }
 
 /* ---------- Small extras ---------- */
 .btn .tiny {

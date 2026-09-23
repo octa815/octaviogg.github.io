@@ -1,1073 +1,320 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-es-title="Octavio Gregorio · Ingeniero Multimedia, Game Dev y Project Manager" data-en-title="Octavio Gregorio · Multimedia Engineer, Game Dev &amp; Project Manager">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Octavio Gregorio — Multimedia Engineer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Octavio Gregorio · Ingeniero Multimedia, Game Dev y Project Manager</title>
+<meta name="description" content="Portfolio de Octavio Gregorio Guerrero, ingeniero multimedia en Elda (Alicante). Videojuegos en C++ y Z80, TFG de superresolución con IA (10, MH) y coordinación de equipos." data-es-content="Portfolio de Octavio Gregorio Guerrero, ingeniero multimedia en Elda (Alicante). Videojuegos en C++ y Z80, TFG de superresolución con IA (10, MH) y coordinación de equipos." data-en-content="Portfolio of Octavio Gregorio Guerrero, multimedia engineer in Elda (Alicante, Spain). Games in C++ and Z80, AI super-resolution thesis (10/10) and team coordination.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Octavio Gregorio Guerrero">
+<link rel="canonical" href="https://octa815.github.io/octaviogg.github.io/">
+<meta name="theme-color" content="#f4f1ea">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Octavio Gregorio">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:title" content="Octavio Gregorio · Ingeniero Multimedia, Game Dev y Project Manager">
+<meta property="og:description" content="Portfolio de Octavio Gregorio Guerrero, ingeniero multimedia en Elda (Alicante). Videojuegos en C++ y Z80, TFG de superresolución con IA (10, MH) y coordinación de equipos.">
+<meta property="og:url" content="https://octa815.github.io/octaviogg.github.io/">
+<meta property="og:image" content="https://octa815.github.io/octaviogg.github.io/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script>(function(){var r=document.documentElement,s;try{s=localStorage}catch(e){}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';r.classList.add('js')})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="images/octavio_gg_logo.png">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #060810;
-    --surface: #0C0F1E;
-    --surface2: #111527;
-    --border: rgba(0,220,255,0.12);
-    --accent: #00DCFF;
-    --accent2: #FF3F6C;
-    --gold: #E8C547;
-    --text: #D8E4FF;
-    --muted: #D3E2FB;
-    --font-head: 'Chakra Petch', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-head);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* GRID TEXTURE */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,220,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,220,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.2rem 3rem;
-    background: rgba(6,8,16,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-decoration: none;
-  }
-
-  .nav-logo span { color: var(--muted); }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-  }
-
-  nav ul a {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  nav ul a:hover { color: var(--accent); }
-
-  .nav-cv {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 1px solid var(--accent);
-    padding: 0.45rem 1.1rem;
-    transition: background 0.2s, color 0.2s;
-  }
-
-  .nav-cv:hover { background: var(--accent); color: var(--bg); }
-
-  /* HERO */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 4rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    z-index: 1;
-  }
-
-  .hero-tag {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .hero-tag::before {
-    content: '';
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  .hero h1 {
-    font-size: clamp(2.8rem, 7vw, 6rem);
-    font-weight: 700;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.3rem;
-  }
-
-  .hero h1 .surname {
-    display: block;
-    color: var(--muted);
-    font-weight: 300;
-  }
-
-  .hero h1 .accent-word { color: var(--accent); }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 520px;
-    margin: 2rem 0 3rem;
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.9rem 2rem;
-    font-weight: 700;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-
-  .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
-
-  .btn-outline {
-    display: inline-block;
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.9rem 2rem;
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 3rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .hero-scroll::after {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--muted);
-    animation: scrollLine 1.5s ease-in-out infinite alternate;
-  }
-
-  @keyframes scrollLine { to { width: 70px; opacity: 0.3; } }
-
-  .hero-number {
-    position: absolute;
-    right: 3rem;
-    bottom: 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-
-  /* SECTIONS */
-  section {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 3rem;
-  }
-
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  .section-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
-
-  /* DIVIDER */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0 3rem;
-  }
-
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .about-text p {
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 1.2rem;
-    font-weight: 300;
-  }
-
-  .about-text p strong { color: var(--text); font-weight: 600; }
-
-  .skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .skill-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .skill-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .skill-name {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text);
-  }
-
-  .skill-level {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-
-  .skill-bar {
-    height: 2px;
-    background: var(--surface2);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .skill-fill {
-    height: 100%;
-    background: var(--accent);
-    transition: width 1s ease;
-  }
-
-  .skill-fill.pink { background: var(--accent2); }
-  .skill-fill.gold { background: var(--gold); }
-
-  /* TAGS */
-  .tag {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-
-  .tag:hover {
-    transform: scale(1.08);
-    border-color: rgba(0,220,255,0.35);
-  }
-
-  .tag.accent { border-color: rgba(0,220,255,0.3); color: var(--accent); }
-  .tag.pink { border-color: rgba(255,63,108,0.3); color: var(--accent2); }
-  .tag.gold { border-color: rgba(232,197,71,0.3); color: var(--gold); }
-
-  /* PROJECTS */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5px;
-  }
-
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-    position: relative;
-    overflow: hidden;
-    cursor: default;
-    transform-origin: center;
-  }
-
-  .project-card.clickable {
-    cursor: pointer;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-
-  .project-card:hover::before { transform: scaleX(1); }
-  .project-card:hover {
-    border-color: rgba(0,220,255,0.32);
-    background: var(--surface2);
-    transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0,220,255,0.08) inset;
-  }
-
-  .project-card:active {
-    transform: translateY(-2px) scale(1.005);
-  }
-
-  .project-card.featured::before { transform: scaleX(1); background: var(--accent2); }
-  .project-card.featured { border-color: rgba(255,63,108,0.2); }
-
-  .project-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .project-year {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-
-  .project-type {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    padding: 0.2rem 0.6rem;
-    border: 1px solid rgba(0,220,255,0.2);
-  }
-
-  .project-type.team { color: var(--gold); border-color: rgba(232,197,71,0.25); }
-  .project-type.personal { color: var(--accent2); border-color: rgba(255,63,108,0.25); }
-
-  .project-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-  }
-
-  .project-desc {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.7;
-    font-weight: 300;
-    flex: 1;
-  }
-
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .project-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .project-links a {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .project-links a:hover { color: var(--accent); }
-
-  .project-links a::after { content: '→'; font-size: 0.8rem; }
-
-  .project-links a.disabled {
-    pointer-events: none;
-    opacity: 0.75;
-  }
-
-  /* EXPERIENCE */
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-left: 1px solid var(--border);
-    padding-left: 2.5rem;
-    margin-left: 1rem;
-  }
-
-  .timeline-item {
-    position: relative;
-    padding-bottom: 2.5rem;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2.9rem;
-    top: 0.4rem;
-    width: 8px;
-    height: 8px;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-  }
-
-  .timeline-date {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-  }
-
-  .timeline-role {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 0.2rem;
-  }
-
-  .timeline-org {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.05em;
-  }
-
-  .timeline-desc {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.7;
-    font-weight: 300;
-    max-width: 600px;
-  }
-
-  /* CONTACT */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .contact-cta h2 {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1.2rem;
-  }
-
-  .contact-cta p {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    font-weight: 300;
-    margin-bottom: 2rem;
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: var(--text);
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .contact-link:hover { border-color: rgba(0,220,255,0.3); background: var(--surface); }
-
-  .contact-link-label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 0.1rem;
-  }
-
-  .contact-link-value {
-    font-size: 0.9rem;
-  }
-
-  .contact-link-arrow {
-    margin-left: auto;
-    color: var(--muted);
-    font-size: 1rem;
-    transition: color 0.2s, transform 0.2s;
-  }
-
-  .contact-link:hover .contact-link-arrow { color: var(--accent); transform: translateX(4px); }
-
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 100%;
-  }
-
-  footer p {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-
-  footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--accent); }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    nav ul { display: none; }
-    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .hero-scroll, .hero-number { display: none; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 1.5rem; }
-    .divider { margin: 0 1.5rem; }
-  }
-
-  /* FADE IN ANIMATION */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: none;
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v=20260923">
+<script src="assets/js/site.js?v=20260923" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://octa815.github.io/octaviogg.github.io/#person", "name": "Octavio Gregorio Guerrero", "alternateName": "Octavio GG", "url": "https://octa815.github.io/octaviogg.github.io/", "image": "https://octa815.github.io/octaviogg.github.io/assets/img/octavio-800.jpg", "email": "mailto:octavio.ogg+pf@gmail.com", "jobTitle": "Ingeniero Multimedia · Game Developer · Project Manager", "address": {"@type": "PostalAddress", "addressLocality": "Elda", "addressRegion": "Alicante", "addressCountry": "ES"}, "homeLocation": {"@type": "Place", "name": "Elda, Alicante, España"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante", "url": "https://www.ua.es"}, "knowsLanguage": ["es", "en"], "knowsAbout": ["Desarrollo de videojuegos", "C++", "OpenGL", "Ensamblador Z80", "Gestión de proyectos", "React", "Node.js", "Blender", "Superresolución con IA"], "sameAs": ["https://www.linkedin.com/in/octagg", "https://github.com/octa815", "https://pocketboy-games.itch.io/towerhero"]}, {"@type": "WebSite", "@id": "https://octa815.github.io/octaviogg.github.io/#website", "url": "https://octa815.github.io/octaviogg.github.io/", "name": "Octavio Gregorio — Portfolio", "inLanguage": ["es", "en"], "publisher": {"@id": "https://octa815.github.io/octaviogg.github.io/#person"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cuándo podrías empezar?", "acceptedAnswer": {"@type": "Answer", "text": "Ya. Terminé el grado en 2026 y estoy disponible para incorporarme de inmediato. Vivo en Elda (Alicante); cuéntame la modalidad y la ubicación del puesto y lo vemos."}}, {"@type": "Question", "name": "¿Qué tipo de puesto buscas?", "acceptedAnswer": {"@type": "Answer", "text": "Gestión de proyectos tecnológicos (project manager, producer, coordinación técnica) o desarrollo, sobre todo en videojuegos. Donde mejor encajo es en un sitio en el que pueda organizar el trabajo del equipo sin perder el contacto con el código."}}, {"@type": "Question", "name": "¿Has coordinado equipos de verdad?", "acceptedAnswer": {"@type": "Answer", "text": "En la carrera, sí, y de forma continuada: en Castle of Shadows (Zero Studios) coordiné al equipo durante todo el curso: reparto de tareas, prioridades y seguimiento de entregas. En casi todos los proyectos en grupo acabé haciendo ese papel. Aún no lo he hecho en una empresa, y es justo lo que busco."}}, {"@type": "Question", "name": "¿De qué va tu TFG?", "acceptedAnswer": {"@type": "Answer", "text": "Casi todos los PCs de juego tienen una GPU dedicada y otra integrada que no se usa. Construí un sistema que le pasa cada frame a la integrada para reescalarlo con IA en tiempo real, sin tocar el juego. Sacó un 10 con Matrícula de Honor."}}, {"@type": "Question", "name": "¿Qué idiomas hablas?", "acceptedAnswer": {"@type": "Answer", "text": "Español nativo e inglés avanzado: tengo el B2 oficial de la EOI y completé el curso de C1. Puedo trabajar, documentar y hacer reuniones en inglés."}}]}]}</script>
 </head>
 <body>
-
-<nav>
-  <a class="nav-logo" href="#">
-    <img src="images/octavio_gg_logo.png" alt="Octavio GG Logo" style="height:2.5rem;vertical-align:middle;margin-right:0.7rem;">
-    OGG<span>.dev</span>
-  </a>
+<a class="skip-link" href="#main"><span lang="es">Saltar al contenido</span><span lang="en">Skip to content</span></a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Octavio Gregorio — inicio" data-es-aria-label="Octavio Gregorio — inicio" data-en-aria-label="Octavio Gregorio — home">
+      <img src="assets/img/logo-96.webp" alt="" width="34" height="34">
+      <span>Octavio GG <small>/ multimedia</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Principal" data-en-aria-label="Main" data-es-aria-label="Principal">
+      <ul>
+<li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn lang-toggle" type="button" aria-label="Switch to English"><span data-l="es">ES</span>/<span data-l="en">EN</span></button>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false"><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+      <a class="btn btn--sm btn--ink header-cv" href="cv_octavio_gregorio.pdf" download><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="bars"><span class="bar"></span><span class="bar"></span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
   <ul>
-    <li><a href="#proyectos">Proyectos</a></li>
-    <li><a href="#experiencia">Experiencia</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-    <li><a href="elements.html">Archivador</a></li>
+<li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
   </ul>
-  <a class="nav-cv" href="cv_octavio_gregorio.pdf" download>Descargar CV</a>
-</nav>
+  <a class="btn btn--primary" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span lang="es">Descargar CV (PDF)</span><span lang="en">Download CV (PDF)</span></a>
+</div>
+<main id="main" tabindex="-1">
 
 <!-- HERO -->
-<div class="hero">
-  <p class="hero-tag">Estudiante de Ingeniería Multimedia · Project Lead · Game Dev</p>
-  <h1>
-    <span>Octavio</span>
-    <span class="surname">Gregorio <span class="accent-word">Guerrero</span></span>
-  </h1>
-  <p class="hero-subtitle">
-    Estudiante de ingeniería multimedia especializado en desarrollo de videojuegos
-    y coordinación de equipos y proyectos.
-  </p>
-  <div class="hero-ctas">
-    <a href="#proyectos" class="btn-primary">Ver proyectos</a>
-    <a href="#contacto" class="btn-outline">Contactar</a>
-  </div>
-  <span class="hero-scroll">:D</span>
-  <span class="hero-number">2021 — 2026</span>
-</div>
-
-<hr class="divider">
-
-<!-- SOBRE MÍ -->
-<section id="sobre-mi" class="fade-in">
-  <p class="section-label">Sobre mí</p>
-  <h2 class="section-title">Ingeniero que <br>lidera equipos</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>
-        Estudiante de último año de <strong>Ingeniería Multimedia</strong> en la Universidad de Alicante.
-        A lo largo de la carrera he asumido de forma natural el rol de <strong>coordinador</strong>
-        en todos los proyectos en grupo: organizando tareas, marcando ritmos y asegurando que el producto salga adelante.
-      </p>
-      <p>
-        Me atrae especialmente la <strong>gestión de proyectos tecnológicos</strong>, orientándome mayoritariamente
-        hacia la rama de los videojuegos aunque con una base técnica en desarrollo y web.
-      </p>
-      <p>
-        Tengo iniciativa propia: llevo adelante una pequeña idea de negocio de impresión 3D (<strong>3DOCNA</strong>),
-        que me ha permitido expandir conocimientos de modelado y negocio.
-      </p>
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero-grid">
+    <div>
+      <p class="status" data-enter style="--i:0"><span class="dot" aria-hidden="true"></span><span lang="es">Disponible ahora · Elda, Alicante</span><span lang="en">Available now · Elda, Alicante</span></p>
+      <h1 id="hero-title" class="display" data-enter style="--i:1">Octavio<br>Gregorio <span class="light">Guerrero</span></h1>
+      <p class="lede" data-enter style="--i:2"><span lang="es">Ingeniero multimedia. Programo videojuegos desde el motor hacia arriba y, en los equipos, suelo ser quien organiza el trabajo para que el juego <em>llegue a la entrega</em>.</span><span lang="en">Multimedia engineer. I build games from the engine up, and on teams I'm usually the one organising the work so the game <em>actually ships</em>.</span></p>
+      <div class="hero-actions" data-enter style="--i:3" data-cta-trigger>
+        <a class="btn btn--primary" href="#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn" href="cv_octavio_gregorio.pdf" download><svg class="arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      </div>
+      <p class="hero-note" data-enter style="--i:4"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span lang="es">Suelo responder en menos de 24 h</span><span lang="en">I usually reply within 24 h</span></p>
     </div>
-    <div class="skills-grid">
-      <div class="skill-item">
-        <div class="skill-header">
-          <span class="skill-name">Project Management</span>
-          <span class="skill-level">Principal</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+    <figure class="portrait" data-enter>
+      <div class="frame">
+        <picture>
+          <source type="image/webp" srcset="assets/img/octavio-480.webp 480w, assets/img/octavio-800.webp 800w" sizes="(max-width: 860px) 300px, 400px">
+          <img src="assets/img/octavio-800.jpg" alt="Retrato de Octavio Gregorio sonriendo, con gafas y camisa blanca" data-es-alt="Retrato de Octavio Gregorio sonriendo, con gafas y camisa blanca" data-en-alt="Portrait of Octavio Gregorio smiling, wearing glasses and a white shirt" width="800" height="1000" fetchpriority="high" decoding="async">
+        </picture>
       </div>
-      <div class="skill-item">
-        <div class="skill-header">
-          <span class="skill-name">C / C++</span>
-          <span class="skill-level">Avanzado</span>
+      <img class="sticker" src="assets/img/icon-192.png" alt="" width="84" height="84">
+      <figcaption><span lang="es">Yo. El pulpo es el logo.</span><span lang="en">Me. The octopus is the logo.</span></figcaption>
+    </figure>
+  </div>
+
+  <ul class="proof" aria-label="Datos destacados" data-es-aria-label="Datos destacados" data-en-aria-label="Highlights">
+    <li data-enter style="--i:5"><strong>10 · MH</strong><span><span lang="es">Nota del TFG, con Matrícula de Honor</span><span lang="en">Thesis grade, with honours</span></span></li>
+    <li data-enter style="--i:6"><strong>GBRetroDev'25</strong><span><span lang="es">Participante oficial con un juego de Game Boy en Z80</span><span lang="en">Official entry with a Game Boy game in Z80</span></span></li>
+    <li data-enter style="--i:7"><strong><span lang="es">Motor propio</span><span lang="en">Own engine</span></strong><span><span lang="es">Castle of Shadows: C++ y OpenGL, coordinando al equipo</span><span lang="en">Castle of Shadows: C++ and OpenGL, leading the team</span></span></li>
+    <li data-enter style="--i:8"><strong>2026</strong><span><span lang="es">Graduado en Ingeniería Multimedia (UA)</span><span lang="en">BSc Multimedia Engineering (Univ. of Alicante)</span></span></li>
+  </ul>
+</section>
+
+<!-- WORK -->
+<section class="section" id="trabajo" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="num">01</span>
+      <h2 id="work-title"><span lang="es">Proyectos elegidos</span><span lang="en">Selected work</span></h2>
+      <p><span lang="es">Tres casos contados con calma: qué había que resolver, qué hice yo y qué salió.</span><span lang="en">Three projects told properly: what needed solving, what I did and how it turned out.</span></p>
+    </div>
+
+    <div class="cases">
+      <a class="case-card case-card--wide" href="tfg-superresolucion.html" data-reveal>
+        <div class="case-media"><div class="cover-type cover-type--tfg" aria-hidden="true"><span>dGPU → iGPU → IA</span><b><span lang="es">Superresolución</span><span lang="en">Super-resolution</span></b></div></div>
+        <div class="case-body">
+          <p class="case-kicker"><span>2025–26</span><span>TFG · <span lang="es">Investigación</span><span lang="en">Research</span></span><span>10 · MH</span></p>
+          <h3 class="case-title"><span lang="es">Reescalar juegos con IA usando la GPU que nadie usa</span><span lang="en">Upscaling games with AI on the GPU nobody uses</span></h3>
+          <p class="case-desc"><span lang="es">Un sistema que captura cada frame del juego y se lo pasa a la GPU integrada para reconstruirlo a resolución completa en tiempo real.</span><span lang="en">A system that grabs every game frame and hands it to the integrated GPU to rebuild it at full resolution in real time.</span></p>
+          <span class="case-more"><span lang="es">Leer el caso</span><span lang="en">Read the case study</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+      </a>
+
+      <a class="case-card" href="castle-of-shadows.html" data-reveal style="--i:1">
+        <div class="case-media"><div class="cover-type" aria-hidden="true"><span>C++ · OpenGL · raylib</span><b>Castle of<br>Shadows</b></div></div>
+        <div class="case-body">
+          <p class="case-kicker"><span>2025–26</span><span>Zero Studios</span><span><span lang="es">Coordinador</span><span lang="en">Team lead</span></span></p>
+          <h3 class="case-title">Castle of Shadows</h3>
+          <p class="case-desc"><span lang="es">Juego 3D de acción sobre un motor propio. Coordiné al equipo, llevé el game design y programé donde hacía falta.</span><span lang="en">3D action game on an in-house engine. I led the team, owned game design and programmed wherever needed.</span></p>
+          <span class="case-more"><span lang="es">Leer el caso</span><span lang="en">Read the case study</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+      <a class="case-card" href="tower-hero.html" data-reveal style="--i:2">
+        <div class="case-media skel" style="background:#95a297"><img style="object-fit:contain;image-rendering:pixelated" src="assets/img/work/towerhero-cover.webp" alt="Portada de Tower Hero: un héroe en lo alto de una torre rodeado de esqueletos y murciélagos, en pixel art" width="900" height="900" loading="lazy" decoding="async"></div>
+        <div class="case-body">
+          <p class="case-kicker"><span>2025</span><span>PocketBoy</span><span><span lang="es">PM y programador</span><span lang="en">PM & programmer</span></span></p>
+          <h3 class="case-title">Tower Hero</h3>
+          <p class="case-desc"><span lang="es">Un tower defense para Game Boy escrito en ensamblador. Entrada oficial de GBRetroDev'25.</span><span lang="en">A Game Boy tower defense written in assembly. Official GBRetroDev'25 entry.</span></p>
+          <span class="case-more"><span lang="es">Leer el caso</span><span lang="en">Read the case study</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+
+    <h3 class="more-head" data-reveal><span lang="es">Más proyectos</span><span lang="en">More projects</span></h3>
+    <ul class="more-list">
+      <li data-reveal><div class="more-row">
+        <span class="year">2026</span>
+        <div><h3>3DOCNA <span class="badge"><span lang="es">En construcción</span><span lang="en">Work in progress</span></span></h3><p><span lang="es">Mi pequeño negocio de impresión 3D: pedidos personalizados y catálogo propio en PLA, PETG y TPU. Diseño, producción y clientes.</span><span lang="en">My small 3D-printing business: custom orders and an own catalogue in PLA, PETG and TPU. Design, production and customers.</span></p></div>
+        <span class="stack">Blender · OpenSCAD · Bambu Lab A1</span><span class="go" aria-hidden="true"></span></div></li>
+      <li data-reveal><a class="more-row" href="https://github.com/octa815/UA_PixelDepot" target="_blank" rel="noopener">
+        <span class="year">2025</span>
+        <div><h3>PixelDepot</h3><p><span lang="es">Gestor de assets para estudios de videojuegos, accesible (WCAG 2.1).</span><span lang="en">Asset manager for game studios, built to WCAG 2.1.</span></p></div>
+        <span class="stack">React · Node · MongoDB</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li data-reveal><a class="more-row" href="https://youtu.be/JT4wM71QWTo" target="_blank" rel="noopener">
+        <span class="year">2024</span>
+        <div><h3>2Dymiros</h3><p><span lang="es">Juego de cartas en C++ sin motor: turnos, IA básica y estados de partida.</span><span lang="en">Card game in C++ with no engine: turns, basic AI and game states.</span></p></div>
+        <span class="stack">C++</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li data-reveal><a class="more-row" href="https://youtu.be/HxZO4kSogeQ" target="_blank" rel="noopener">
+        <span class="year">2025</span>
+        <div><h3><span lang="es">Cortometraje</span><span lang="en">Short film</span></h3><p><span lang="es">Rodaje con cámaras profesionales y postproducción completa: montaje y color.</span><span lang="en">Shot on professional cameras, fully post-produced: edit and grade.</span></p></div>
+        <span class="stack">DaVinci Resolve</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li data-reveal><a class="more-row" href="interiorismo.html">
+        <span class="year">2023</span>
+        <div><h3><span lang="es">Un interior dentro del Taj Mahal</span><span lang="en">An interior inside the Taj Mahal</span></h3><p><span lang="es">Modelado e iluminación de día y de noche.</span><span lang="en">Modelling and day/night lighting.</span></p></div>
+        <span class="stack">Blender</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li data-reveal><a class="more-row" href="animation.html">
+        <span class="year">2023</span>
+        <div><h3><span lang="es">O.V.O., un robot en la Luna</span><span lang="en">O.V.O., a robot on the Moon</span></h3><p><span lang="es">Modelado, rigging y animación de un robot cuadrúpedo.</span><span lang="en">Modelling, rigging and animating a four-legged robot.</span></p></div>
+        <span class="stack">Blender</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li data-reveal><a class="more-row" href="scripting.html">
+        <span class="year">2023</span>
+        <div><h3><span lang="es">Lluvia procedural</span><span lang="en">Procedural rain</span></h3><p><span lang="es">Script en Python que genera una escena de lluvia editable.</span><span lang="en">Python script that builds an editable rain scene.</span></p></div>
+        <span class="stack">Python · Blender</span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="sobre-mi" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="num">02</span>
+      <h2 id="about-title"><span lang="es">Sobre mí</span><span lang="en">About</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text" data-reveal>
+        <p lang="es">Me gradué en Ingeniería Multimedia en la Universidad de Alicante en 2026. Vengo de los videojuegos, pero lo que más disfruto es que un proyecto con mucha gente salga bien.</p><p lang="en">I graduated in Multimedia Engineering from the University of Alicante in 2026. I come from games, but what I enjoy most is a project with lots of people going well.</p>
+        <p lang="es">En casi todos los trabajos en grupo de la carrera acabé coordinando: repartir tareas, marcar un ritmo y decidir qué se recorta cuando no llega el tiempo. Por eso busco puestos de <strong>gestión de proyectos tecnológicos</strong> sin dejar de tocar código.</p><p lang="en">In almost every group project at university I ended up coordinating: splitting tasks, setting a pace and deciding what gets cut when time runs out. That's why I'm looking for <strong>tech project management</strong> roles where I still touch code.</p>
+        <p lang="es">Me tiran especialmente la IA aplicada y el hardware; mi TFG va justo de eso.</p><p lang="en">I'm especially drawn to applied AI and hardware — my thesis is exactly that.</p>
+        <ul class="ways">
+          <li><span class="n">01</span><div><b><span lang="es">Organizo antes de programar</span><span lang="en">I plan before I code</span></b><span lang="es">Tareas repartidas, ritmos claros y todo el mundo sabiendo qué toca esta semana.</span><span lang="en">Tasks split, a clear pace, and everyone knowing what this week is for.</span></div></li>
+          <li><span class="n">02</span><div><b><span lang="es">Que salga adelante</span><span lang="en">Ship it first</span></b><span lang="es">Lo importante es entregar; el detalle se pule sobre algo que ya funciona.</span><span lang="en">Delivering comes first; polish happens on something that already works.</span></div></li>
+          <li><span class="n">03</span><div><b><span lang="es">Aprendo lo que haga falta</span><span lang="en">I learn what the project needs</span></b><span lang="es">De ensamblador Z80 a OpenCL: si el proyecto lo pide, me pongo.</span><span lang="en">From Z80 assembly to OpenCL: if the project needs it, I pick it up.</span></div></li>
+        </ul>
       </div>
-      <div class="skill-item">
-        <div class="skill-header">
-          <span class="skill-name">Web — MERN Stack</span>
-          <span class="skill-level">Intermedio</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill pink" style="width:60%"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-header">
-          <span class="skill-name">3D Design & Print</span>
-          <span class="skill-level">Avanzado</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill gold" style="width:80%"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-header">
-          <span class="skill-name">Game Dev</span>
-          <span class="skill-level">Intermedio</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill pink" style="width:65%"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-header">
-          <span class="skill-name">Blender / OpenGL</span>
-          <span class="skill-level">Intermedio</span>
-        </div>
-        <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+      <div data-reveal style="--i:1">
+        <h3 class="sub-h"><span lang="es">Herramientas</span><span lang="en">Toolbox</span></h3>
+        <dl class="stack-list">
+          <div><dt><span lang="es">Lenguajes</span><span lang="en">Languages</span></dt><dd>C, C++, JavaScript, Python, Java, PHP, ASM Z80, HTML/CSS</dd></div>
+          <div><dt>Game dev</dt><dd>OpenGL, raylib, Game Boy ASM, Unreal Engine 5, Unity</dd></div>
+          <div><dt>Web</dt><dd>React, Node.js, Express, MongoDB, Angular, Ionic, WordPress</dd></div>
+          <div><dt><span lang="es">Datos</span><span lang="en">Data</span></dt><dd>MySQL, MongoDB, Oracle DB</dd></div>
+          <div><dt><span lang="es">Entorno</span><span lang="en">Tooling</span></dt><dd>Git, GitHub, Docker, CI/CD, VS Code, Visual Studio, Android Studio</dd></div>
+          <div><dt><span lang="es">3D y vídeo</span><span lang="en">3D & video</span></dt><dd>Blender, OpenSCAD, <span lang="es">impresión FDM (Bambu Lab A1)</span><span lang="en">FDM printing (Bambu Lab A1)</span>, DaVinci Resolve</dd></div>
+          <div><dt><span lang="es">Idiomas</span><span lang="en">Languages</span></dt><dd><span lang="es">Español nativo · Inglés avanzado (B2, curso C1)</span><span lang="en">Spanish (native) · English (advanced, B2 + C1 course)</span></dd></div>
+        </dl>
+        <ol class="timeline" aria-label="Formación" data-es-aria-label="Formación" data-en-aria-label="Education">
+          <li><span class="when">2026</span><div><b><span lang="es">Grado en Ingeniería Multimedia</span><span lang="en">BSc Multimedia Engineering</span></b><span lang="es">Universidad de Alicante · Escuela Politécnica Superior</span><span lang="en">University of Alicante · Polytechnic School</span></div></li>
+          <li><span class="when">2025–26</span><div><b><span lang="es">Prácticas y TFG en la EPS</span><span lang="en">Internship & thesis at the EPS</span></b><span lang="es">Superresolución con IA en GPU híbrida · 10, Matrícula de Honor</span><span lang="en">AI super-resolution on hybrid GPUs · 10/10 with honours</span></div></li>
+          <li><span class="when">2020</span><div><b><span lang="es">B2 de inglés</span><span lang="en">English B2</span></b><span lang="es">EOI Elda · curso de C1 completado</span><span lang="en">EOI Elda · C1 course completed</span></div></li>
+          <li><span class="when">2018–20</span><div><b><span lang="es">Bachillerato Tecnológico</span><span lang="en">High school, technology track</span></b><span>Colegio Sagrada Familia, Elda</span></div></li>
+        </ol>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- PROYECTOS -->
-<section id="proyectos" class="fade-in">
-  <p class="section-label">Trabajo seleccionado</p>
-  <h2 class="section-title">Proyectos</h2>
-
-  <div class="projects-grid">
-
-    <!-- Castle of Shadows -->
-    <div class="project-card featured">
-      <div class="project-meta">
-        <span class="project-year">2025 — 2026</span>
-        <span class="project-type team">Equipo · Zero Studios</span>
-      </div>
-      <h3 class="project-title">Castle of Shadows</h3>
-      <p class="project-desc">
-        Videojuego 3D de acción y mazmorras desarrollado en equipo dentro de Zero Studios,
-        construido sobre un motor gráfico propio en C++ con OpenGL. Mi rol: programador
-        multitarea con orientación al game design, coordinación del equipo y gestión de tareas.
-      </p>
-      <div class="project-tags">
-        <span class="tag accent">C++</span>
-        <span class="tag accent">OpenGL</span>
-        <span class="tag">Motor propio</span>
-        <span class="tag">Game Design</span>
-        <span class="tag">Project Lead</span>
-      </div>
-      <div class="project-links">
-        <a href="https://www.instagram.com/realzerostudios/" target="_blank">Instagram</a>
-      </div>
+<!-- FAQ -->
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="num">03</span>
+      <h2 id="faq-title"><span lang="es">Preguntas frecuentes</span><span lang="en">Questions I get asked</span></h2>
+      <p><span lang="es">Lo que suele preguntarse en una primera llamada.</span><span lang="en">What usually comes up on a first call.</span></p>
     </div>
-
-    <!-- PixelDepot -->
-    <div class="project-card">
-      <div class="project-meta">
-        <span class="project-year">2025</span>
-        <span class="project-type team">Equipo · UA</span>
-      </div>
-      <h3 class="project-title">PixelDepot — Plataforma MERN</h3>
-      <p class="project-desc">
-        Plataforma web colaborativa de gestión de assets digitales para una empresa de videojuegos
-        ficticia. Desarrollada con el stack completo MERN.
-        Autenticación, CRUD de assets, filtrado y diseño responsive con criterios WCAG 2.1.
-      </p>
-      <div class="project-tags">
-        <span class="tag pink">React.js</span>
-        <span class="tag pink">Node.js</span>
-        <span class="tag">MongoDB</span>
-        <span class="tag">Express</span>
-        <span class="tag">WCAG 2.1</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/octa815/UA_PixelDepot" target="_blank">GitHub</a>
-      </div>
-    </div>
-
-    <!-- Tower Hero Game Boy -->
-    <div class="project-card">
-      <div class="project-meta">
-        <span class="project-year">2025</span>
-        <span class="project-type team">Equipo · PocketBoy</span>
-      </div>
-      <h3 class="project-title">Tower Hero — Game Boy</h3>
-      <p class="project-desc">
-        Videojuego completo para hardware Game Boy programado en ensamblador Z80.
-        Participante oficial de <strong style="color:var(--gold)">GBRetroDev'25: Heroes of ASM 2</strong>.
-        Desarrollo a bajo nivel: gestión directa de memoria y optimización de recursos
-        en hardware con restricciones severas.
-      </p>
-      <div class="project-tags">
-        <span class="tag">ASM Z80</span>
-        <span class="tag">Bajo nivel</span>
-        <span class="tag">Hardware</span>
-        <span class="tag gold">GBRetroDev'25</span>
-      </div>
-      <div class="project-links">
-        <a href="https://pocketboy-games.itch.io/towerhero" target="_blank">itch.io</a>
-      </div>
-    </div>
-
-    <!-- 2Dymiros -->
-    <div class="project-card">
-      <div class="project-meta">
-        <span class="project-year">2024</span>
-        <span class="project-type team">Equipo · CodeBreaker Studios</span>
-      </div>
-      <h3 class="project-title">2Dymiros — Videojuego de cartas</h3>
-      <p class="project-desc">
-        Juego de cartas desarrollado en C++ sin motor gráfico externo para Fundamentos de Videojuegos.
-        Implementación de sistemas de cartas, turnos, IA básica para el oponente
-        y gestión de estados de partida.
-      </p>
-      <div class="project-tags">
-        <span class="tag accent">C++</span>
-        <span class="tag">OOP</span>
-        <span class="tag">Game Logic</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/octa815" target="_blank">GitHub</a>
-      </div>
-    </div>
-
-    <!-- Postproducción / Cortometraje -->
-    <div class="project-card">
-      <div class="project-meta">
-        <span class="project-year">2025</span>
-        <span class="project-type team">Equipo · UA</span>
-      </div>
-      <h3 class="project-title">Cortometraje — Postproducción Digital</h3>
-      <p class="project-desc">
-        Grabación y postproducción de un cortometraje en equipo. Rodaje con cámaras
-        profesionales y dispositivos móviles, seguido de edición, corrección de color
-        y postproducción completa en DaVinci Resolve.
-      </p>
-      <div class="project-tags">
-        <span class="tag pink">DaVinci Resolve</span>
-        <span class="tag">Edición de vídeo</span>
-        <span class="tag">Color grading</span>
-        <span class="tag">Producción</span>
-      </div>
-    </div>
-
-    <!-- 3DOCNA -->
-    <div class="project-card">
-      <div class="project-meta">
-        <span class="project-year">2026</span>
-        <span class="project-type personal">Proyecto propio</span>
-      </div>
-      <h3 class="project-title">3DOCNA — Impresión 3D</h3>
-      <p class="project-desc">
-        Idea de negocio propio de impresión 3D recién arrancada: pedidos personalizados y catálogo
-        de productos. Trabajo con materiales como TPU, PLA y PETG en una Bambu Lab A1.
-        Gestión íntegra: diseño, producción, pedidos y clientes.
-      </p>
-      <div class="project-tags">
-        <span class="tag gold">Emprendimiento</span>
-        <span class="tag">Blender</span>
-        <span class="tag">OpenSCAD</span>
-        <span class="tag">FDM</span>
-      </div>
-      <div class="project-links">
-        <a href="#" class="disabled" aria-disabled="true"> WEB EN CONSTRUCCIÓN</a>
-      </div>
-    </div>
-
-    <!-- Blender / 3D -->
-    <div class="project-card">
-      <div class="project-meta">
-        <span class="project-year">2023</span>
-        <span class="project-type accent">Individual</span>
-      </div>
-      <h3 class="project-title">Blender — Diseño 3D & Scripting</h3>
-      <p class="project-desc">
-        Serie de proyectos 3D: interiorismo del Taj Mahal, animación de robot cuadrúpedo
-        y scripting en Python para generar escenas de lluvia dinámicas dentro de Blender.
-        Render, rigging e iluminación.
-      </p>
-      <div class="project-tags">
-        <span class="tag">Blender</span>
-        <span class="tag">Python</span>
-        <span class="tag">3D Modeling</span>
-        <span class="tag">Rigging</span>
-      </div>
-      <div class="project-links">
-        <a href="https://octa815.github.io/octaviogg.github.io/" target="_blank">Portfolio</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- EXPERIENCIA -->
-<section id="experiencia" class="fade-in">
-  <p class="section-label">Formación & Experiencia</p>
-  <h2 class="section-title">Trayectoria</h2>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <p class="timeline-date">2021 — Actualidad</p>
-      <h3 class="timeline-role">Grado en Ingeniería Multimedia</h3>
-      <p class="timeline-org">Universidad de Alicante — EPS</p>
-      <p class="timeline-desc">
-        Formación en desarrollo de software, videojuegos, diseño 3D, web, sistemas gráficos y gestión de proyectos.
-        En múltiples asignaturas he ejercido como coordinador de grupo: planificación de tareas,
-        distribución del trabajo y seguimiento del progreso del equipo.
-      </p>
-    </div>
-
-    <div class="timeline-item">
-      <p class="timeline-date">2024 — Actualidad</p>
-      <h3 class="timeline-role">Investigación — Prácticas universitarias</h3>
-      <p class="timeline-org">Escuela Politécnica Superior, Universidad de Alicante</p>
-      <p class="timeline-desc">
-        Prácticas en la propia EPS que derivaron en un trabajo de investigación sobre
-        <strong style="color:var(--text)">Arquitectura Híbrida</strong>. Los resultados están siendo
-        aprovechados como base del Trabajo de Fin de Grado (TFG) actualmente en desarrollo.
-      </p>
-    </div>
-
-    <div class="timeline-item">
-      <p class="timeline-date">2025 — Actualidad</p>
-      <h3 class="timeline-role">Project Lead & Developer</h3>
-      <p class="timeline-org">Zero Studios — Castle of Shadows</p>
-      <p class="timeline-desc">
-        Coordinación del equipo de desarrollo del videojuego Castle of Shadows. Toma de decisiones
-        sobre arquitectura técnica, priorización de funcionalidades y seguimiento de entregables.
-        Rol de programador multitarea con orientación al game design.
-      </p>
-    </div>
-
-    <div class="timeline-item">
-      <p class="timeline-date">2026</p>
-      <h3 class="timeline-role">Fundador</h3>
-      <p class="timeline-org">3DOCNA — Impresión 3D personalizada</p>
-      <p class="timeline-desc">
-        Idea de negocio propio de impresión 3D recién arrancada. Gestión de diseño de productos,
-        atención a clientes, producción y presencia web.
-      </p>
-    </div>
-
-    <div class="timeline-item">
-      <p class="timeline-date">2020</p>
-      <h3 class="timeline-role">Titulación B2 en Inglés</h3>
-      <p class="timeline-org">EOI Elda (Curso en C1)</p>
-      <p class="timeline-desc">Certificación oficial de nivel B2 en lengua inglesa.</p>
+    <div class="faq">
+<details data-reveal style="--i:0"><summary><span lang="es">¿Cuándo podrías empezar?</span><span lang="en">When could you start?</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p lang="es">Ya. Terminé el grado en 2026 y estoy disponible para incorporarme de inmediato. Vivo en Elda (Alicante); cuéntame la modalidad y la ubicación del puesto y lo vemos.</p><p lang="en">Right away. I finished my degree in 2026 and I'm available immediately. I live in Elda (Alicante, Spain) — tell me about the role's location and setup and we'll figure it out.</p></div></details>
+<details data-reveal style="--i:1"><summary><span lang="es">¿Qué tipo de puesto buscas?</span><span lang="en">What kind of role are you after?</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p lang="es">Gestión de proyectos tecnológicos (project manager, producer, coordinación técnica) o desarrollo, sobre todo en videojuegos. Donde mejor encajo es en un sitio en el que pueda organizar el trabajo del equipo sin perder el contacto con el código.</p><p lang="en">Tech project management (project manager, producer, technical coordination) or development, especially in games. I fit best where I can organise a team's work without losing touch with the code.</p></div></details>
+<details data-reveal style="--i:2"><summary><span lang="es">¿Has coordinado equipos de verdad?</span><span lang="en">Have you actually led teams?</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p lang="es">En la carrera, sí, y de forma continuada: en Castle of Shadows (Zero Studios) coordiné al equipo durante todo el curso: reparto de tareas, prioridades y seguimiento de entregas. En casi todos los proyectos en grupo acabé haciendo ese papel. Aún no lo he hecho en una empresa, y es justo lo que busco.</p><p lang="en">At university, yes, consistently: on Castle of Shadows (Zero Studios) I coordinated the team for the whole year — task split, priorities and delivery tracking. I ended up in that role in almost every group project. I haven't done it inside a company yet, and that's exactly what I'm looking for.</p></div></details>
+<details data-reveal style="--i:3"><summary><span lang="es">¿De qué va tu TFG?</span><span lang="en">What was your thesis about?</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p lang="es">Casi todos los PCs de juego tienen una GPU dedicada y otra integrada que no se usa. Construí un sistema que le pasa cada frame a la integrada para reescalarlo con IA en tiempo real, sin tocar el juego. Sacó un 10 con Matrícula de Honor. <a class="link" href="tfg-superresolucion.html">Aquí lo cuento entero</a>.</p><p lang="en">Most gaming PCs have a dedicated GPU plus an integrated one that sits idle. I built a system that hands every frame to the integrated GPU to upscale it with AI in real time, without touching the game. It got a 10/10 with honours. <a class="link" href="tfg-superresolucion.html">Full write-up here</a>.</p></div></details>
+<details data-reveal style="--i:4"><summary><span lang="es">¿Qué idiomas hablas?</span><span lang="en">Which languages do you speak?</span><span class="plus" aria-hidden="true"></span></summary><div class="answer"><p lang="es">Español nativo e inglés avanzado: tengo el B2 oficial de la EOI y completé el curso de C1. Puedo trabajar, documentar y hacer reuniones en inglés.</p><p lang="en">Native Spanish and advanced English: I hold the official B2 (EOI) and completed the C1 course. I can work, write docs and run meetings in English.</p></div></details>
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- CONTACTO -->
-<section id="contacto" class="fade-in">
-  <p class="section-label">Contacto</p>
-  <div class="contact-grid">
-    <div class="contact-cta">
-      <h2>¿Hablamos de<br><span style="color:var(--accent)">trabajar juntos?</span></h2>
-      <p>
-        Abierto a oportunidades en gestión de proyectos, product management o desarrollo
-        en la industria del videojuego o tech. También disponible para freelance y colaboraciones.
-      </p>
-      <a href="cv_octavio_gregorio.pdf" download class="btn-primary">Descargar CV completo</a>
+<!-- CONTACT -->
+<section class="section" id="contacto" aria-labelledby="contact-title" data-cta-hide>
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="num">04</span>
+      <h2 id="contact-title"><span lang="es">Hablemos</span><span lang="en">Let's talk</span></h2>
+      <p><span lang="es">Cuéntame qué buscas: un puesto, un proyecto o una duda sobre algo de aquí.</span><span lang="en">Tell me what you're after: a role, a project, or a question about something here.</span></p>
     </div>
-    <div class="contact-links">
-      <a href="mailto:octavio.ogg+pf@gmail.com" class="contact-link">
-        <div>
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">octavio.ogg+pf@gmail.com</span>
+    <div class="contact-grid">
+      <div class="direct" data-reveal>
+        <div class="quick">
+          <h3><span lang="es">Escríbeme por email</span><span lang="en">Email me</span></h3>
+          <p><span lang="es">Es la forma más rápida. Suelo contestar en menos de 24 h.</span><span lang="en">It's the fastest way. I usually reply within 24 h.</span></p>
+          <button class="copy-email" type="button" data-copy="octavio.ogg+pf@gmail.com">
+            <span class="addr">octavio.ogg+pf@gmail.com</span>
+            <span class="state"><span class="idle"><span lang="es">Copiar</span><span lang="en">Copy</span></span><span class="done" role="status"><svg width="14" height="14" style="display:inline;vertical-align:-2px" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg> <span lang="es">Copiado</span><span lang="en">Copied</span></span></span>
+          </button>
+          <div class="row" style="margin-top:12px">
+            <a class="btn btn--primary" href="mailto:octavio.ogg+pf@gmail.com?subject=Contacto%20desde%20tu%20portfolio"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span lang="es">Abrir email</span><span lang="en">Open email</span></a>
+            <a class="btn" href="https://wa.me/34694455979?text=Hola%20Octavio%2C%20he%20visto%20tu%20portfolio" target="_blank" rel="noopener"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41z"/></svg>WhatsApp</a>
+          </div>
         </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="https://github.com/octa815" target="_blank" class="contact-link">
-        <div>
-          <span class="contact-link-label">GitHub</span>
-          <span class="contact-link-value">github.com/octa815</span>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="https://3docna.netlify.app" target="_blank" class="contact-link">
-        <div>
-          <span class="contact-link-label">3D Printing Business</span>
-          <span class="contact-link-value">3docna.netlify.app</span>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="https://www.linkedin.com/in/octavio-gregorio" target="_blank" class="contact-link">
-        <div>
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">linkedin.com/in/octavio-gregorio</span>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
+      </div>
+
+      <aside class="direct" data-reveal style="--i:1" aria-label="Redes" data-es-aria-label="Redes" data-en-aria-label="Profiles">
+        <ul class="socials">
+          <li><a href="https://www.linkedin.com/in/octagg" target="_blank" rel="me noopener"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn <small>/in/octagg</small></span><svg width="16" height="16" class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a href="https://github.com/octa815" target="_blank" rel="me noopener"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg><span>GitHub <small>@octa815</small></span><svg width="16" height="16" class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a href="https://pocketboy-games.itch.io" target="_blank" rel="noopener"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.13 1.34C2.08 1.96.02 4.33 0 4.95v1.03c0 1.3 1.22 2.45 2.33 2.45 1.33 0 2.44-1.1 2.44-2.4 0 1.3 1.07 2.4 2.4 2.4 1.33 0 2.36-1.1 2.36-2.4 0 1.3 1.14 2.4 2.47 2.4h.02c1.33 0 2.47-1.1 2.47-2.4 0 1.3 1.03 2.4 2.36 2.4 1.33 0 2.4-1.1 2.4-2.4 0 1.3 1.11 2.4 2.44 2.4C22.78 8.43 24 7.28 24 5.98V4.95c-.02-.62-2.08-2.99-3.13-3.61-3.27-.11-5.53-.13-8.87-.13-3.34 0-7.9.05-8.87.13zm6.35 6.45a2.78 2.78 0 0 1-4.74 0 2.8 2.8 0 0 1-2.4 1.3c-.3 0-.62-.08-.87-.17-.36 3.83-.26 6.55.3 7.8 1.64 1.9 9.04 1.83 10.23 1.83 1.2 0 8.6.07 10.23-1.83.56-1.25.66-3.97.3-7.8-.25.09-.57.17-.87.17-1 0-1.9-.5-2.4-1.3a2.78 2.78 0 0 1-4.74 0 2.8 2.8 0 0 1-2.43 1.3 2.8 2.8 0 0 1-2.43-1.3h-.01l-.17-.02zM8.3 10.26c.8 0 1.52 0 2.4.97a19.6 19.6 0 0 1 2.6 0c.88-.97 1.6-.97 2.4-.97 2.4 0 3 3.54 3.84 6.53.78 2.78-.25 2.85-1.53 2.85-1.9-.07-2.95-1.45-2.95-2.83-1.05.17-2.27.26-3.06.26s-2.01-.09-3.06-.26c0 1.38-1.05 2.76-2.95 2.83-1.28 0-2.31-.07-1.53-2.85.84-3 1.43-6.53 3.84-6.53zM12 12.78s-2.28 2.1-2.7 2.84l1.5-.06v1.3c0 .07.6.04 1.2.01.6.03 1.2.06 1.2-.01v-1.3l1.5.06c-.42-.75-2.7-2.84-2.7-2.84z"/></svg><span>itch.io <small>PocketBoy</small></span><svg width="16" height="16" class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+          <li><a href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span><span lang="es">CV en PDF</span><span lang="en">CV (PDF)</span> <small>2026</small></span><svg width="16" height="16" class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+        </ul>
+      </aside>
     </div>
   </div>
 </section>
-
-<footer>
-  <p>© 2026 Octavio Gregorio Guerrero — Ingeniero Multimedia</p>
-  <p>Elda, Alicante, España · <a href="https://github.com/octa815" target="_blank">GitHub</a></p>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="assets/img/logo-96.webp" alt="" width="34" height="34" loading="lazy"><span>Octavio GG</span></a>
+        <p><span lang="es">Ingeniero Multimedia en Elda, Alicante. Videojuegos, desarrollo y coordinación de proyectos.</span><span lang="en">Multimedia engineer based in Elda, Alicante. Games, development and project coordination.</span></p>
+      </div>
+      <nav aria-label="Proyectos" data-en-aria-label="Projects" data-es-aria-label="Proyectos">
+        <h2><span lang="es">Proyectos</span><span lang="en">Work</span></h2>
+        <ul>
+          <li><a href="tfg-superresolucion.html"><span lang="es">TFG: superresolución con IA</span><span lang="en">Thesis: AI super-resolution</span></a></li>
+          <li><a href="castle-of-shadows.html">Castle of Shadows</a></li>
+          <li><a href="tower-hero.html">Tower Hero</a></li>
+          <li><a href="elements.html"><span lang="es">Archivo de ficheros</span><span lang="en">File archive</span></a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Contacto" data-en-aria-label="Contact" data-es-aria-label="Contacto">
+        <h2><span lang="es">Contacto</span><span lang="en">Contact</span></h2>
+        <ul>
+          <li><a href="mailto:octavio.ogg+pf@gmail.com">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/octagg" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/octa815" rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href="https://pocketboy-games.itch.io" rel="noopener" target="_blank">itch.io</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <h2><span lang="es">Sitio</span><span lang="en">Site</span></h2>
+        <ul>
+          <li><a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a></li>
+          <li><a href="cv_octavio_gregorio.pdf" download><span lang="es">CV en PDF</span><span lang="en">CV (PDF)</span></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Octavio Gregorio Guerrero</span>
+      <span>Elda, Alicante · <span lang="es">España</span><span lang="en">Spain</span></span>
+    </div>
+  </div>
 </footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  document.querySelectorAll('.project-card').forEach((card) => {
-    const primaryLink = card.querySelector('.project-links a:not(.disabled)');
-    if (!primaryLink) return;
-
-    card.classList.add('clickable');
-
-    card.addEventListener('click', (event) => {
-      if (event.target.closest('.project-links a')) return;
-      window.open(primaryLink.href, '_blank', 'noopener');
-    });
-  });
-</script>
+<button class="to-top" type="button" aria-label="Volver arriba" data-es-aria-label="Volver arriba" data-en-aria-label="Back to top"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<div class="mobile-cta" aria-label="Acciones rápidas" data-en-aria-label="Quick actions" data-es-aria-label="Acciones rápidas" role="region">
+  <a class="btn btn--primary" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span></a>
+  <a class="btn" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CV</a>
+</div>
 </body>
 </html>

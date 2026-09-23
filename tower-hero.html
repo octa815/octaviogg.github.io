@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es" data-es-title="Tower Hero · Caso de estudio · Octavio Gregorio" data-en-title="Tower Hero · Case study · Octavio Gregorio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Tower Hero · Caso de estudio · Octavio Gregorio</title>
+<meta name="description" content="Tower Hero: tower defense para Game Boy en ensamblador Z80, entrada oficial de GBRetroDev&#x27;25. Caso de estudio de Octavio Gregorio con capturas y gameplay." data-es-content="Tower Hero: tower defense para Game Boy en ensamblador Z80, entrada oficial de GBRetroDev&#x27;25. Caso de estudio de Octavio Gregorio con capturas y gameplay." data-en-content="Tower Hero: a Game Boy tower defense in Z80 assembly, official GBRetroDev&#x27;25 entry. Case study by Octavio Gregorio with screenshots and gameplay.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Octavio Gregorio Guerrero">
+<link rel="canonical" href="https://octa815.github.io/octaviogg.github.io/tower-hero.html">
+<meta name="theme-color" content="#f4f1ea">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Octavio Gregorio">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:title" content="Tower Hero · Caso de estudio · Octavio Gregorio">
+<meta property="og:description" content="Tower Hero: tower defense para Game Boy en ensamblador Z80, entrada oficial de GBRetroDev&#x27;25. Caso de estudio de Octavio Gregorio con capturas y gameplay.">
+<meta property="og:url" content="https://octa815.github.io/octaviogg.github.io/tower-hero.html">
+<meta property="og:image" content="https://octa815.github.io/octaviogg.github.io/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script>(function(){var r=document.documentElement,s;try{s=localStorage}catch(e){}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';r.classList.add('js')})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v=20260923">
+<script src="assets/js/site.js?v=20260923" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://octa815.github.io/octaviogg.github.io/#person", "name": "Octavio Gregorio Guerrero", "alternateName": "Octavio GG", "url": "https://octa815.github.io/octaviogg.github.io/", "image": "https://octa815.github.io/octaviogg.github.io/assets/img/octavio-800.jpg", "email": "mailto:octavio.ogg+pf@gmail.com", "jobTitle": "Ingeniero Multimedia · Game Developer · Project Manager", "address": {"@type": "PostalAddress", "addressLocality": "Elda", "addressRegion": "Alicante", "addressCountry": "ES"}, "homeLocation": {"@type": "Place", "name": "Elda, Alicante, España"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante", "url": "https://www.ua.es"}, "knowsLanguage": ["es", "en"], "knowsAbout": ["Desarrollo de videojuegos", "C++", "OpenGL", "Ensamblador Z80", "Gestión de proyectos", "React", "Node.js", "Blender", "Superresolución con IA"], "sameAs": ["https://www.linkedin.com/in/octagg", "https://github.com/octa815", "https://pocketboy-games.itch.io/towerhero"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://octa815.github.io/octaviogg.github.io/index.html"}, {"@type": "ListItem", "position": 2, "name": "Proyectos", "item": "https://octa815.github.io/octaviogg.github.io/index.html#trabajo"}, {"@type": "ListItem", "position": 3, "name": "Tower Hero", "item": "https://octa815.github.io/octaviogg.github.io/tower-hero.html"}]}, {"@type": "VideoGame", "name": "Tower Hero", "url": "https://octa815.github.io/octaviogg.github.io/tower-hero.html", "author": {"@id": "https://octa815.github.io/octaviogg.github.io/#person"}, "description": "Tower Hero: tower defense para Game Boy en ensamblador Z80, entrada oficial de GBRetroDev'25. Caso de estudio de Octavio Gregorio con capturas y gameplay.", "inLanguage": "es", "gamePlatform": "Game Boy", "genre": "Tower defense", "sameAs": "https://pocketboy-games.itch.io/towerhero", "image": "https://octa815.github.io/octaviogg.github.io/assets/img/work/towerhero-cover.webp"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main"><span lang="es">Saltar al contenido</span><span lang="en">Skip to content</span></a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Octavio Gregorio — inicio" data-es-aria-label="Octavio Gregorio — inicio" data-en-aria-label="Octavio Gregorio — home">
+      <img src="assets/img/logo-96.webp" alt="" width="34" height="34">
+      <span>Octavio GG <small>/ multimedia</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Principal" data-en-aria-label="Main" data-es-aria-label="Principal">
+      <ul>
+<li><a href="index.html#trabajo" aria-current="page"><span lang="es">Proyectos</span><span lang="en">Work</span></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn lang-toggle" type="button" aria-label="Switch to English"><span data-l="es">ES</span>/<span data-l="en">EN</span></button>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false"><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+      <a class="btn btn--sm btn--ink header-cv" href="cv_octavio_gregorio.pdf" download><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="bars"><span class="bar"></span><span class="bar"></span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+<li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+  </ul>
+  <a class="btn btn--primary" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span lang="es">Descargar CV (PDF)</span><span lang="en">Download CV (PDF)</span></a>
+</div>
+<main id="main" tabindex="-1">
+<nav class="crumbs wrap" aria-label="Migas de pan" data-es-aria-label="Migas de pan" data-en-aria-label="Breadcrumb"><ol><li><a href="index.html"><span lang="es">Inicio</span><span lang="en">Home</span></a></li><li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span></a></li><li><span aria-current="page">Tower Hero</span></li></ol></nav>
+<header class="case-hero wrap">
+  <p class="eyebrow" data-enter style="--i:0"><span lang="es">Caso de estudio · Game Boy</span><span lang="en">Case study · Game Boy</span></p>
+  <h1 class="display" data-enter style="--i:1">Tower Hero</h1>
+  <p class="lede" data-enter style="--i:2"><span lang="es">Un tower defense para Game Boy escrito en ensamblador Z80 por un equipo de tres. Entrada oficial de GBRetroDev'25: Heroes of ASM 2.</span><span lang="en">A Game Boy tower defense written in Z80 assembly by a team of three. Official entry to GBRetroDev'25: Heroes of ASM 2.</span></p>
+  <dl class="facts" data-enter style="--i:3"><div><dt><span lang="es">Año</span><span lang="en">Year</span></dt><dd>2025</dd></div><div><dt><span lang="es">Rol</span><span lang="en">Role</span></dt><dd><span lang="es">PM · programación</span><span lang="en">PM · programming</span></dd></div><div><dt><span lang="es">Equipo</span><span lang="en">Team</span></dt><dd>PocketBoy (3) · Game Boy</dd></div><div><dt><span lang="es">Stack</span><span lang="en">Stack</span></dt><dd><span lang="es">Ensamblador Z80</span><span lang="en">Z80 assembly</span></dd></div></dl>
+</header>
+<div class="wrap" data-enter style="--i:4">
+<div class="case-cover case-cover--contain skel" style="background:#95a297"><img src="assets/img/work/towerhero-cover.webp" alt="Portada de Tower Hero: un héroe en lo alto de una torre de piedra rodeado de esqueletos, murciélagos y una serpiente, en pixel art" data-es-alt="Portada de Tower Hero: un héroe en lo alto de una torre de piedra rodeado de esqueletos, murciélagos y una serpiente, en pixel art" data-en-alt="Tower Hero cover art: a hero on top of a stone tower surrounded by skeletons, bats and a snake, in pixel art" width="900" height="900" fetchpriority="high" decoding="async" style="image-rendering:pixelated"></div>
+</div>
+<div class="wrap prose-grid">
+  <aside class="toc" aria-label="En esta página" data-es-aria-label="En esta página" data-en-aria-label="On this page">
+    <p class="sub-h"><span lang="es">En esta página</span><span lang="en">On this page</span></p>
+    <ol><li><a href="#juego"><span lang="es">El juego</span><span lang="en">The game</span></a></li><li><a href="#restricciones"><span lang="es">Programar para Game Boy</span><span lang="en">Game Boy constraints</span></a></li><li><a href="#concurso"><span lang="es">GBRetroDev'25</span><span lang="en">GBRetroDev'25</span></a></li></ol>
+  </aside>
+  <article class="prose">
+
+<section id="juego" data-reveal>
+  <h2><span lang="es">El juego</span><span lang="en">The game</span></h2>
+  <p lang="es">Las fuerzas oscuras avanzan hacia la torre de tu reino y hay que aguantar. Tocas a los enemigos para eliminarlos (algunos necesitan varios golpes). Cada seis derrotados se carga la energía de la torre, y con <kbd>A</kbd> la descargas contra todos. Si un solo enemigo llega a la torre, se acaba la partida.</p><p lang="en">Dark forces march on your kingdom's tower and you have to hold. You tap enemies to take them out (some need several hits). Every six kills charge the tower's energy, and <kbd>A</kbd> unleashes it on everyone. If a single enemy reaches the tower, it's game over.</p>
+  <p lang="es">Cinco niveles con dificultad creciente, pensado para partidas cortas.</p><p lang="en">Five levels of rising difficulty, built for short sessions.</p>
+  <div class="yt" data-id="ULPoZf-G2Yo" data-title="Tower Hero — gameplay">
+  <button type="button" aria-label="Ver gameplay: Tower Hero — gameplay" data-es-aria-label="Ver gameplay: Tower Hero — gameplay" data-en-aria-label="Watch gameplay: Tower Hero — gameplay">
+    <img src="https://i.ytimg.com/vi/ULPoZf-G2Yo/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <span class="play"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg><span lang="es">Ver gameplay</span><span lang="en">Watch gameplay</span></span>
+  </button>
+</div>
+</section>
+
+<section id="restricciones" data-reveal>
+  <h2><span lang="es">Programar para una Game Boy</span><span lang="en">Programming for a Game Boy</span></h2>
+  <p lang="es">No hay motor ni lenguaje de alto nivel: todo está escrito en ensamblador Z80 (el dialecto de la CPU de la Game Boy). La consola tiene una pantalla de 160×144 píxeles, cuatro tonos y unos pocos KB de RAM de trabajo, así que cada sprite, cada byte de memoria y cada ciclo cuentan.</p><p lang="en">No engine, no high-level language: everything is written in Z80-style assembly for the Game Boy's CPU. The console has a 160×144 screen, four shades and a few KB of working RAM, so every sprite, byte and cycle counts.</p>
+  <p lang="es">Lo hicimos entre tres personas del equipo PocketBoy: Javier Sainz-Pardo Tenza, Ángela Cabrera Ruiz y yo. El resultado es un <code>.gb</code> que corre en hardware real y en emulador.</p><p lang="en">Three of us built it as PocketBoy: Javier Sainz-Pardo Tenza, Ángela Cabrera Ruiz and me. The result is a <code>.gb</code> ROM that runs on real hardware and emulators.</p>
+  <h3><span lang="es">Mi papel</span><span lang="en">My role</span></h3>
+  <p lang="es">Hice de project manager del equipo y de programador en las dos capas del juego: el <strong>gameplay</strong> (enemigos, oleadas, energía de la torre, niveles) y el <strong>funcionamiento interno</strong> que lo sostiene en la Game Boy.</p><p lang="en">I was the team's project manager and a programmer on both layers of the game: the <strong>gameplay</strong> (enemies, waves, tower energy, levels) and the <strong>internal systems</strong> that make it run on the Game Boy.</p>
+  <div class="gallery gallery--2 pixel"><figure><button type="button" data-full="assets/img/work/towerhero-1.webp" aria-label="Nivel 1: la torre en el centro del mapa y los primeros enemigos acercándose" data-en-aria-label="Level 1: the tower in the middle of the map with the first enemies closing in" data-es-aria-label="Nivel 1: la torre en el centro del mapa y los primeros enemigos acercándose"><span class="skel" style="display:block"><img src="assets/img/work/towerhero-1.webp" alt="Nivel 1: la torre en el centro del mapa y los primeros enemigos acercándose" data-es-alt="Nivel 1: la torre en el centro del mapa y los primeros enemigos acercándose" data-en-alt="Level 1: the tower in the middle of the map with the first enemies closing in" width="800" height="724" loading="lazy" decoding="async"></span></button></figure><figure><button type="button" data-full="assets/img/work/towerhero-2.webp" aria-label="Nivel 2: la torre recibe el ataque de enemigos por varios flancos" data-en-aria-label="Level 2: the tower under attack from several sides" data-es-aria-label="Nivel 2: la torre recibe el ataque de enemigos por varios flancos"><span class="skel" style="display:block"><img src="assets/img/work/towerhero-2.webp" alt="Nivel 2: la torre recibe el ataque de enemigos por varios flancos" data-es-alt="Nivel 2: la torre recibe el ataque de enemigos por varios flancos" data-en-alt="Level 2: the tower under attack from several sides" width="800" height="724" loading="lazy" decoding="async"></span></button></figure><figure><button type="button" data-full="assets/img/work/towerhero-3.webp" aria-label="Nivel 2 con la paleta oscura, justo al activar la energía de la torre" data-en-aria-label="Level 2 with the dark palette, right as the tower&#x27;s energy fires" data-es-aria-label="Nivel 2 con la paleta oscura, justo al activar la energía de la torre"><span class="skel" style="display:block"><img src="assets/img/work/towerhero-3.webp" alt="Nivel 2 con la paleta oscura, justo al activar la energía de la torre" data-es-alt="Nivel 2 con la paleta oscura, justo al activar la energía de la torre" data-en-alt="Level 2 with the dark palette, right as the tower&#x27;s energy fires" width="800" height="724" loading="lazy" decoding="async"></span></button></figure><figure><button type="button" data-full="assets/img/work/towerhero-4.webp" aria-label="Nivel 3: una oleada numerosa rodeando la torre" data-en-aria-label="Level 3: a large wave surrounding the tower" data-es-aria-label="Nivel 3: una oleada numerosa rodeando la torre"><span class="skel" style="display:block"><img src="assets/img/work/towerhero-4.webp" alt="Nivel 3: una oleada numerosa rodeando la torre" data-es-alt="Nivel 3: una oleada numerosa rodeando la torre" data-en-alt="Level 3: a large wave surrounding the tower" width="800" height="724" loading="lazy" decoding="async"></span></button></figure></div>
+</section>
+
+<section id="concurso" data-reveal>
+  <h2>GBRetroDev'25</h2>
+  <p lang="es">Tower Hero fue entrada oficial de <strong>GBRetroDev'25: Heroes of ASM 2</strong>, el concurso de desarrollo para Game Boy en ensamblador. Presentarlo implicaba cumplir las bases, cerrar una versión estable y publicarla.</p><p lang="en">Tower Hero was an official entry to <strong>GBRetroDev'25: Heroes of ASM 2</strong>, the Game Boy assembly game jam. Entering meant meeting the rules, locking a stable build and publishing it.</p>
+  <p><a class="btn btn--ink" href="https://pocketboy-games.itch.io/towerhero" target="_blank" rel="noopener"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.13 1.34C2.08 1.96.02 4.33 0 4.95v1.03c0 1.3 1.22 2.45 2.33 2.45 1.33 0 2.44-1.1 2.44-2.4 0 1.3 1.07 2.4 2.4 2.4 1.33 0 2.36-1.1 2.36-2.4 0 1.3 1.14 2.4 2.47 2.4h.02c1.33 0 2.47-1.1 2.47-2.4 0 1.3 1.03 2.4 2.36 2.4 1.33 0 2.4-1.1 2.4-2.4 0 1.3 1.11 2.4 2.44 2.4C22.78 8.43 24 7.28 24 5.98V4.95c-.02-.62-2.08-2.99-3.13-3.61-3.27-.11-5.53-.13-8.87-.13-3.34 0-7.9.05-8.87.13zm6.35 6.45a2.78 2.78 0 0 1-4.74 0 2.8 2.8 0 0 1-2.4 1.3c-.3 0-.62-.08-.87-.17-.36 3.83-.26 6.55.3 7.8 1.64 1.9 9.04 1.83 10.23 1.83 1.2 0 8.6.07 10.23-1.83.56-1.25.66-3.97.3-7.8-.25.09-.57.17-.87.17-1 0-1.9-.5-2.4-1.3a2.78 2.78 0 0 1-4.74 0 2.8 2.8 0 0 1-2.43 1.3 2.8 2.8 0 0 1-2.43-1.3h-.01l-.17-.02zM8.3 10.26c.8 0 1.52 0 2.4.97a19.6 19.6 0 0 1 2.6 0c.88-.97 1.6-.97 2.4-.97 2.4 0 3 3.54 3.84 6.53.78 2.78-.25 2.85-1.53 2.85-1.9-.07-2.95-1.45-2.95-2.83-1.05.17-2.27.26-3.06.26s-2.01-.09-3.06-.26c0 1.38-1.05 2.76-2.95 2.83-1.28 0-2.31-.07-1.53-2.85.84-3 1.43-6.53 3.84-6.53zM12 12.78s-2.28 2.1-2.7 2.84l1.5-.06v1.3c0 .07.6.04 1.2.01.6.03 1.2.06 1.2-.01v-1.3l1.5.06c-.42-.75-2.7-2.84-2.7-2.84z"/></svg><span lang="es">Jugar en itch.io</span><span lang="en">Play on itch.io</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+</section>
+
+  </article>
+</div>
+<section class="wrap" aria-label="Contacto" data-es-aria-label="Contacto" data-en-aria-label="Contact">
+  <div class="cta-band" data-reveal>
+    <div>
+      <h2><span lang="es">¿Buscas a alguien para un equipo así?</span><span lang="en">Looking for someone for a team like this?</span></h2>
+      <p><span lang="es">Disponible para incorporación inmediata. Suelo responder en menos de 24 h.</span><span lang="en">Available to start now. I usually reply within 24 h.</span></p>
+    </div>
+    <a class="btn" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+<nav class="wrap next-case" aria-label="Más proyectos" data-es-aria-label="Más proyectos" data-en-aria-label="More work">
+  <a href="castle-of-shadows.html"><small>← <span lang="es">Anterior</span><span lang="en">Previous</span></small><b>Castle of Shadows</b></a>
+  <a href="tfg-superresolucion.html"><small><span lang="es">Siguiente</span><span lang="en">Next</span> →</small><b><span lang="es">TFG: superresolución</span><span lang="en">Thesis: super-resolution</span></b></a>
+</nav>
+</main>
+<dialog class="lightbox" id="lightbox" aria-label="Imagen ampliada">
+  <button class="close" type="button" aria-label="Cerrar" data-en-aria-label="Close" data-es-aria-label="Cerrar"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <img src="data:," alt="">
+  <p></p>
+</dialog>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="assets/img/logo-96.webp" alt="" width="34" height="34" loading="lazy"><span>Octavio GG</span></a>
+        <p><span lang="es">Ingeniero Multimedia en Elda, Alicante. Videojuegos, desarrollo y coordinación de proyectos.</span><span lang="en">Multimedia engineer based in Elda, Alicante. Games, development and project coordination.</span></p>
+      </div>
+      <nav aria-label="Proyectos" data-en-aria-label="Projects" data-es-aria-label="Proyectos">
+        <h2><span lang="es">Proyectos</span><span lang="en">Work</span></h2>
+        <ul>
+          <li><a href="tfg-superresolucion.html"><span lang="es">TFG: superresolución con IA</span><span lang="en">Thesis: AI super-resolution</span></a></li>
+          <li><a href="castle-of-shadows.html">Castle of Shadows</a></li>
+          <li><a href="tower-hero.html">Tower Hero</a></li>
+          <li><a href="elements.html"><span lang="es">Archivo de ficheros</span><span lang="en">File archive</span></a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Contacto" data-en-aria-label="Contact" data-es-aria-label="Contacto">
+        <h2><span lang="es">Contacto</span><span lang="en">Contact</span></h2>
+        <ul>
+          <li><a href="mailto:octavio.ogg+pf@gmail.com">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/octagg" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/octa815" rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href="https://pocketboy-games.itch.io" rel="noopener" target="_blank">itch.io</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <h2><span lang="es">Sitio</span><span lang="en">Site</span></h2>
+        <ul>
+          <li><a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a></li>
+          <li><a href="cv_octavio_gregorio.pdf" download><span lang="es">CV en PDF</span><span lang="en">CV (PDF)</span></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Octavio Gregorio Guerrero</span>
+      <span>Elda, Alicante · <span lang="es">España</span><span lang="en">Spain</span></span>
+    </div>
+  </div>
+</footer>
+<button class="to-top" type="button" aria-label="Volver arriba" data-es-aria-label="Volver arriba" data-en-aria-label="Back to top"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<div class="mobile-cta" aria-label="Acciones rápidas" data-en-aria-label="Quick actions" data-es-aria-label="Acciones rápidas" role="region">
+  <a class="btn btn--primary" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span></a>
+  <a class="btn" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CV</a>
+</div>
+</body>
+</html>

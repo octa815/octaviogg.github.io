@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" data-es-title="TFG: superresolución con IA · Caso de estudio · Octavio Gregorio" data-en-title="Thesis: AI super-resolution · Case study · Octavio Gregorio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>TFG: superresolución con IA · Caso de estudio · Octavio Gregorio</title>
+<meta name="description" content="TFG de Octavio Gregorio (10, Matrícula de Honor): sistema híbrido dGPU + iGPU para superresolución con IA en videojuegos en tiempo real, con OpenCL, OpenVINO y ONNX Runtime." data-es-content="TFG de Octavio Gregorio (10, Matrícula de Honor): sistema híbrido dGPU + iGPU para superresolución con IA en videojuegos en tiempo real, con OpenCL, OpenVINO y ONNX Runtime." data-en-content="Octavio Gregorio&#x27;s thesis (10/10, honours): a hybrid dGPU + iGPU system for real-time AI super-resolution in games, using OpenCL, OpenVINO and ONNX Runtime.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Octavio Gregorio Guerrero">
+<link rel="canonical" href="https://octa815.github.io/octaviogg.github.io/tfg-superresolucion.html">
+<meta name="theme-color" content="#f4f1ea">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Octavio Gregorio">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:title" content="TFG: superresolución con IA · Caso de estudio · Octavio Gregorio">
+<meta property="og:description" content="TFG de Octavio Gregorio (10, Matrícula de Honor): sistema híbrido dGPU + iGPU para superresolución con IA en videojuegos en tiempo real, con OpenCL, OpenVINO y ONNX Runtime.">
+<meta property="og:url" content="https://octa815.github.io/octaviogg.github.io/tfg-superresolucion.html">
+<meta property="og:image" content="https://octa815.github.io/octaviogg.github.io/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script>(function(){var r=document.documentElement,s;try{s=localStorage}catch(e){}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';r.classList.add('js')})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v=20260923">
+<script src="assets/js/site.js?v=20260923" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://octa815.github.io/octaviogg.github.io/#person", "name": "Octavio Gregorio Guerrero", "alternateName": "Octavio GG", "url": "https://octa815.github.io/octaviogg.github.io/", "image": "https://octa815.github.io/octaviogg.github.io/assets/img/octavio-800.jpg", "email": "mailto:octavio.ogg+pf@gmail.com", "jobTitle": "Ingeniero Multimedia · Game Developer · Project Manager", "address": {"@type": "PostalAddress", "addressLocality": "Elda", "addressRegion": "Alicante", "addressCountry": "ES"}, "homeLocation": {"@type": "Place", "name": "Elda, Alicante, España"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante", "url": "https://www.ua.es"}, "knowsLanguage": ["es", "en"], "knowsAbout": ["Desarrollo de videojuegos", "C++", "OpenGL", "Ensamblador Z80", "Gestión de proyectos", "React", "Node.js", "Blender", "Superresolución con IA"], "sameAs": ["https://www.linkedin.com/in/octagg", "https://github.com/octa815", "https://pocketboy-games.itch.io/towerhero"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://octa815.github.io/octaviogg.github.io/index.html"}, {"@type": "ListItem", "position": 2, "name": "Proyectos", "item": "https://octa815.github.io/octaviogg.github.io/index.html#trabajo"}, {"@type": "ListItem", "position": 3, "name": "TFG: superresolución con IA", "item": "https://octa815.github.io/octaviogg.github.io/tfg-superresolucion.html"}]}, {"@type": "Thesis", "name": "TFG: superresolución con IA", "url": "https://octa815.github.io/octaviogg.github.io/tfg-superresolucion.html", "author": {"@id": "https://octa815.github.io/octaviogg.github.io/#person"}, "description": "TFG de Octavio Gregorio (10, Matrícula de Honor): sistema híbrido dGPU + iGPU para superresolución con IA en videojuegos en tiempo real, con OpenCL, OpenVINO y ONNX Runtime.", "inLanguage": "es", "inSupportOf": "Grado en Ingeniería Multimedia", "sameAs": "https://hdl.handle.net/10045/170538", "datePublished": "2026-09-10", "sourceOrganization": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante"}, "keywords": "superresolución, upscaling, GPU integrada, GPU dedicada, arquitectura híbrida, videojuegos, FSRCNN, RealESRGAN, OpenCL"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main"><span lang="es">Saltar al contenido</span><span lang="en">Skip to content</span></a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Octavio Gregorio — inicio" data-es-aria-label="Octavio Gregorio — inicio" data-en-aria-label="Octavio Gregorio — home">
+      <img src="assets/img/logo-96.webp" alt="" width="34" height="34">
+      <span>Octavio GG <small>/ multimedia</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Principal" data-en-aria-label="Main" data-es-aria-label="Principal">
+      <ul>
+<li><a href="index.html#trabajo" aria-current="page"><span lang="es">Proyectos</span><span lang="en">Work</span></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn lang-toggle" type="button" aria-label="Switch to English"><span data-l="es">ES</span>/<span data-l="en">EN</span></button>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false"><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+      <a class="btn btn--sm btn--ink header-cv" href="cv_octavio_gregorio.pdf" download><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="bars"><span class="bar"></span><span class="bar"></span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+<li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+  </ul>
+  <a class="btn btn--primary" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span lang="es">Descargar CV (PDF)</span><span lang="en">Download CV (PDF)</span></a>
+</div>
+<main id="main" tabindex="-1">
+<nav class="crumbs wrap" aria-label="Migas de pan" data-es-aria-label="Migas de pan" data-en-aria-label="Breadcrumb"><ol><li><a href="index.html"><span lang="es">Inicio</span><span lang="en">Home</span></a></li><li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span></a></li><li><span aria-current="page">TFG: superresolución con IA</span></li></ol></nav>
+<header class="case-hero wrap">
+  <p class="eyebrow" data-enter style="--i:0"><span lang="es">Caso de estudio · Investigación</span><span lang="en">Case study · Research</span></p>
+  <h1 class="display" data-enter style="--i:1"><span lang="es">Reescalar juegos con IA usando la GPU que nadie usa</span><span lang="en">Upscaling games with AI on the GPU nobody uses</span></h1>
+  <p class="lede" data-enter style="--i:2"><span lang="es">Trabajo de Fin de Grado: un sistema híbrido dGPU + iGPU que reconstruye cada frame a resolución completa en tiempo real. Nota: 10 con Matrícula de Honor.</span><span lang="en">Bachelor's thesis: a hybrid dGPU + iGPU system that rebuilds every frame at full resolution in real time. Graded 10/10 with honours.</span></p>
+  <dl class="facts" data-enter style="--i:3"><div><dt><span lang="es">Año</span><span lang="en">Year</span></dt><dd>2025–2026</dd></div><div><dt><span lang="es">Tipo</span><span lang="en">Type</span></dt><dd><span lang="es">TFG · Universidad de Alicante</span><span lang="en">Thesis · Univ. of Alicante</span></dd></div><div><dt><span lang="es">Resultado</span><span lang="en">Result</span></dt><dd><span lang="es">10 · Matrícula de Honor</span><span lang="en">10/10 · honours</span></dd></div><div><dt><span lang="es">Stack</span><span lang="en">Stack</span></dt><dd>OpenGL/GLX · OpenCL · OpenVINO · ONNX Runtime · Linux</dd></div></dl>
+</header>
+<div class="wrap" data-enter style="--i:4">
+<div class="case-cover"><div class="cover-type cover-type--tfg" aria-hidden="true"><span>dGPU (render) → glXSwapBuffers → POSIX shm → iGPU (IA)</span><b><span lang="es">Dos GPUs,<br>un juego</span><span lang="en">Two GPUs,<br>one game</span></b></div></div>
+</div>
+<div class="wrap prose-grid">
+  <aside class="toc" aria-label="En esta página" data-es-aria-label="En esta página" data-en-aria-label="On this page">
+    <p class="sub-h"><span lang="es">En esta página</span><span lang="en">On this page</span></p>
+    <ol><li><a href="#problema"><span lang="es">El problema</span><span lang="en">The problem</span></a></li><li><a href="#sistema"><span lang="es">Cómo funciona</span><span lang="en">How it works</span></a></li><li><a href="#resultados"><span lang="es">Qué salió</span><span lang="en">Results</span></a></li><li><a href="#aprendido"><span lang="es">Lo que me llevo</span><span lang="en">Takeaways</span></a></li></ol>
+  </aside>
+  <article class="prose">
+
+<section id="problema" data-reveal>
+  <h2><span lang="es">El problema</span><span lang="en">The problem</span></h2>
+  <p lang="es">La mayoría de PCs de juego tienen dos GPUs: la dedicada (dGPU), que renderiza el juego, y una integrada (iGPU) dentro del procesador. Durante una partida, la dedicada va al límite y la integrada está prácticamente parada. Es potencia de cálculo que ya has pagado y no usas.</p><p lang="en">Most gaming PCs have two GPUs: the dedicated one (dGPU) that renders the game, and an integrated one (iGPU) inside the CPU. During a session the dGPU is maxed out while the iGPU sits almost idle — compute you've paid for and never use.</p>
+  <p lang="es">La pregunta del trabajo: ¿se puede usar esa iGPU para reescalar el juego con IA, al estilo de DLSS o FSR, sin robarle rendimiento a la dedicada?</p><p lang="en">The question: can that iGPU upscale the game with AI, DLSS/FSR-style, without stealing performance from the dGPU?</p>
+</section>
+
+<section id="sistema" data-reveal>
+  <h2><span lang="es">Cómo funciona</span><span lang="en">How it works</span></h2>
+  <p lang="es">No es un prototipo para una gráfica concreta: es un sistema completo que funciona con cualquier aplicación OpenGL en Linux, sin modificar el juego.</p><p lang="en">It isn't a one-off prototype: it's an end-to-end system that works with any OpenGL application on Linux, without modifying the game.</p>
+  <ol class="pipeline">
+    <li><b><span lang="es">Render</span><span lang="en">Render</span></b><span lang="es">El juego corre oculto en una pantalla virtual, a baja resolución, en la dGPU.</span><span lang="en">The game runs hidden on a virtual display, at low resolution, on the dGPU.</span></li>
+    <li><b><span lang="es">Captura</span><span lang="en">Capture</span></b><span lang="es">Cada frame se intercepta de forma transparente en <code>glXSwapBuffers</code>.</span><span lang="en">Each frame is intercepted transparently at <code>glXSwapBuffers</code>.</span></li>
+    <li><b><span lang="es">Transferencia</span><span lang="en">Transfer</span></b><span lang="es">El frame viaja por memoria compartida POSIX.</span><span lang="en">The frame travels over POSIX shared memory.</span></li>
+    <li><b><span lang="es">Reconstrucción</span><span lang="en">Rebuild</span></b><span lang="es">La iGPU lo reescala con IA y se muestra en una sola ventana.</span><span lang="en">The iGPU upscales it with AI and it's shown in a single window.</span></li>
+  </ol>
+  <p lang="es">El usuario solo ve una ventana y juega con normalidad. Por debajo hay tres backends de inferencia intercambiables: <strong>OpenCV con OpenCL</strong>, <strong>OpenVINO</strong> para hardware Intel y <strong>ONNX Runtime con CUDA</strong>, con modelos como FSRCNN y Real-ESRGAN.</p><p lang="en">The player sees one window and plays normally. Underneath there are three swappable inference backends: <strong>OpenCV with OpenCL</strong>, <strong>OpenVINO</strong> for Intel hardware and <strong>ONNX Runtime with CUDA</strong>, running models such as FSRCNN and Real-ESRGAN.</p>
+</section>
+
+<section id="resultados" data-reveal>
+  <h2><span lang="es">Qué salió</span><span lang="en">Results</span></h2>
+  <p lang="es">Lo medí en un sobremesa con un Intel Core Ultra 7 265K (con iGPU) y una NVIDIA RTX 5060, comparando dónde se ejecuta cada parte.</p><p lang="en">I measured it on a desktop with an Intel Core Ultra 7 265K (with iGPU) and an NVIDIA RTX 5060, comparing where each stage runs.</p>
+  <ul>
+    <li><span lang="es">La captura y la transferencia de frames tienen una latencia muy baja: <strong>no son el cuello de botella</strong>.</span><span lang="en">Frame capture and transfer have very low latency: <strong>they aren't the bottleneck</strong>.</span></li>
+    <li><span lang="es">Lo que manda es el <strong>tiempo de inferencia</strong>. Los modelos ligeros van sobrados en la iGPU; los de más calidad son demasiado lentos a resoluciones de juego.</span><span lang="en">What matters is <strong>inference time</strong>. Light models run comfortably on the iGPU; the highest-quality ones are too slow at gaming resolutions.</span></li>
+    <li><span lang="es">Se sacan los puntos de cruce entre CPU e iGPU según modelo y resolución.</span><span lang="en">It maps the CPU vs iGPU crossover points by model and resolution.</span></li>
+    <li><span lang="es">El sistema completo es <strong>jugable en tiempo real</strong> con hardware de consumo y mejora al renderizado nativo a la misma resolución de salida.</span><span lang="en">The full system is <strong>playable in real time</strong> on consumer hardware and beats native rendering at the same output resolution.</span></li>
+    <li><span lang="es">Da <strong>más FPS con dGPU + iGPU</strong> que dejando que la dGPU haga también la superresolución: así la inferencia no compite con el render.</span><span lang="en">It gets <strong>more FPS with dGPU + iGPU</strong> than letting the dGPU also do super-resolution — inference stops competing with rendering.</span></li>
+  </ul>
+  <p lang="es">Al final, el equilibrio entre calidad y fluidez quedó recogido en modos configurables, parecidos a los de las soluciones comerciales.</p><p lang="en">The quality/smoothness trade-off ended up as configurable modes, much like commercial upscalers.</p>
+</section>
+
+<section id="aprendido" data-reveal>
+  <h2><span lang="es">Lo que me llevo</span><span lang="en">What I took away</span></h2>
+  <p lang="es">Empezó en unas prácticas en la propia EPS y acabó siendo el TFG. Me obligó a bajar a capas que en la carrera se tocan poco (GLX, memoria compartida, backends de inferencia) y a medir antes de optimizar: el cuello de botella no estaba donde yo esperaba.</p><p lang="en">It started as an internship at the EPS and grew into my thesis. It pushed me into layers you rarely touch at university (GLX, shared memory, inference backends) and taught me to measure before optimising: the bottleneck wasn't where I expected.</p>
+  <div class="callout"><b><span lang="es">Nota: 10 · Matrícula de Honor</span><span lang="en">Grade: 10/10 · with honours</span></b><span lang="es">Tutores: Antonio Maciá-Lillo e Higinio Mora (Dpto. de Tecnología Informática y Computación, UA).</span><span lang="en">Supervisors: Antonio Maciá-Lillo and Higinio Mora (Dept. of Computer Technology, Univ. of Alicante).</span></div>
+  <p><a class="btn btn--ink" href="https://hdl.handle.net/10045/170538" target="_blank" rel="noopener"><span lang="es">Leer la memoria en RUA</span><span lang="en">Read the thesis (RUA, Spanish)</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></p>
+</section>
+
+  </article>
+</div>
+<section class="wrap" aria-label="Contacto" data-es-aria-label="Contacto" data-en-aria-label="Contact">
+  <div class="cta-band" data-reveal>
+    <div>
+      <h2><span lang="es">¿Buscas a alguien para un equipo así?</span><span lang="en">Looking for someone for a team like this?</span></h2>
+      <p><span lang="es">Disponible para incorporación inmediata. Suelo responder en menos de 24 h.</span><span lang="en">Available to start now. I usually reply within 24 h.</span></p>
+    </div>
+    <a class="btn" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+<nav class="wrap next-case" aria-label="Más proyectos" data-es-aria-label="Más proyectos" data-en-aria-label="More work">
+  <a href="tower-hero.html"><small>← <span lang="es">Anterior</span><span lang="en">Previous</span></small><b>Tower Hero</b></a>
+  <a href="castle-of-shadows.html"><small><span lang="es">Siguiente</span><span lang="en">Next</span> →</small><b>Castle of Shadows</b></a>
+</nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="assets/img/logo-96.webp" alt="" width="34" height="34" loading="lazy"><span>Octavio GG</span></a>
+        <p><span lang="es">Ingeniero Multimedia en Elda, Alicante. Videojuegos, desarrollo y coordinación de proyectos.</span><span lang="en">Multimedia engineer based in Elda, Alicante. Games, development and project coordination.</span></p>
+      </div>
+      <nav aria-label="Proyectos" data-en-aria-label="Projects" data-es-aria-label="Proyectos">
+        <h2><span lang="es">Proyectos</span><span lang="en">Work</span></h2>
+        <ul>
+          <li><a href="tfg-superresolucion.html"><span lang="es">TFG: superresolución con IA</span><span lang="en">Thesis: AI super-resolution</span></a></li>
+          <li><a href="castle-of-shadows.html">Castle of Shadows</a></li>
+          <li><a href="tower-hero.html">Tower Hero</a></li>
+          <li><a href="elements.html"><span lang="es">Archivo de ficheros</span><span lang="en">File archive</span></a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Contacto" data-en-aria-label="Contact" data-es-aria-label="Contacto">
+        <h2><span lang="es">Contacto</span><span lang="en">Contact</span></h2>
+        <ul>
+          <li><a href="mailto:octavio.ogg+pf@gmail.com">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/octagg" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/octa815" rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href="https://pocketboy-games.itch.io" rel="noopener" target="_blank">itch.io</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <h2><span lang="es">Sitio</span><span lang="en">Site</span></h2>
+        <ul>
+          <li><a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a></li>
+          <li><a href="cv_octavio_gregorio.pdf" download><span lang="es">CV en PDF</span><span lang="en">CV (PDF)</span></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Octavio Gregorio Guerrero</span>
+      <span>Elda, Alicante · <span lang="es">España</span><span lang="en">Spain</span></span>
+    </div>
+  </div>
+</footer>
+<button class="to-top" type="button" aria-label="Volver arriba" data-es-aria-label="Volver arriba" data-en-aria-label="Back to top"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<div class="mobile-cta" aria-label="Acciones rápidas" data-en-aria-label="Quick actions" data-es-aria-label="Acciones rápidas" role="region">
+  <a class="btn btn--primary" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span></a>
+  <a class="btn" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CV</a>
+</div>
+</body>
+</html>

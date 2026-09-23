@@ -1,151 +1,174 @@
-<!DOCTYPE HTML>
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-	  var links = document.querySelectorAll(".smooth-scroll");
-	
-	  for (var i = 0; i < links.length; i++) {
-		links[i].addEventListener("click", function(event) {
-		  event.preventDefault();
-		  var targetId = this.getAttribute("href").substring(1);
-		  var targetElement = document.getElementById(targetId);
-		  if (targetElement) {
-			var targetPosition = targetElement.offsetTop;
-			var startPosition = window.pageYOffset;
-			var distance = targetPosition - startPosition;
-			var duration = 1000; // Duración de la animación en milisegundos
-			var startTime = null;
-	
-			function animation(currentTime) {
-			  if (startTime === null) startTime = currentTime;
-			  var timeElapsed = currentTime - startTime;
-			  var progress = Math.min(timeElapsed / duration, 1);
-			  window.scrollTo(0, startPosition + distance * ease(progress));
-	
-			  if (timeElapsed < duration) {
-				requestAnimationFrame(animation);
-			  }
-			}
-	
-			function ease(t) {
-			  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
-			}
-	
-			requestAnimationFrame(animation);
-		  }
-		});
-	  }
-	});
-	</script>
-<html>
-	<head>
-	<link rel="icon" type="image/png" href="images/octavio_gg_logo.png">
-		<title>OGG - interiorismo</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		
-		<style>
-			.terminal {
-				background-color: black;
-				color: green;
-				font-family: 'Courier New', Courier, monospace;
-				padding: 20px;
-				border-radius: 5px;
-			}
-			.terminal h4 {
-            font-size: 1.5em; /* Ajusta este valor según el tamaño de texto que prefieras */
-            color: green;
-            margin-top: 0;
-        }
+<!DOCTYPE html>
+<html lang="es" data-es-title="O.V.O., un robot en la Luna · Caso de estudio · Octavio Gregorio" data-en-title="O.V.O., a robot on the Moon · Case study · Octavio Gregorio">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-        .terminal p {
-            margin: 0;
-        }
-		</style>
+<title>O.V.O., un robot en la Luna · Caso de estudio · Octavio Gregorio</title>
+<meta name="description" content="O.V.O.: robot cuadrúpedo modelado, rigueado y animado en Blender por Octavio Gregorio. Vídeo de la animación y renders." data-es-content="O.V.O.: robot cuadrúpedo modelado, rigueado y animado en Blender por Octavio Gregorio. Vídeo de la animación y renders." data-en-content="O.V.O.: a four-legged robot modelled, rigged and animated in Blender by Octavio Gregorio. Animation video and renders.">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Octavio Gregorio Guerrero">
+<link rel="canonical" href="https://octa815.github.io/octaviogg.github.io/animation.html">
+<meta name="theme-color" content="#f4f1ea">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Octavio Gregorio">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:title" content="O.V.O., un robot en la Luna · Caso de estudio · Octavio Gregorio">
+<meta property="og:description" content="O.V.O.: robot cuadrúpedo modelado, rigueado y animado en Blender por Octavio Gregorio. Vídeo de la animación y renders.">
+<meta property="og:url" content="https://octa815.github.io/octaviogg.github.io/animation.html">
+<meta property="og:image" content="https://octa815.github.io/octaviogg.github.io/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script>(function(){var r=document.documentElement,s;try{s=localStorage}catch(e){}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';r.classList.add('js')})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v=20260923">
+<script src="assets/js/site.js?v=20260923" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://octa815.github.io/octaviogg.github.io/#person", "name": "Octavio Gregorio Guerrero", "alternateName": "Octavio GG", "url": "https://octa815.github.io/octaviogg.github.io/", "image": "https://octa815.github.io/octaviogg.github.io/assets/img/octavio-800.jpg", "email": "mailto:octavio.ogg+pf@gmail.com", "jobTitle": "Ingeniero Multimedia · Game Developer · Project Manager", "address": {"@type": "PostalAddress", "addressLocality": "Elda", "addressRegion": "Alicante", "addressCountry": "ES"}, "homeLocation": {"@type": "Place", "name": "Elda, Alicante, España"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante", "url": "https://www.ua.es"}, "knowsLanguage": ["es", "en"], "knowsAbout": ["Desarrollo de videojuegos", "C++", "OpenGL", "Ensamblador Z80", "Gestión de proyectos", "React", "Node.js", "Blender", "Superresolución con IA"], "sameAs": ["https://www.linkedin.com/in/octagg", "https://github.com/octa815", "https://pocketboy-games.itch.io/towerhero"]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://octa815.github.io/octaviogg.github.io/index.html"}, {"@type": "ListItem", "position": 2, "name": "Archivo", "item": "https://octa815.github.io/octaviogg.github.io/elements.html"}, {"@type": "ListItem", "position": 3, "name": "O.V.O., un robot en la Luna", "item": "https://octa815.github.io/octaviogg.github.io/animation.html"}]}, {"@type": "CreativeWork", "name": "O.V.O., un robot en la Luna", "url": "https://octa815.github.io/octaviogg.github.io/animation.html", "author": {"@id": "https://octa815.github.io/octaviogg.github.io/#person"}, "description": "O.V.O.: robot cuadrúpedo modelado, rigueado y animado en Blender por Octavio Gregorio. Vídeo de la animación y renders.", "inLanguage": "es"}]}</script>
+</head>
+<body>
+<a class="skip-link" href="#main"><span lang="es">Saltar al contenido</span><span lang="en">Skip to content</span></a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Octavio Gregorio — inicio" data-es-aria-label="Octavio Gregorio — inicio" data-en-aria-label="Octavio Gregorio — home">
+      <img src="assets/img/logo-96.webp" alt="" width="34" height="34">
+      <span>Octavio GG <small>/ multimedia</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Principal" data-en-aria-label="Main" data-es-aria-label="Principal">
+      <ul>
+<li><a href="index.html#trabajo" aria-current="page"><span lang="es">Proyectos</span><span lang="en">Work</span></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn lang-toggle" type="button" aria-label="Switch to English"><span data-l="es">ES</span>/<span data-l="en">EN</span></button>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false"><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+      <a class="btn btn--sm btn--ink header-cv" href="cv_octavio_gregorio.pdf" download><span lang="es">Descargar CV</span><span lang="en">Download CV</span></a>
+      <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="bars"><span class="bar"></span><span class="bar"></span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+<li><a href="index.html#trabajo"><span lang="es">Proyectos</span><span lang="en">Work</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#sobre-mi"><span lang="es">Sobre mí</span><span lang="en">About</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#faq"><span lang="es">FAQ</span><span lang="en">FAQ</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+<li><a href="index.html#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span><svg width="18" class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+  </ul>
+  <a class="btn btn--primary" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span lang="es">Descargar CV (PDF)</span><span lang="en">Download CV (PDF)</span></a>
+</div>
+<main id="main" tabindex="-1">
+<nav class="crumbs wrap" aria-label="Migas de pan" data-es-aria-label="Migas de pan" data-en-aria-label="Breadcrumb"><ol><li><a href="index.html"><span lang="es">Inicio</span><span lang="en">Home</span></a></li><li><a href="elements.html"><span lang="es">Archivo</span><span lang="en">Archive</span></a></li><li><span aria-current="page">O.V.O., un robot en la Luna</span></li></ol></nav>
+<header class="case-hero wrap">
+  <p class="eyebrow" data-enter style="--i:0"><span lang="es">Proyecto 3D · Animación</span><span lang="en">3D project · Animation</span></p>
+  <h1 class="display" data-enter style="--i:1"><span lang="es">O.V.O., un robot en la Luna</span><span lang="en">O.V.O., a robot on the Moon</span></h1>
+  <p class="lede" data-enter style="--i:2"><span lang="es">Modelado, rigging y animación de un robot cuadrúpedo con un poco de historia detrás.</span><span lang="en">Modelling, rigging and animating a four-legged robot, with a bit of a story.</span></p>
+  <dl class="facts" data-enter style="--i:3"><div><dt><span lang="es">Año</span><span lang="en">Year</span></dt><dd>2023</dd></div><div><dt><span lang="es">Tipo</span><span lang="en">Type</span></dt><dd><span lang="es">Individual · asignatura</span><span lang="en">Solo · coursework</span></dd></div><div><dt><span lang="es">Trabajo</span><span lang="en">Work</span></dt><dd><span lang="es">Modelado, rigging, animación</span><span lang="en">Modelling, rigging, animation</span></dd></div><div><dt><span lang="es">Stack</span><span lang="en">Stack</span></dt><dd>Blender</dd></div></dl>
+</header>
+<div class="wrap" data-enter style="--i:4">
+<div class="case-cover skel"><img src="assets/img/work/ovo-selfie-1600.webp" srcset="assets/img/work/ovo-selfie-800.webp 800w, assets/img/work/ovo-selfie-1600.webp 1600w" sizes="(max-width: 1200px) 100vw, 1120px" alt="O.V.O., un robot negro con luces verdes, sujetando una cámara con la Tierra de fondo" width="1600" height="900" fetchpriority="high" decoding="async"></div>
+</div>
+<div class="wrap prose-grid">
+  <aside class="toc" aria-label="En esta página" data-es-aria-label="En esta página" data-en-aria-label="On this page">
+    <p class="sub-h"><span lang="es">En esta página</span><span lang="en">On this page</span></p>
+    <ol><li><a href="#video"><span lang="es">El vídeo</span><span lang="en">The video</span></a></li><li><a href="#informe"><span lang="es">Informe de misión</span><span lang="en">Mission report</span></a></li><li><a href="#renders"><span lang="es">Renders</span><span lang="en">Renders</span></a></li></ol>
+  </aside>
+  <article class="prose">
 
-	</head>
-	<body class="is-preload">
+<section id="video" data-reveal>
+  <h2><span lang="es">El vídeo</span><span lang="en">The video</span></h2>
+  <p lang="es">O.V.O. es un robot de cuatro patas que modelé, rigueé y animé en Blender. La historia: está en misión cerca de la Tierra, le mandan una cámara para comprobar que todo va bien… y decide usarla para hacerse fotos.</p><p lang="en">O.V.O. is a four-legged robot I modelled, rigged and animated in Blender. The story: it's on a mission near Earth, gets sent a camera to check everything's fine… and decides to take selfies with it.</p>
+  <div class="yt" data-id="xsF1OzIbQyA" data-title="O.V.O. — animación en Blender">
+  <button type="button" aria-label="Ver vídeo: O.V.O. — animación en Blender" data-es-aria-label="Ver vídeo: O.V.O. — animación en Blender" data-en-aria-label="Watch video: O.V.O. — Blender animation">
+    <img src="https://i.ytimg.com/vi/xsF1OzIbQyA/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async">
+    <span class="play"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg><span lang="es">Ver vídeo</span><span lang="en">Watch video</span></span>
+  </button>
+</div>
+</section>
+<section id="informe" data-reveal>
+  <h2><span lang="es">Informe de misión</span><span lang="en">Mission report</span></h2>
+  <blockquote><p lang="es">Robot: O.V.O. · Ubicación: espacio exterior, cerca de la Tierra · Estado: buscando otras formas de vida inteligente. Al final del vídeo gira los ojos de una forma extraña. Puede que viera algo detrás de la cámara. Solicitamos una nave de búsqueda a Met-247828.</p><p lang="en">Robot: O.V.O. · Location: outer space, near Earth · Status: searching for other intelligent life. At the end of the video it rolls its eyes oddly. It may have seen something behind the camera. Requesting a search ship to Met-247828.</p></blockquote>
+</section>
+<section id="renders" data-reveal>
+  <h2>Renders</h2>
+  <div class="gallery"><figure class=""><button type="button" data-full="assets/img/work/ovo-selfie-1600.webp" aria-label="O.V.O. sujetando la cámara para hacerse una foto, con la Tierra al fondo — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-selfie-800.webp" alt="O.V.O. sujetando la cámara para hacerse una foto, con la Tierra al fondo" width="800" height="450" loading="lazy" decoding="async"></span></button></figure><figure class=""><button type="button" data-full="assets/img/work/ovo-epica-1600.webp" aria-label="Plano contrapicado de O.V.O. sobre la superficie lunar — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-epica-800.webp" alt="Plano contrapicado de O.V.O. sobre la superficie lunar" width="800" height="450" loading="lazy" decoding="async"></span></button></figure><figure class=""><button type="button" data-full="assets/img/work/ovo-frente-1600.webp" aria-label="O.V.O. de frente, con sus ojos verdes brillantes — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-frente-800.webp" alt="O.V.O. de frente, con sus ojos verdes brillantes" width="800" height="450" loading="lazy" decoding="async"></span></button></figure><figure class=""><button type="button" data-full="assets/img/work/ovo-hola-1600.webp" aria-label="O.V.O. levantando una pata para saludar — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-hola-800.webp" alt="O.V.O. levantando una pata para saludar" width="800" height="450" loading="lazy" decoding="async"></span></button></figure><figure class=""><button type="button" data-full="assets/img/work/ovo-obsrevando-1600.webp" aria-label="O.V.O. observando algo fuera de cuadro — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-obsrevando-800.webp" alt="O.V.O. observando algo fuera de cuadro" width="800" height="450" loading="lazy" decoding="async"></span></button></figure><figure class=""><button type="button" data-full="assets/img/work/ovo-pensando-1600.webp" aria-label="O.V.O. inclinado, como pensando — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-pensando-800.webp" alt="O.V.O. inclinado, como pensando" width="800" height="450" loading="lazy" decoding="async"></span></button></figure><figure class=""><button type="button" data-full="assets/img/work/ovo-saludos-1600.webp" aria-label="O.V.O. de pie sobre dos patas, saludando a lo lejos — ampliar"><span class="skel" style="display:block"><img src="assets/img/work/ovo-saludos-800.webp" alt="O.V.O. de pie sobre dos patas, saludando a lo lejos" width="800" height="450" loading="lazy" decoding="async"></span></button></figure></div>
+</section>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">OctavioGG</a>
-					</header>
-
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li><a href="index.html">Inicio</a></li>
-						</ul>
-						<ul class="icons">
-							<!-- <li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li> -->
-							<!-- <li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li> -->
-							<li><a href="https://instagram.com/octa815" target="_blank" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="https://github.com/octa815" target="_blank" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
-
-				<!-- Main -->
-					<div id="main">
-
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">2023</span>
-									<h1>Animación de un robot<br />
-									en blender</h1>
-								</header>
-
-								<iframe class="image main" width="560" height="560" src="https://www.youtube.com/embed/xsF1OzIbQyA?controls=0&autoplay=1&loop=1&playlist=xsF1OzIbQyA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-								<div class="terminal">
-									<h4>**Apertura de conexión**</h4>
-									<p>Nombre del robot: Ovo</p>
-									<p>Ubicación: Espacio exterior, cerca del planeta tierra</p>
-									<p>Situación actual: En búsqueda de otras formas de vida inteligente</p>
-									<p>Informe: El robot O.V.O parece estar al día con sus tareas de búsqueda. Enviamos una cámara para observar que todo esté correcto y el robot decidió coger la cámara para tomarse unas fotos. Enviaremos una nave a recogerla. Al final del vídeo, observamos una mirada un poco extraña, O.V.O no suele girar los ojos de esa manera, es probable que viera algo detrás de la cámara, o que nos quisiera decir algo.</p>
-									<p>Solicitud: Envíen nave de búsqueda a Met-247828 para búsqueda de O.V.O.</p>
-									<br>
-									<h4>**Cierre de conexión**</h4>
-								</div>
-
-								<div class="image main"><img src="proyectos/anim_blend/Renders/selfie.jpg" alt="" /></div>
-								<div class="image main"><img src="proyectos/anim_blend/Renders/epica.jpg" alt="" /></div>
-								<div class="image main"><img src="proyectos/anim_blend/Renders/frente.jpg" alt="" /></div>
-								<div class="image main"><img src="proyectos/anim_blend/Renders/Hola.jpg" alt="" /></div>
-								<div class="image main"><img src="proyectos/anim_blend/Renders/Obsrevando.jpg" alt="" /></div>
-								<div class="image main"><img src="proyectos/anim_blend/Renders/Pensando.jpg" alt="" /></div>
-								<div class="image main"><img src="proyectos/anim_blend/Renders/saludos.jpg" alt="" /></div>
-
-
-
-
-								
-
-								
-							</section>
-
-					</div>
-
-				<!-- Copyright -->
-				<div id="copyright">
-					<ul><li>&copy; OGG</li></ul>
-					<!-- <li>Design: <a href="https://html5up.net">HTML5 UP</a></li> -->
-				</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+  </article>
+</div>
+<section class="wrap" aria-label="Contacto" data-es-aria-label="Contacto" data-en-aria-label="Contact">
+  <div class="cta-band" data-reveal>
+    <div>
+      <h2><span lang="es">¿Buscas a alguien para un equipo así?</span><span lang="en">Looking for someone for a team like this?</span></h2>
+      <p><span lang="es">Disponible para incorporación inmediata. Suelo responder en menos de 24 h.</span><span lang="en">Available to start now. I usually reply within 24 h.</span></p>
+    </div>
+    <a class="btn" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+<nav class="wrap next-case" aria-label="Más proyectos" data-es-aria-label="Más proyectos" data-en-aria-label="More work">
+  <a href="interiorismo.html"><small>← <span lang="es">Anterior</span><span lang="en">Previous</span></small><b><span lang="es">Taj Mahal</span><span lang="en">Taj Mahal</span></b></a>
+  <a href="scripting.html"><small><span lang="es">Siguiente</span><span lang="en">Next</span> →</small><b><span lang="es">Lluvia procedural</span><span lang="en">Procedural rain</span></b></a>
+</nav>
+</main>
+<dialog class="lightbox" id="lightbox" aria-label="Imagen ampliada">
+  <button class="close" type="button" aria-label="Cerrar" data-en-aria-label="Close" data-es-aria-label="Cerrar"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <img src="data:," alt="">
+  <p></p>
+</dialog>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><img src="assets/img/logo-96.webp" alt="" width="34" height="34" loading="lazy"><span>Octavio GG</span></a>
+        <p><span lang="es">Ingeniero Multimedia en Elda, Alicante. Videojuegos, desarrollo y coordinación de proyectos.</span><span lang="en">Multimedia engineer based in Elda, Alicante. Games, development and project coordination.</span></p>
+      </div>
+      <nav aria-label="Proyectos" data-en-aria-label="Projects" data-es-aria-label="Proyectos">
+        <h2><span lang="es">Proyectos</span><span lang="en">Work</span></h2>
+        <ul>
+          <li><a href="tfg-superresolucion.html"><span lang="es">TFG: superresolución con IA</span><span lang="en">Thesis: AI super-resolution</span></a></li>
+          <li><a href="castle-of-shadows.html">Castle of Shadows</a></li>
+          <li><a href="tower-hero.html">Tower Hero</a></li>
+          <li><a href="elements.html"><span lang="es">Archivo de ficheros</span><span lang="en">File archive</span></a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Contacto" data-en-aria-label="Contact" data-es-aria-label="Contacto">
+        <h2><span lang="es">Contacto</span><span lang="en">Contact</span></h2>
+        <ul>
+          <li><a href="mailto:octavio.ogg+pf@gmail.com">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/octagg" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/octa815" rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href="https://pocketboy-games.itch.io" rel="noopener" target="_blank">itch.io</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <h2><span lang="es">Sitio</span><span lang="en">Site</span></h2>
+        <ul>
+          <li><a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a></li>
+          <li><a href="cv_octavio_gregorio.pdf" download><span lang="es">CV en PDF</span><span lang="en">CV (PDF)</span></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Octavio Gregorio Guerrero</span>
+      <span>Elda, Alicante · <span lang="es">España</span><span lang="en">Spain</span></span>
+    </div>
+  </div>
+</footer>
+<button class="to-top" type="button" aria-label="Volver arriba" data-es-aria-label="Volver arriba" data-en-aria-label="Back to top"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<div class="mobile-cta" aria-label="Acciones rápidas" data-en-aria-label="Quick actions" data-es-aria-label="Acciones rápidas" role="region">
+  <a class="btn btn--primary" href="index.html#contacto"><span lang="es">Escríbeme</span><span lang="en">Get in touch</span></a>
+  <a class="btn" href="cv_octavio_gregorio.pdf" download><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>CV</a>
+</div>
+</body>
 </html>

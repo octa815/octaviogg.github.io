@@ -13,7 +13,7 @@ LINKEDIN = "https://www.linkedin.com/in/octagg"
 GITHUB = "https://github.com/octa815"
 ITCH = "https://pocketboy-games.itch.io/towerhero"
 PHONE_WA = "34694455979"
-V = "20260923d"  # cache-busting for css/js
+V = "20260923e"  # cache-busting for css/js
 
 from urllib.parse import quote
 MSG_ES = "Hola Octavio, he visto tu portfolio y me encantaría contratarte ;)"
@@ -25,9 +25,9 @@ MAIL_EN = f"mailto:{EMAIL}?subject={quote('Found you through your portfolio')}&a
 MAIL_ZH = f"mailto:{EMAIL}?subject={quote('從你的作品集找到你')}&amp;body={quote(MSG_ZH)}"
 
 
-# Traditional Chinese: tools/zh_hant.json maps the exact Spanish string to its
+# Simplified Chinese: tools/zh_hans.json maps the exact Spanish string to its
 # translation. Missing keys fall back to English and are listed after a build.
-ZH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "zh_hant.json")
+ZH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "zh_hans.json")
 ZH = json.load(open(ZH_PATH, encoding="utf-8")) if os.path.exists(ZH_PATH) else {}
 ZH_MISSING = {}
 
@@ -42,7 +42,7 @@ def zh(es, en):
 def L(es, en, tag="span", cls=""):
     c = f' class="{cls}"' if cls else ""
     return (f'<{tag}{c} lang="es">{es}</{tag}><{tag}{c} lang="en">{en}</{tag}>'
-            f'<{tag}{c} lang="zh-Hant">{zh(es, en)}</{tag}>')
+            f'<{tag}{c} lang="zh-Hans">{zh(es, en)}</{tag}>')
 
 
 _TAG = re.compile(r"<[a-zA-Z][^<>]*\bdata-es-[^<>]*>")
@@ -167,7 +167,7 @@ def head(*, path, title_es, title_en, desc_es, desc_en, ld_json="", robots="inde
 <meta property="og:site_name" content="Octavio Gregorio">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_GB">
-<meta property="og:locale:alternate" content="zh_TW">
+<meta property="og:locale:alternate" content="zh_CN">
 <meta property="og:title" content="{html.escape(title_es)}">
 <meta property="og:description" content="{html.escape(desc_es)}">
 <meta property="og:url" content="{canonical}">
@@ -179,10 +179,10 @@ def head(*, path, title_es, title_en, desc_es, desc_en, ld_json="", robots="inde
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<script>(function(){{var r=document.documentElement,s;try{{s=localStorage}}catch(e){{}}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';if(l==='zh')r.lang='zh-Hant';r.classList.add('js')}})()</script>
+<script>(function(){{var r=document.documentElement,s;try{{s=localStorage}}catch(e){{}}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';if(l==='zh')r.lang='zh-Hans';r.classList.add('js')}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600&display=swap">
 <link rel="stylesheet" href="assets/css/site.css?v={V}">
 <script src="assets/js/site.js?v={V}" defer></script>
 {ld_json}
@@ -218,7 +218,7 @@ def header(active=""):
       </ul>
     </nav>
     <div class="tools">
-      <div class="lang-switch" role="group" aria-label="Idioma" data-es-aria-label="Idioma" data-en-aria-label="Language"><button type="button" data-set-lang="es" lang="es" aria-label="Español">ES</button><button type="button" data-set-lang="en" lang="en" aria-label="English">EN</button><button type="button" data-set-lang="zh" lang="zh-Hant" aria-label="繁體中文">中</button></div>
+      <div class="lang-switch" role="group" aria-label="Idioma" data-es-aria-label="Idioma" data-en-aria-label="Language"><button type="button" data-set-lang="es" lang="es" aria-label="Español">ES</button><button type="button" data-set-lang="en" lang="en" aria-label="English">EN</button><button type="button" data-set-lang="zh" lang="zh-Hans" aria-label="简体中文">中</button></div>
       <button class="icon-btn theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false">{icon("moon", "i-moon")}{icon("sun", "i-sun")}</button>
       <a class="btn btn--sm btn--ink header-cv" href="cv_octavio_gregorio.pdf" download>{L("Descargar CV", "Download CV")}</a>
       <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="bars"><span class="bar"></span><span class="bar"></span></span></button>
@@ -414,6 +414,7 @@ def index():
       <p class="hero-note" data-enter style="--i:4">{icon("clock")}{L("Suelo responder en menos de 24 h", "I usually reply within 24 h")}</p>
     </div>
     <figure class="portrait" data-enter>
+      <div class="photo">
       <div class="frame">
         <picture>
           <source type="image/webp" srcset="assets/img/octavio-480.webp 480w, assets/img/octavio-800.webp 800w" sizes="(max-width: 860px) 300px, 400px">
@@ -421,6 +422,7 @@ def index():
         </picture>
       </div>
       <img class="sticker" src="assets/img/icon-192.png" alt="" width="84" height="84">
+      </div>
       <figcaption>{L("¡Hola! Soy yo, el pulpo es mi logo. Porque de Octavio… Octa… Oct… que sale 8… ¿lo pillas?… ¿no?… Bueno, pues soy yo :)", "Hi! That's me, and the octopus is my logo. Because Octavio… Octa… Oct… that's 8… get it?… no?… Well, anyway, that's me :)")}</figcaption>
     </figure>
   </div>
@@ -1126,7 +1128,7 @@ def archive():
     let n = 0;
     items.forEach(li => {{ const ok = (cat === 'all' || li.dataset.cat === cat) && (!term || li.dataset.search.includes(term)); li.hidden = !ok; if (ok) n++; }});
     empty.hidden = n > 0;
-    const lg = document.documentElement.lang; count.textContent = lg === 'en' ? n + ' files' : lg === 'zh-Hant' ? n + ' 個檔案' : n + ' archivos';
+    const lg = document.documentElement.lang; count.textContent = lg === 'en' ? n + ' files' : lg === 'zh-Hans' ? n + ' 个文件' : n + ' archivos';
   }};
   q.addEventListener('input', run);
   chips.forEach(c => c.addEventListener('click', () => {{ cat = c.dataset.filter; chips.forEach(x => x.setAttribute('aria-pressed', String(x === c))); run(); }}));
@@ -1175,22 +1177,22 @@ def privacidad():
   <h2>Your rights</h2>
   <p>You can ask for access, correction or deletion of anything you've sent me by emailing <a class="link" href="mailto:{EMAIL}">{EMAIL}</a>. You can also complain to the Spanish data protection authority, the <a class="link" href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a>.</p>
 </div>"""
-    zhb = f"""<div lang="zh-Hant">
-  <p><strong>最後更新：</strong>2026 年 9 月 23 日。</p>
-  <h2>負責人</h2>
-  <p>Octavio Gregorio Guerrero，西班牙阿利坎特省埃爾達（Elda）。聯絡方式：<a class="link" href="mailto:{EMAIL}">{EMAIL}</a>。</p>
-  <h2>我收集哪些資料</h2>
-  <p>完全不收集。本網站沒有表單、沒有分析工具、沒有廣告，也沒有 Cookie。如果你透過電子郵件或 WhatsApp 聯絡我，我只會用你的訊息來回覆你；只要你提出要求，我就會刪除它。</p>
-  <h2>第三方服務</h2>
+    zhb = f"""<div lang="zh-Hans">
+  <p><strong>最后更新：</strong>2026 年 9 月 23 日。</p>
+  <h2>负责人</h2>
+  <p>Octavio Gregorio Guerrero，西班牙阿利坎特省埃尔达（Elda）。联系方式：<a class="link" href="mailto:{EMAIL}">{EMAIL}</a>。</p>
+  <h2>我收集哪些数据</h2>
+  <p>完全不收集。本网站没有表单、没有分析工具、没有广告，也没有 Cookie。如果你通过电子邮件或 WhatsApp 联系我，我只会用你的消息来回复你；只要你提出要求，我就会删除它。</p>
+  <h2>第三方服务</h2>
   <ul>
-    <li><strong>GitHub Pages</strong>（GitHub Inc.）託管本網站，可能在技術日誌中記錄你的 IP。</li>
-    <li><strong>Google Fonts</strong> 提供網站字型。</li>
-    <li><strong>YouTube</strong>（隱私強化模式）只會在你點擊影片時載入。</li>
+    <li><strong>GitHub Pages</strong>（GitHub Inc.）托管本网站，可能在技术日志中记录你的 IP。</li>
+    <li><strong>Google Fonts</strong> 提供网站字体。</li>
+    <li><strong>YouTube</strong>（隐私强化模式）只会在你点击视频时加载。</li>
   </ul>
-  <h2>本機儲存</h2>
-  <p>瀏覽器會在本機儲存 <code>theme</code> 與 <code>lang</code>，用來記住淺色／深色模式與語言。這是技術性資料，無法識別任何人，也不會離開你的裝置。</p>
-  <h2>你的權利</h2>
-  <p>你可以寫信到 <a class="link" href="mailto:{EMAIL}">{EMAIL}</a>，要求查閱、更正或刪除你寄給我的任何資料。你也可以向西班牙資料保護局 <a class="link" href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a> 提出申訴。</p>
+  <h2>本机保存</h2>
+  <p>浏览器会在本机保存 <code>theme</code> 与 <code>lang</code>，用来记住浅色／深色模式与语言。这是技术性数据，无法识别任何人，也不会离开你的设备。</p>
+  <h2>你的权利</h2>
+  <p>你可以写信到 <a class="link" href="mailto:{EMAIL}">{EMAIL}</a>，要求查阅、更正或删除你寄给我的任何数据。你也可以向西班牙数据保护局 <a class="link" href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a> 提出申诉。</p>
 </div>"""
     out = head(
         path="privacidad.html",
@@ -1259,4 +1261,4 @@ if __name__ == "__main__":
     if ZH_MISSING:
         miss = os.path.join(os.path.dirname(ZH_PATH), "zh_missing.json")
         json.dump(ZH_MISSING, open(miss, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-        print(f"[zh] {len(ZH_MISSING)} strings without Traditional Chinese (English used) -> {miss}")
+        print(f"[zh] {len(ZH_MISSING)} strings without Simplified Chinese (English used) -> {miss}")

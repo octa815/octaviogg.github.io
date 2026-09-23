@@ -67,19 +67,19 @@
 }
 
 /* ---------- Language visibility ---------- */
-html[lang="es"] [lang="en"], html[lang="es"] [lang="zh-Hant"],
-html[lang="en"] [lang="es"], html[lang="en"] [lang="zh-Hant"],
-html[lang="zh-Hant"] [lang="es"], html[lang="zh-Hant"] [lang="en"] { display: none !important; }
+html[lang="es"] [lang="en"], html[lang="es"] [lang="zh-Hans"],
+html[lang="en"] [lang="es"], html[lang="en"] [lang="zh-Hans"],
+html[lang="zh-Hans"] [lang="es"], html[lang="zh-Hans"] [lang="en"] { display: none !important; }
 /* The switch buttons always show, whatever their own lang attribute */
 html .lang-switch button[lang] { display: inline-grid !important; }
 
-:root[lang="zh-Hant"] {
-  --font-display: "Fraunces", "Noto Serif TC", serif;
-  --font-sans: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
+:root[lang="zh-Hans"] {
+  --font-display: "Fraunces", "Noto Serif SC", serif;
+  --font-sans: "IBM Plex Sans", "Noto Sans SC", system-ui, sans-serif;
 }
-:root[lang="zh-Hant"] .display,
-:root[lang="zh-Hant"] .section-head h2 { letter-spacing: 0; line-height: 1.15; }
-:root[lang="zh-Hant"] body { line-height: 1.8; }
+:root[lang="zh-Hans"] .display,
+:root[lang="zh-Hans"] .section-head h2 { letter-spacing: 0; line-height: 1.15; }
+:root[lang="zh-Hans"] body { line-height: 1.8; }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -336,7 +336,7 @@ mark, .mark {
 }
 .lang-switch button:active { transform: scale(0.94); }
 .lang-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
-.lang-switch button[lang="zh-Hant"] { font-family: "Noto Sans TC", var(--font-sans); font-size: 0.85rem; }
+.lang-switch button[lang="zh-Hans"] { font-family: "Noto Sans SC", var(--font-sans); font-size: 0.85rem; }
 @media (hover: hover) and (pointer: fine) {
   .lang-switch button:not([aria-pressed="true"]):hover { background: var(--paper-2); color: var(--ink); }
 }
@@ -519,6 +519,7 @@ mark, .mark {
   width: 100%;
   max-width: 400px;
 }
+.portrait .photo { position: relative; }
 .portrait .frame {
   position: relative;
   aspect-ratio: 4 / 5;
@@ -574,7 +575,7 @@ mark, .mark {
 @media (max-width: 860px) {
   .hero-grid { grid-template-columns: 1fr; align-items: start; }
   .portrait { justify-self: start; max-width: 280px; }
-  .portrait .sticker { left: auto; right: -14px; bottom: 30px; width: 64px; height: 64px; }
+  .portrait .sticker { left: auto; right: -14px; bottom: 16px; width: 64px; height: 64px; }
   .proof { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .proof li:nth-child(3) { padding-left: 0; border-left: 0; }
   .proof li:nth-child(n + 3) { border-top: 1px solid var(--line); }
@@ -1815,3 +1816,5 @@ body.gb-in-view .to-top { opacity: 0; pointer-events: none; }
 .gb-keys div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
 .gb-keys dt { flex-wrap: nowrap; }
 .gb-keys dd { color: var(--ink); font-weight: 500; }
+.proof strong { overflow-wrap: break-word; }
+@media (max-width: 520px) { .proof strong { font-size: clamp(1rem, 5.2vw, 1.25rem); } }

@@ -19,11 +19,11 @@
   const TXT = {
     es: { loading: "Cargando…", error: "No se ha podido cargar el juego. Recarga la página.", pause: "Pausa", resume: "Continuar", paused: "En pausa", soundOn: "Sonido: sí", soundOff: "Sonido: no", full: "Pantalla completa", exitFull: "Salir de pantalla completa", hint: "Pulsa START para empezar" },
     en: { loading: "Loading…", error: "Couldn't load the game. Please reload the page.", pause: "Pause", resume: "Resume", paused: "Paused", soundOn: "Sound: on", soundOff: "Sound: off", full: "Fullscreen", exitFull: "Exit fullscreen", hint: "Press START to begin" },
-    zh: { loading: "載入中…", error: "無法載入遊戲，請重新整理頁面。", pause: "暫停", resume: "繼續", paused: "已暫停", soundOn: "聲音：開", soundOff: "聲音：關", full: "全螢幕", exitFull: "離開全螢幕", hint: "按 START 開始" },
+    zh: { loading: "加载中…", error: "无法加载游戏，请刷新页面。", pause: "暂停", resume: "继续", paused: "已暂停", soundOn: "声音：开", soundOff: "声音：关", full: "全屏", exitFull: "退出全屏", hint: "按 START 开始" },
   };
   const t = (k) => {
     const l = document.documentElement.lang;
-    return (TXT[l === "zh-Hant" ? "zh" : l] || TXT.es)[k];
+    return (TXT[l === "zh-Hans" ? "zh" : l] || TXT.es)[k];
   };
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch { return null; } },

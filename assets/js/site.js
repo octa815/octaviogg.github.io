@@ -31,20 +31,20 @@
       toLight: "Switch to light mode",
     },
     zh: {
-      copied: "已複製",
-      menuOpen: "開啟選單",
-      menuClose: "關閉選單",
-      toDark: "切換為深色模式",
-      toLight: "切換為淺色模式",
+      copied: "已复制",
+      menuOpen: "打开菜单",
+      menuClose: "关闭菜单",
+      toDark: "切换为深色模式",
+      toLight: "切换为浅色模式",
     },
   };
   // Visible language code ("es" | "en" | "zh") <-> <html lang> value.
-  const LANG_ATTR = { es: "es", en: "en", zh: "zh-Hant" };
-  const lang = () => (root.lang === "en" ? "en" : root.lang === "zh-Hant" ? "zh" : "es");
+  const LANG_ATTR = { es: "es", en: "en", zh: "zh-Hans" };
+  const lang = () => (root.lang === "en" ? "en" : root.lang === "zh-Hans" ? "zh" : "es");
   const t = (k, ...a) => { const v = (T[lang()] || T.en)[k]; return typeof v === "function" ? v(...a) : v; };
 
   // ---- Language -----------------------------------------------------------
-  // Long copy lives in sibling elements (lang="es" / "en" / "zh-Hant") and CSS
+  // Long copy lives in sibling elements (lang="es" / "en" / "zh-Hans") and CSS
   // hides the inactive ones. Attributes use data-es-* / data-en-* / data-zh-*.
   function applyLang(l) {
     root.lang = LANG_ATTR[l];

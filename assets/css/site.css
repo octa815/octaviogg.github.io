@@ -67,8 +67,19 @@
 }
 
 /* ---------- Language visibility ---------- */
-html[lang="es"] [lang="en"],
-html[lang="en"] [lang="es"] { display: none !important; }
+html[lang="es"] [lang="en"], html[lang="es"] [lang="zh-Hant"],
+html[lang="en"] [lang="es"], html[lang="en"] [lang="zh-Hant"],
+html[lang="zh-Hant"] [lang="es"], html[lang="zh-Hant"] [lang="en"] { display: none !important; }
+/* The switch buttons always show, whatever their own lang attribute */
+html .lang-switch button[lang] { display: inline-grid !important; }
+
+:root[lang="zh-Hant"] {
+  --font-display: "Fraunces", "Noto Serif TC", serif;
+  --font-sans: "IBM Plex Sans", "Noto Sans TC", system-ui, sans-serif;
+}
+:root[lang="zh-Hant"] .display,
+:root[lang="zh-Hant"] .section-head h2 { letter-spacing: 0; line-height: 1.15; }
+:root[lang="zh-Hant"] body { line-height: 1.8; }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -306,9 +317,32 @@ mark, .mark {
 :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
 :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
 
-.lang-toggle [data-l] { opacity: 0.45; transition: opacity var(--dur-fast) ease; }
-html[lang="es"] .lang-toggle [data-l="es"],
-html[lang="en"] .lang-toggle [data-l="en"] { opacity: 1; }
+.lang-switch {
+  display: inline-flex;
+  height: 40px;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.lang-switch button {
+  place-items: center;
+  min-width: 32px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, transform var(--dur-press) var(--ease-out);
+}
+.lang-switch button:active { transform: scale(0.94); }
+.lang-switch button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.lang-switch button[lang="zh-Hant"] { font-family: "Noto Sans TC", var(--font-sans); font-size: 0.85rem; }
+@media (hover: hover) and (pointer: fine) {
+  .lang-switch button:not([aria-pressed="true"]):hover { background: var(--paper-2); color: var(--ink); }
+}
+@media (max-width: 380px) {
+  .lang-switch button { min-width: 28px; }
+}
 
 .menu-btn { display: none; }
 .menu-btn.icon-btn { padding: 0; }
@@ -1505,3 +1539,46 @@ html:not(.js) .skel::after { display: none; }
 
 /* Theme swap: skip per-element colour transitions for one frame */
 .theme-swap, .theme-swap *, .theme-swap *::before, .theme-swap *::after { transition: none !important; }
+
+/* ---------- Custom cursor (mouse only) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html, body { cursor: url("../img/cursor.svg") 2 2, auto; }
+  a, button, summary, label[for], .chip, [role="button"], select,
+  .gallery button, .yt button, input[type="checkbox"] {
+    cursor: url("../img/cursor-pointer.svg") 2 2, pointer;
+  }
+  input[type="text"], input[type="email"], input[type="search"], textarea { cursor: text; }
+  .gallery button { cursor: url("../img/cursor-pointer.svg") 2 2, zoom-in; }
+}
+
+/* ---------- Small extras ---------- */
+.btn .tiny {
+  font-size: 0.6rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-left: -6px;
+  align-self: flex-end;
+  padding-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+.figbox { border-radius: var(--radius-sm); overflow: hidden; }
+
+.case-cover-fig figcaption { margin-top: 10px; font-size: 0.85rem; color: var(--ink-3); }
+.numbers {
+  list-style: none;
+  padding: 0 !important;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.numbers li { margin: 0 !important; padding: 16px 16px 16px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; color: var(--ink-2); }
+.numbers li:nth-child(odd) { padding-right: 20px; }
+.numbers b { display: block; font-family: var(--font-display); font-size: 1.8rem; line-height: 1.1; color: var(--ink); margin-bottom: 4px; }
+@media (max-width: 520px) { .numbers { grid-template-columns: 1fr; } }
+.modes { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.modes th, .modes td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+.modes th { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 400; color: var(--ink-3); }
+.modes td:nth-child(n+3) { font-variant-numeric: tabular-nums; }
+.prose figure .gallery { grid-template-columns: 1fr; }
+.prose figure.narrow { max-width: 300px; }

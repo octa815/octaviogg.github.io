@@ -30,15 +30,24 @@
       toDark: "Switch to dark mode",
       toLight: "Switch to light mode",
     },
+    zh: {
+      copied: "已複製",
+      menuOpen: "開啟選單",
+      menuClose: "關閉選單",
+      toDark: "切換為深色模式",
+      toLight: "切換為淺色模式",
+    },
   };
-  const lang = () => (root.lang === "en" ? "en" : "es");
-  const t = (k, ...a) => { const v = T[lang()][k]; return typeof v === "function" ? v(...a) : v; };
+  // Visible language code ("es" | "en" | "zh") <-> <html lang> value.
+  const LANG_ATTR = { es: "es", en: "en", zh: "zh-Hant" };
+  const lang = () => (root.lang === "en" ? "en" : root.lang === "zh-Hant" ? "zh" : "es");
+  const t = (k, ...a) => { const v = (T[lang()] || T.en)[k]; return typeof v === "function" ? v(...a) : v; };
 
   // ---- Language -----------------------------------------------------------
-  // Long copy lives in paired elements (lang="es" / lang="en") and CSS hides
-  // the inactive one. Attributes use data-es-* / data-en-* (e.g. data-en-placeholder).
+  // Long copy lives in sibling elements (lang="es" / "en" / "zh-Hant") and CSS
+  // hides the inactive ones. Attributes use data-es-* / data-en-* / data-zh-*.
   function applyLang(l) {
-    root.lang = l;
+    root.lang = LANG_ATTR[l];
     $$("*").forEach((el) => {
       for (const { name, value } of Array.from(el.attributes)) {
         if (!name.startsWith(`data-${l}-`)) continue;
@@ -49,19 +58,21 @@
     });
     const title = root.getAttribute(`data-${l}-title`);
     if (title) document.title = title;
-    $$(".lang-toggle").forEach((b) => b.setAttribute("aria-label", l === "es" ? "Switch to English" : "Cambiar a español"));
+    $$("[data-set-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.setLang === l)));
     syncThemeLabel();
     document.dispatchEvent(new CustomEvent("langchange"));
   }
 
-  $$(".lang-toggle").forEach((btn) =>
+  $$("[data-set-lang]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      const next = lang() === "es" ? "en" : "es";
+      const next = btn.dataset.setLang;
+      if (next === lang()) return;
       store.set("lang", next);
       applyLang(next);
     })
   );
-  if (lang() === "en") applyLang("en");
+  if (lang() !== "es") applyLang(lang());
+  else $$("[data-set-lang]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.setLang === "es")));
 
   // ---- Theme --------------------------------------------------------------
   const themeMeta = $('meta[name="theme-color"]');

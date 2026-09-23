@@ -4,7 +4,7 @@
 The HTML files are committed, so GitHub Pages needs no build step. Edit copy or
 the shared header/footer here, then run:  python3 tools/build_pages.py
 """
-import json, os, html
+import json, os, html, re
 
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://octa815.github.io/octaviogg.github.io/"
@@ -13,12 +13,80 @@ LINKEDIN = "https://www.linkedin.com/in/octagg"
 GITHUB = "https://github.com/octa815"
 ITCH = "https://pocketboy-games.itch.io/towerhero"
 PHONE_WA = "34694455979"
-V = "20260923"  # cache-busting for css/js
+V = "20260923b"  # cache-busting for css/js
+
+from urllib.parse import quote
+MSG_ES = "Hola Octavio, he visto tu portfolio y me encantaría contratarte ;)"
+MSG_EN = "Hi Octavio, I've seen your portfolio and I'd love to hire you ;)"
+MSG_ZH = "你好 Octavio，我看過你的作品集，很想聘請你 ;)"
+WA_ES, WA_EN, WA_ZH = quote(MSG_ES), quote(MSG_EN), quote(MSG_ZH)
+MAIL_ES = f"mailto:{EMAIL}?subject={quote('Te he visto en tu portfolio')}&amp;body={quote(MSG_ES)}"
+MAIL_EN = f"mailto:{EMAIL}?subject={quote('Found you through your portfolio')}&amp;body={quote(MSG_EN)}"
+MAIL_ZH = f"mailto:{EMAIL}?subject={quote('從你的作品集找到你')}&amp;body={quote(MSG_ZH)}"
+
+
+# Traditional Chinese: tools/zh_hant.json maps the exact Spanish string to its
+# translation. Missing keys fall back to English and are listed after a build.
+ZH_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "zh_hant.json")
+ZH = json.load(open(ZH_PATH, encoding="utf-8")) if os.path.exists(ZH_PATH) else {}
+ZH_MISSING = {}
+
+
+def zh(es, en):
+    if es in ZH:
+        return ZH[es]
+    ZH_MISSING[es] = en
+    return en
 
 
 def L(es, en, tag="span", cls=""):
     c = f' class="{cls}"' if cls else ""
-    return f'<{tag}{c} lang="es">{es}</{tag}><{tag}{c} lang="en">{en}</{tag}>'
+    return (f'<{tag}{c} lang="es">{es}</{tag}><{tag}{c} lang="en">{en}</{tag}>'
+            f'<{tag}{c} lang="zh-Hant">{zh(es, en)}</{tag}>')
+
+
+_TAG = re.compile(r"<[a-zA-Z][^<>]*\bdata-es-[^<>]*>")
+_ATTR = re.compile(r'data-es-([a-z-]+)="([^"]*)"')
+
+
+_EN_ONLY = re.compile(r"<[a-zA-Z][^<>]*\bdata-en-[^<>]*>")
+
+
+def add_es_attrs(markup):
+    """A tag with data-en-X but no data-es-X gets data-es-X from its current X."""
+    def fix(m):
+        tag = m.group(0)
+        extra = []
+        for attr in re.findall(r'data-en-([a-z-]+)="', tag):
+            if f"data-es-{attr}=" in tag:
+                continue
+            cur = re.search(rf'(?<![\w-]){attr}="([^"]*)"', tag)
+            if cur:
+                extra.append(f'data-es-{attr}="{cur.group(1)}"')
+        if not extra:
+            return tag
+        end = -2 if tag.endswith("/>") else -1
+        return tag[:end] + " " + " ".join(extra) + tag[end:]
+    return _EN_ONLY.sub(fix, markup)
+
+
+def add_zh_attrs(markup):
+    """Every data-es-X gets a data-zh-X sibling (translated or English fallback)."""
+    markup = add_es_attrs(markup)
+    def fix(m):
+        tag = m.group(0)
+        extra = []
+        for attr, val in _ATTR.findall(tag):
+            if f"data-zh-{attr}=" in tag:
+                continue
+            en = re.search(rf'data-en-{attr}="([^"]*)"', tag)
+            en_val = html.unescape(en.group(1)) if en else html.unescape(val)
+            extra.append(f'data-zh-{attr}="{html.escape(zh(html.unescape(val), en_val))}"')
+        if not extra:
+            return tag
+        end = -2 if tag.endswith("/>") else -1
+        return tag[:end] + " " + " ".join(extra) + tag[end:]
+    return _TAG.sub(fix, markup)
 
 
 # ---------- icons ----------
@@ -99,6 +167,7 @@ def head(*, path, title_es, title_en, desc_es, desc_en, ld_json="", robots="inde
 <meta property="og:site_name" content="Octavio Gregorio">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="zh_TW">
 <meta property="og:title" content="{html.escape(title_es)}">
 <meta property="og:description" content="{html.escape(desc_es)}">
 <meta property="og:url" content="{canonical}">
@@ -110,10 +179,10 @@ def head(*, path, title_es, title_en, desc_es, desc_en, ld_json="", robots="inde
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<script>(function(){{var r=document.documentElement,s;try{{s=localStorage}}catch(e){{}}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';r.classList.add('js')}})()</script>
+<script>(function(){{var r=document.documentElement,s;try{{s=localStorage}}catch(e){{}}var t=s&&s.getItem('theme'),l=s&&s.getItem('lang');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(l==='en')r.lang='en';if(l==='zh')r.lang='zh-Hant';r.classList.add('js')}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600&display=swap">
 <link rel="stylesheet" href="assets/css/site.css?v={V}">
 <script src="assets/js/site.js?v={V}" defer></script>
 {ld_json}
@@ -149,7 +218,7 @@ def header(active=""):
       </ul>
     </nav>
     <div class="tools">
-      <button class="icon-btn lang-toggle" type="button" aria-label="Switch to English"><span data-l="es">ES</span>/<span data-l="en">EN</span></button>
+      <div class="lang-switch" role="group" aria-label="Idioma" data-es-aria-label="Idioma" data-en-aria-label="Language"><button type="button" data-set-lang="es" lang="es" aria-label="Español">ES</button><button type="button" data-set-lang="en" lang="en" aria-label="English">EN</button><button type="button" data-set-lang="zh" lang="zh-Hant" aria-label="繁體中文">中</button></div>
       <button class="icon-btn theme-toggle" type="button" aria-label="Activar modo oscuro" aria-pressed="false">{icon("moon", "i-moon")}{icon("sun", "i-sun")}</button>
       <a class="btn btn--sm btn--ink header-cv" href="cv_octavio_gregorio.pdf" download>{L("Descargar CV", "Download CV")}</a>
       <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span class="bars"><span class="bar"></span><span class="bar"></span></span></button>
@@ -191,7 +260,7 @@ def footer(mobile_cta=True):
       <nav aria-label="Contacto" data-en-aria-label="Contact" data-es-aria-label="Contacto">
         <h2>{L("Contacto", "Contact")}</h2>
         <ul>
-          <li><a href="mailto:{EMAIL}">Email</a></li>
+          <li><a href="{MAIL_ES}" data-es-href="{MAIL_ES}" data-en-href="{MAIL_EN}" data-zh-href="{MAIL_ZH}">Email</a></li>
           <li><a href="{LINKEDIN}" rel="me noopener" target="_blank">LinkedIn</a></li>
           <li><a href="{GITHUB}" rel="me noopener" target="_blank">GitHub</a></li>
           <li><a href="https://pocketboy-games.itch.io" rel="noopener" target="_blank">itch.io</a></li>
@@ -281,6 +350,7 @@ def next_case(prev, nxt):
 
 
 def write(name, content):
+    content = add_zh_attrs(content)
     with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
         f.write(content)
     print("wrote", name, len(content))
@@ -291,20 +361,20 @@ def write(name, content):
 # =====================================================================
 FAQ = [
     ("¿Cuándo podrías empezar?", "When could you start?",
-     "Ya. Terminé el grado en 2026 y estoy disponible para incorporarme de inmediato. Vivo en Elda (Alicante); cuéntame la modalidad y la ubicación del puesto y lo vemos.",
-     "Right away. I finished my degree in 2026 and I'm available immediately. I live in Elda (Alicante, Spain) — tell me about the role's location and setup and we'll figure it out."),
+     "YA. Acabo de terminar el grado en 2026 y estoy disponible para incorporarme de inmediato.",
+     "NOW. I just finished my degree in 2026 and I'm available to start immediately."),
     ("¿Qué tipo de puesto buscas?", "What kind of role are you after?",
-     "Gestión de proyectos tecnológicos (project manager, producer, coordinación técnica) o desarrollo, sobre todo en videojuegos. Donde mejor encajo es en un sitio en el que pueda organizar el trabajo del equipo sin perder el contacto con el código.",
-     "Tech project management (project manager, producer, technical coordination) or development, especially in games. I fit best where I can organise a team's work without losing touch with the code."),
+     "Gestión de proyectos tecnológicos (project manager, producer, coordinación técnica) o desarrollo en cualquier entorno tecnológico. Donde mejor encajo es en un sitio en el que pueda organizar el trabajo del equipo sin perder el contacto con el código ni con las personas.",
+     "Tech project management (project manager, producer, technical coordination) or development in any tech environment. I fit best where I can organise a team's work without losing touch with the code — or with the people."),
     ("¿Has coordinado equipos de verdad?", "Have you actually led teams?",
-     "En la carrera, sí, y de forma continuada: en Castle of Shadows (Zero Studios) coordiné al equipo durante todo el curso: reparto de tareas, prioridades y seguimiento de entregas. En casi todos los proyectos en grupo acabé haciendo ese papel. Aún no lo he hecho en una empresa, y es justo lo que busco.",
-     "At university, yes, consistently: on Castle of Shadows (Zero Studios) I coordinated the team for the whole year — task split, priorities and delivery tracking. I ended up in that role in almost every group project. I haven't done it inside a company yet, and that's exactly what I'm looking for."),
+     "En la carrera, sí, y de forma continuada: en Castle of Shadows (Zero Studios) y en Tower Hero (PocketBoy) coordiné al equipo durante todo el curso: reparto de tareas, prioridades y seguimiento de entregas. En casi todos los proyectos en grupo acabé haciendo ese papel. Aún no lo he hecho en una empresa, y es justo lo que busco.",
+     "At university, yes, consistently: on Castle of Shadows (Zero Studios) and Tower Hero (PocketBoy) I coordinated the team for the whole year — task split, priorities and delivery tracking. I ended up in that role in almost every group project. I haven't done it inside a company yet, and that's exactly what I'm looking for."),
     ("¿De qué va tu TFG?", "What was your thesis about?",
-     'Casi todos los PCs de juego tienen una GPU dedicada y otra integrada que no se usa. Construí un sistema que le pasa cada frame a la integrada para reescalarlo con IA en tiempo real, sin tocar el juego. Sacó un 10 con Matrícula de Honor. <a class="link" href="tfg-superresolucion.html">Aquí lo cuento entero</a>.',
-     'Most gaming PCs have a dedicated GPU plus an integrated one that sits idle. I built a system that hands every frame to the integrated GPU to upscale it with AI in real time, without touching the game. It got a 10/10 with honours. <a class="link" href="tfg-superresolucion.html">Full write-up here</a>.'),
+     'Casi todos los ordenadores modernos tienen una GPU dedicada y otra integrada que no se usa. Construí un sistema que le pasa cada frame a la integrada para reescalarlo con IA en tiempo real, sin tocar el juego. Obtuve una nota de 10 con mención a Matrícula de Honor. <a class="link" href="tfg-superresolucion.html">Aquí lo cuento entero</a>.',
+     'Almost every modern computer has a dedicated GPU plus an integrated one that sits idle. I built a system that hands every frame to the integrated GPU to upscale it with AI in real time, without touching the game. It got a 10/10 with honours. <a class="link" href="tfg-superresolucion.html">Full write-up here</a>.'),
     ("¿Qué idiomas hablas?", "Which languages do you speak?",
-     "Español nativo e inglés avanzado: tengo el B2 oficial de la EOI y completé el curso de C1. Puedo trabajar, documentar y hacer reuniones en inglés.",
-     "Native Spanish and advanced English: I hold the official B2 (EOI) and completed the C1 course. I can work, write docs and run meetings in English."),
+     "Español nativo desde el lanzamiento del Grand Theft Auto: Vice City e inglés avanzado: tengo el B2 oficial de la EOI y completé el curso de C1. Puedo trabajar, documentar y hacer reuniones en inglés.",
+     "Native Spanish since Grand Theft Auto: Vice City came out, and advanced English: I hold the official B2 (EOI) and completed the C1 course. I can work, write docs and run meetings in English."),
 ]
 
 
@@ -336,9 +406,9 @@ def index():
     <div>
       <p class="status" data-enter style="--i:0"><span class="dot" aria-hidden="true"></span>{L("Disponible ahora · Elda, Alicante", "Available now · Elda, Alicante")}</p>
       <h1 id="hero-title" class="display" data-enter style="--i:1">Octavio<br>Gregorio <span class="light">Guerrero</span></h1>
-      <p class="lede" data-enter style="--i:2">{L("Ingeniero multimedia. Programo videojuegos desde el motor hacia arriba y, en los equipos, suelo ser quien organiza el trabajo para que el juego <em>llegue a la entrega</em>.", "Multimedia engineer. I build games from the engine up, and on teams I'm usually the one organising the work so the game <em>actually ships</em>.")}</p>
+      <p class="lede" data-enter style="--i:2">{L("Ingeniero multimedia. Programo, coordino equipos, organizo el trabajo y <em>me preocupo por el producto</em>.", "Multimedia engineer. I code, lead teams, organise the work and <em>care about the product</em>.")}</p>
       <div class="hero-actions" data-enter style="--i:3" data-cta-trigger>
-        <a class="btn btn--primary" href="#contacto">{L("Escríbeme", "Get in touch")}{icon("arrow", "arrow")}</a>
+        <a class="btn btn--primary" href="#contacto">{L("Escríbeme", "Get in touch")}{icon("arrow", "arrow")}<small class="tiny">{L("porfa :)", "please :)")}</small></a>
         <a class="btn" href="cv_octavio_gregorio.pdf" download>{icon("download", "arrow-down")}{L("Descargar CV", "Download CV")}</a>
       </div>
       <p class="hero-note" data-enter style="--i:4">{icon("clock")}{L("Suelo responder en menos de 24 h", "I usually reply within 24 h")}</p>
@@ -351,12 +421,12 @@ def index():
         </picture>
       </div>
       <img class="sticker" src="assets/img/icon-192.png" alt="" width="84" height="84">
-      <figcaption>{L("Yo. El pulpo es el logo.", "Me. The octopus is the logo.")}</figcaption>
+      <figcaption>{L("¡Hola! Soy yo, el pulpo es mi logo. Porque de Octavio… Octa… Oct… que sale 8… ¿lo pillas?… ¿no?… Bueno, pues soy yo :)", "Hi! That's me, and the octopus is my logo. Because Octavio… Octa… Oct… that's 8… get it?… no?… Well, anyway, that's me :)")}</figcaption>
     </figure>
   </div>
 
   <ul class="proof" aria-label="Datos destacados" data-es-aria-label="Datos destacados" data-en-aria-label="Highlights">
-    <li data-enter style="--i:5"><strong>10 · MH</strong><span>{L("Nota del TFG, con Matrícula de Honor", "Thesis grade, with honours")}</span></li>
+    <li data-enter style="--i:5"><strong>10 · MH</strong><span>{L("Nota del TFG, con mención a Matrícula de Honor", "Thesis grade, with a distinction (Matrícula de Honor)")}</span></li>
     <li data-enter style="--i:6"><strong>GBRetroDev'25</strong><span>{L("Participante oficial con un juego de Game Boy en Z80", "Official entry with a Game Boy game in Z80")}</span></li>
     <li data-enter style="--i:7"><strong>{L("Motor propio", "Own engine")}</strong><span>{L("Castle of Shadows: C++ y OpenGL, coordinando al equipo", "Castle of Shadows: C++ and OpenGL, leading the team")}</span></li>
     <li data-enter style="--i:8"><strong>2026</strong><span>{L("Graduado en Ingeniería Multimedia (UA)", "BSc Multimedia Engineering (Univ. of Alicante)")}</span></li>
@@ -369,12 +439,12 @@ def index():
     <div class="section-head" data-reveal>
       <span class="num">01</span>
       <h2 id="work-title">{L("Proyectos elegidos", "Selected work")}</h2>
-      <p>{L("Tres casos contados con calma: qué había que resolver, qué hice yo y qué salió.", "Three projects told properly: what needed solving, what I did and how it turned out.")}</p>
+      <p>{L("Tres proyectos de los que me siento orgulloso.", "Three projects I'm proud of.")}</p>
     </div>
 
     <div class="cases">
       <a class="case-card case-card--wide" href="tfg-superresolucion.html" data-reveal>
-        <div class="case-media"><div class="cover-type cover-type--tfg" aria-hidden="true"><span>dGPU → iGPU → IA</span><b>{L("Superresolución", "Super-resolution")}</b></div></div>
+        <div class="case-media skel">{img("assets/img/work/tfg-fsrcnn-1280.webp", "Minecraft con shaders reconstruido a 1080p por IA en la GPU integrada", 1280, 720, sizes="(max-width: 760px) 100vw, 620px").replace("<img ", "<img data-en-alt=\"Minecraft with shaders rebuilt to 1080p by AI on the integrated GPU\" ")}</div>
         <div class="case-body">
           <p class="case-kicker"><span>2025–26</span><span>TFG · {L("Investigación", "Research")}</span><span>10 · MH</span></p>
           <h3 class="case-title">{L("Reescalar juegos con IA usando la GPU que nadie usa", "Upscaling games with AI on the GPU nobody uses")}</h3>
@@ -384,11 +454,11 @@ def index():
       </a>
 
       <a class="case-card" href="castle-of-shadows.html" data-reveal style="--i:1">
-        <div class="case-media"><div class="cover-type" aria-hidden="true"><span>C++ · OpenGL · raylib</span><b>Castle of<br>Shadows</b></div></div>
+        <div class="case-media skel">{img("assets/img/work/cos-cover-800.webp", "Arte de Castle of Shadows: caballero con armadura low-poly sobre fondo rojo", 800, 450, srcset=work("cos-cover"), sizes="(max-width: 760px) 100vw, 540px").replace("<img ", "<img data-en-alt=\"Castle of Shadows key art: low-poly armoured knight on a red background\" ")}</div>
         <div class="case-body">
-          <p class="case-kicker"><span>2025–26</span><span>Zero Studios</span><span>{L("Coordinador", "Team lead")}</span></p>
+          <p class="case-kicker"><span>2025–26</span><span>Zero Studios</span><span>{L("Coordinador y programador", "Lead & programmer")}</span></p>
           <h3 class="case-title">Castle of Shadows</h3>
-          <p class="case-desc">{L("Juego 3D de acción sobre un motor propio. Coordiné al equipo, llevé el game design y programé donde hacía falta.", "3D action game on an in-house engine. I led the team, owned game design and programmed wherever needed.")}</p>
+          <p class="case-desc">{L("Juego 3D de acción sobre un motor propio. Coordiné al equipo, programé el motor y sacamos el producto adelante.", "3D action game on an in-house engine. I led the team, programmed the engine and we shipped the product.")}</p>
           <span class="case-more">{L("Leer el caso", "Read the case study")}{icon("arrow", "arrow")}</span>
         </div>
       </a>
@@ -449,7 +519,6 @@ def index():
       <div class="about-text" data-reveal>
         {L("Me gradué en Ingeniería Multimedia en la Universidad de Alicante en 2026. Vengo de los videojuegos, pero lo que más disfruto es que un proyecto con mucha gente salga bien.", "I graduated in Multimedia Engineering from the University of Alicante in 2026. I come from games, but what I enjoy most is a project with lots of people going well.", "p")}
         {L("En casi todos los trabajos en grupo de la carrera acabé coordinando: repartir tareas, marcar un ritmo y decidir qué se recorta cuando no llega el tiempo. Por eso busco puestos de <strong>gestión de proyectos tecnológicos</strong> sin dejar de tocar código.", "In almost every group project at university I ended up coordinating: splitting tasks, setting a pace and deciding what gets cut when time runs out. That's why I'm looking for <strong>tech project management</strong> roles where I still touch code.", "p")}
-        {L("Me tiran especialmente la IA aplicada y el hardware; mi TFG va justo de eso.", "I'm especially drawn to applied AI and hardware — my thesis is exactly that.", "p")}
         <ul class="ways">
           <li><span class="n">01</span><div><b>{L("Organizo antes de programar", "I plan before I code")}</b>{L("Tareas repartidas, ritmos claros y todo el mundo sabiendo qué toca esta semana.", "Tasks split, a clear pace, and everyone knowing what this week is for.")}</div></li>
           <li><span class="n">02</span><div><b>{L("Que salga adelante", "Ship it first")}</b>{L("Lo importante es entregar; el detalle se pule sobre algo que ya funciona.", "Delivering comes first; polish happens on something that already works.")}</div></li>
@@ -483,8 +552,8 @@ def index():
   <div class="wrap">
     <div class="section-head" data-reveal>
       <span class="num">03</span>
-      <h2 id="faq-title">{L("Preguntas frecuentes", "Questions I get asked")}</h2>
-      <p>{L("Lo que suele preguntarse en una primera llamada.", "What usually comes up on a first call.")}</p>
+      <h2 id="faq-title">{L("Lo que me preguntan los entrevistadores en la primera llamada", "What interviewers ask me on the first call")}</h2>
+      <p>{L("(Por favor, llamadme.)", "(Please call me.)")}</p>
     </div>
     <div class="faq">
 {faq_html}
@@ -510,8 +579,8 @@ def index():
             <span class="state"><span class="idle">{L("Copiar", "Copy")}</span><span class="done" role="status">{icon("check").replace('<svg ', '<svg width="14" height="14" style="display:inline;vertical-align:-2px" ')} {L("Copiado", "Copied")}</span></span>
           </button>
           <div class="row" style="margin-top:12px">
-            <a class="btn btn--primary" href="mailto:{EMAIL}?subject=Contacto%20desde%20tu%20portfolio">{icon("mail")}{L("Abrir email", "Open email")}</a>
-            <a class="btn" href="https://wa.me/{PHONE_WA}?text=Hola%20Octavio%2C%20he%20visto%20tu%20portfolio" target="_blank" rel="noopener">{icon("whatsapp")}WhatsApp</a>
+            <a class="btn btn--primary" href="{MAIL_ES}" data-es-href="{MAIL_ES}" data-en-href="{MAIL_EN}" data-zh-href="{MAIL_ZH}">{icon("mail")}{L("Abrir email", "Open email")}</a>
+            <a class="btn" href="https://wa.me/{PHONE_WA}?text={WA_ES}" data-es-href="https://wa.me/{PHONE_WA}?text={WA_ES}" data-en-href="https://wa.me/{PHONE_WA}?text={WA_EN}" data-zh-href="https://wa.me/{PHONE_WA}?text={WA_ZH}" target="_blank" rel="noopener">{icon("whatsapp")}WhatsApp</a>
           </div>
         </div>
       </div>
@@ -592,63 +661,98 @@ def case_page(*, file, title, h1, lede, eyebrow, facts, cover, toc, body, prev, 
 # =====================================================================
 # TFG
 # =====================================================================
+def fig(src, w, h, alt_es, alt_en, cap_es, cap_en, zoom=None, cls=""):
+    inner = f'<img src="{src}" alt="{html.escape(alt_es)}" data-es-alt="{html.escape(alt_es)}" data-en-alt="{html.escape(alt_en)}" width="{w}" height="{h}" loading="lazy" decoding="async">'
+    if zoom:
+        inner = f'<div class="gallery"><button type="button" data-full="{zoom}" aria-label="{html.escape(alt_es)}" data-es-aria-label="{html.escape(alt_es)}" data-en-aria-label="{html.escape(alt_en)}"><span class="skel" style="display:block">{inner}</span></button></div>'
+    else:
+        inner = f'<div class="skel figbox">{inner}</div>'
+    return f'<figure class="{cls}">{inner}<figcaption>{L(cap_es, cap_en)}</figcaption></figure>'
+
+
 def tfg():
+    modes = [("Rendimiento", "Performance", "480×270 · x4", "60", "29.3 dB"),
+             ("Equilibrado", "Balanced", "640×360 · x3", "48", "31.0 dB"),
+             ("Calidad", "Quality", "960×540 · x2", "25", "35.0 dB")]
+    mode_rows = "".join(f"<tr><td>{L(a, b)}</td><td>{c}</td><td>{d}</td><td>{e}</td></tr>" for a, b, c, d, e in modes)
     body = f"""
 <section id="problema" data-reveal>
   <h2>{L("El problema", "The problem")}</h2>
-  {L("La mayoría de PCs de juego tienen dos GPUs: la dedicada (dGPU), que renderiza el juego, y una integrada (iGPU) dentro del procesador. Durante una partida, la dedicada va al límite y la integrada está prácticamente parada. Es potencia de cálculo que ya has pagado y no usas.", "Most gaming PCs have two GPUs: the dedicated one (dGPU) that renders the game, and an integrated one (iGPU) inside the CPU. During a session the dGPU is maxed out while the iGPU sits almost idle — compute you've paid for and never use.", "p")}
-  {L("La pregunta del trabajo: ¿se puede usar esa iGPU para reescalar el juego con IA, al estilo de DLSS o FSR, sin robarle rendimiento a la dedicada?", "The question: can that iGPU upscale the game with AI, DLSS/FSR-style, without stealing performance from the dGPU?", "p")}
+  {L("La mayoría de equipos de juego tienen dos GPUs: la dedicada (dGPU), que renderiza el juego, y una integrada (iGPU) dentro del procesador. Durante una partida, la dedicada va al límite y la integrada está prácticamente parada. Es potencia de cálculo que ya has pagado y no usas.", "Most gaming machines have two GPUs: the dedicated one (dGPU) that renders the game, and an integrated one (iGPU) inside the CPU. During a session the dGPU is maxed out while the iGPU sits almost idle — compute you've paid for and never use.", "p")}
+  {L("DLSS, FSR y XeSS hacen el reescalado en la misma GPU que renderiza, así que compiten por ella. La pregunta del trabajo: ¿se puede pasar esa carga a la iGPU, en tiempo real y sin tocar el juego?", "DLSS, FSR and XeSS upscale on the same GPU that renders, so they compete for it. The question: can that load move to the iGPU, in real time, without touching the game?", "p")}
+</section>
+
+<section id="arquitectura" data-reveal>
+  <h2>{L("La arquitectura", "The architecture")}</h2>
+  {L("La dGPU renderiza el juego en pequeño; el frame viaja una sola vez por el bus PCIe hasta la memoria principal y la iGPU, que comparte esa memoria con la CPU, lo reconstruye a resolución completa. El jugador solo ve la reconstrucción.", "The dGPU renders the game small; the frame crosses the PCIe bus once into main memory, and the iGPU — which shares that memory with the CPU — rebuilds it at full resolution. The player only sees the reconstruction.", "p")}
+  {fig("assets/img/work/tfg-arquitectura.webp", 1400, 842, "Diagrama de la arquitectura híbrida: la dGPU renderiza en pequeño, el frame pasa a la memoria compartida y la iGPU lo reconstruye con IA", "Hybrid architecture diagram: the dGPU renders small, the frame goes to shared memory and the iGPU rebuilds it with AI", "Figura 3.1 de la memoria: reparto de tareas entre CPU, iGPU y dGPU.", "Figure 3.1 from the thesis: how work is split between CPU, iGPU and dGPU.", zoom="assets/img/work/tfg-arquitectura.webp")}
 </section>
 
 <section id="sistema" data-reveal>
-  <h2>{L("Cómo funciona", "How it works")}</h2>
-  {L("No es un prototipo para una gráfica concreta: es un sistema completo que funciona con cualquier aplicación OpenGL en Linux, sin modificar el juego.", "It isn't a one-off prototype: it's an end-to-end system that works with any OpenGL application on Linux, without modifying the game.", "p")}
+  <h2>{L("Cómo funciona por dentro", "How it works inside")}</h2>
+  {L("Es un sistema completo que funciona con cualquier aplicación OpenGL en Linux, sin modificarla. Todo el código es abierto.", "It's an end-to-end system that works with any OpenGL application on Linux, unmodified. All the code is open source.", "p")}
   <ol class="pipeline">
-    <li><b>{L("Render", "Render")}</b>{L("El juego corre oculto en una pantalla virtual, a baja resolución, en la dGPU.", "The game runs hidden on a virtual display, at low resolution, on the dGPU.")}</li>
-    <li><b>{L("Captura", "Capture")}</b>{L("Cada frame se intercepta de forma transparente en <code>glXSwapBuffers</code>.", "Each frame is intercepted transparently at <code>glXSwapBuffers</code>.")}</li>
-    <li><b>{L("Transferencia", "Transfer")}</b>{L("El frame viaja por memoria compartida POSIX.", "The frame travels over POSIX shared memory.")}</li>
-    <li><b>{L("Reconstrucción", "Rebuild")}</b>{L("La iGPU lo reescala con IA y se muestra en una sola ventana.", "The iGPU upscales it with AI and it's shown in a single window.")}</li>
+    <li><b>{L("Render", "Render")}</b>{L("El juego corre oculto en una pantalla virtual (Xvfb) y la dGPU lo renderiza a baja resolución vía PRIME.", "The game runs hidden on a virtual display (Xvfb) and the dGPU renders it at low resolution via PRIME.")}</li>
+    <li><b>{L("Captura", "Capture")}</b>{L("Una librería en C inyectada con <code>LD_PRELOAD</code> intercepta <code>glXSwapBuffers</code> y copia el frame.", "A C library injected with <code>LD_PRELOAD</code> intercepts <code>glXSwapBuffers</code> and copies the frame.")}</li>
+    <li><b>{L("Transferencia", "Transfer")}</b>{L("El frame se publica en memoria compartida POSIX, sin copias extra.", "The frame is published to POSIX shared memory, with no extra copies.")}</li>
+    <li><b>{L("Reconstrucción", "Rebuild")}</b>{L("La iGPU lo reescala con FSRCNN (OpenVINO) y se muestra en una sola ventana.", "The iGPU upscales it with FSRCNN (OpenVINO) and it's shown in a single window.")}</li>
   </ol>
-  {L("El usuario solo ve una ventana y juega con normalidad. Por debajo hay tres backends de inferencia intercambiables: <strong>OpenCV con OpenCL</strong>, <strong>OpenVINO</strong> para hardware Intel y <strong>ONNX Runtime con CUDA</strong>, con modelos como FSRCNN y Real-ESRGAN.", "The player sees one window and plays normally. Underneath there are three swappable inference backends: <strong>OpenCV with OpenCL</strong>, <strong>OpenVINO</strong> for Intel hardware and <strong>ONNX Runtime with CUDA</strong>, running models such as FSRCNN and Real-ESRGAN.", "p")}
+  <h3>{L("Los detalles que costaron", "The details that took work")}</h3>
+  <ul>
+    <li>{L("<strong>Motores modernos:</strong> Minecraft (LWJGL3/GLFW) no llama a <code>glXSwapBuffers</code> directamente, sino que pide el puntero en tiempo de ejecución. El wrapper intercepta también <code>dlsym</code> y <code>glXGetProcAddressARB</code>.", "<strong>Modern engines:</strong> Minecraft (LWJGL3/GLFW) doesn't call <code>glXSwapBuffers</code> directly; it asks for the pointer at runtime. The wrapper also intercepts <code>dlsym</code> and <code>glXGetProcAddressARB</code>.")}</li>
+    <li>{L("<strong>Shaders que esconden el frame:</strong> Iris/Photon dejan un framebuffer intermedio enlazado y la captura se paraba en silencio. Se fuerza la lectura del framebuffer de la ventana y se restaura después.", "<strong>Shaders hiding the frame:</strong> Iris/Photon leave an intermediate framebuffer bound and capture silently stopped. The wrapper forces a read from the window framebuffer and restores it afterwards.")}</li>
+    <li>{L("<strong>Captura sin presentación:</strong> en la pantalla virtual, presentar cada frame por software era el cuello de botella. Como nadie ve esa pantalla, el wrapper captura y no presenta: el render pasó de ~13 a 44,6 FPS.", "<strong>Capture without presenting:</strong> on the virtual display, presenting each frame in software was the bottleneck. Since nobody sees that display, the wrapper captures and skips presenting: render went from ~13 to 44.6 FPS.")}</li>
+    <li>{L("<strong>Jugar de verdad:</strong> teclado y ratón se reenvían al juego oculto con XTEST, en modo relativo durante la partida y absoluto en los menús.", "<strong>Actually playable:</strong> keyboard and mouse are forwarded to the hidden game via XTEST — relative during gameplay, absolute in menus.")}</li>
+  </ul>
 </section>
 
 <section id="resultados" data-reveal>
   <h2>{L("Qué salió", "Results")}</h2>
-  {L("Lo medí en un sobremesa con un Intel Core Ultra 7 265K (con iGPU) y una NVIDIA RTX 5060, comparando dónde se ejecuta cada parte.", "I measured it on a desktop with an Intel Core Ultra 7 265K (with iGPU) and an NVIDIA RTX 5060, comparing where each stage runs.", "p")}
-  <ul>
-    <li>{L("La captura y la transferencia de frames tienen una latencia muy baja: <strong>no son el cuello de botella</strong>.", "Frame capture and transfer have very low latency: <strong>they aren't the bottleneck</strong>.")}</li>
-    <li>{L("Lo que manda es el <strong>tiempo de inferencia</strong>. Los modelos ligeros van sobrados en la iGPU; los de más calidad son demasiado lentos a resoluciones de juego.", "What matters is <strong>inference time</strong>. Light models run comfortably on the iGPU; the highest-quality ones are too slow at gaming resolutions.")}</li>
-    <li>{L("Se sacan los puntos de cruce entre CPU e iGPU según modelo y resolución.", "It maps the CPU vs iGPU crossover points by model and resolution.")}</li>
-    <li>{L("El sistema completo es <strong>jugable en tiempo real</strong> con hardware de consumo y mejora al renderizado nativo a la misma resolución de salida.", "The full system is <strong>playable in real time</strong> on consumer hardware and beats native rendering at the same output resolution.")}</li>
-    <li>{L("Da <strong>más FPS con dGPU + iGPU</strong> que dejando que la dGPU haga también la superresolución: así la inferencia no compite con el render.", "It gets <strong>more FPS with dGPU + iGPU</strong> than letting the dGPU also do super-resolution — inference stops competing with rendering.")}</li>
+  {L("Ocho experimentos en un sobremesa con Intel Core Ultra 7 265K (con iGPU) y NVIDIA RTX 5060, usando glxgears, SuperTuxKart y Minecraft con el paquete de shaders Photon para saturar la dGPU.", "Eight experiments on a desktop with an Intel Core Ultra 7 265K (with iGPU) and an NVIDIA RTX 5060, using glxgears, SuperTuxKart and Minecraft with the Photon shader pack to saturate the dGPU.", "p")}
+  <ul class="numbers">
+    <li><b>+33&nbsp;%</b>{L("de fluidez frente a renderizar nativo a 1080p (57,6 frente a 43,4 FPS).", "smoother than native rendering at 1080p (57.6 vs 43.4 FPS).")}</li>
+    <li><b>×2</b>{L("casi, frente al nativo en 4K (54,9 frente a 25,7 FPS).", "almost, versus native at 4K (54.9 vs 25.7 FPS).")}</li>
+    <li><b>15/15</b>{L("combinaciones en las que la iGPU gana a hacer la IA en la propia dGPU, hasta +26,6 FPS.", "combinations where the iGPU beats running the AI on the dGPU itself, up to +26.6 FPS.")}</li>
+    <li><b>&lt;1&nbsp;ms</b>{L("para capturar y mover cada frame: menos del 3&nbsp;% del retardo.", "to capture and move each frame: under 3% of the latency.")}</li>
   </ul>
-  {L("Al final, el equilibrio entre calidad y fluidez quedó recogido en modos configurables, parecidos a los de las soluciones comerciales.", "The quality/smoothness trade-off ended up as configurable modes, much like commercial upscalers.", "p")}
+  {fig("assets/img/work/tfg-fps-x3.webp", 1040, 650, "Gráfica de FPS del juego según la resolución de entrada con escala x3: la híbrida se mantiene arriba mientras la dedicada y la nativa caen", "Game FPS by input resolution at x3: hybrid stays on top while dedicated and native drop", "FPS del juego con escala x3: híbrida (IA en iGPU), dedicada (IA en dGPU) y render nativo.", "Game FPS at x3 scale: hybrid (AI on iGPU), dedicated (AI on dGPU) and native render.", zoom="assets/img/work/tfg-fps-x3.webp")}
+  {L("La clave está en un experimento de carga: con la dGPU libre, la inferencia allí es 2,5 veces más rápida que en la iGPU. Pero cuando la dGPU está ocupada renderizando, su tiempo se triplica (de 4,1 a 11,1 ms) mientras la iGPU sigue estable. La ventaja no es que la iGPU sea más rápida: es que libera a la dGPU justo cuando más falta hace.", "The key is a load experiment: with the dGPU free, inference there is 2.5× faster than on the iGPU. But once the dGPU is busy rendering, its time triples (4.1 → 11.1 ms) while the iGPU stays flat. The win isn't that the iGPU is faster — it's that it frees the dGPU exactly when it's needed.", "p")}
+  <h3>{L("Modos de calidad", "Quality modes")}</h3>
+  {L("Como en DLSS, el sistema ofrece tres preajustes (salida 1080p):", "Like DLSS, the system offers three presets (1080p output):", "p")}
+  <table class="modes">
+    <thead><tr><th>{L("Modo", "Mode")}</th><th>{L("Render", "Render")}</th><th>FPS</th><th>PSNR</th></tr></thead>
+    <tbody>{mode_rows}</tbody>
+  </table>
+  {fig("assets/img/work/tfg-zoom.webp", 480, 830, "Ampliación de la misma zona: render nativo, reescalado bicúbico y reconstrucción FSRCNN", "Zoomed crop of the same area: native render, bicubic upscale and FSRCNN reconstruction", "De arriba abajo: nativo, bicúbico y FSRCNN en la iGPU (modo Equilibrado).", "Top to bottom: native, bicubic and FSRCNN on the iGPU (Balanced mode).", zoom="assets/img/work/tfg-zoom.webp", cls="narrow")}
+  {L("Y una conclusión honesta: la calidad la manda la resolución a la que renderizas (+11 dB de 144p a 720p), no el modelo. FSRCNN se eligió por ligero, no por listo, y apenas mejora al bicúbico. El margen de calidad está en usar un modelo mejor; la arquitectura ya funciona.", "And an honest takeaway: quality is driven by the render resolution (+11 dB from 144p to 720p), not the model. FSRCNN was picked for being light, not clever, and barely beats bicubic. The quality headroom is in a better model; the architecture already works.", "p")}
 </section>
 
 <section id="aprendido" data-reveal>
   <h2>{L("Lo que me llevo", "What I took away")}</h2>
-  {L("Empezó en unas prácticas en la propia EPS y acabó siendo el TFG. Me obligó a bajar a capas que en la carrera se tocan poco (GLX, memoria compartida, backends de inferencia) y a medir antes de optimizar: el cuello de botella no estaba donde yo esperaba.", "It started as an internship at the EPS and grew into my thesis. It pushed me into layers you rarely touch at university (GLX, shared memory, inference backends) and taught me to measure before optimising: the bottleneck wasn't where I expected.", "p")}
-  <div class="callout"><b>{L("Nota: 10 · Matrícula de Honor", "Grade: 10/10 · with honours")}</b>{L("Tutores: Antonio Maciá-Lillo e Higinio Mora (Dpto. de Tecnología Informática y Computación, UA).", "Supervisors: Antonio Maciá-Lillo and Higinio Mora (Dept. of Computer Technology, Univ. of Alicante).")}</div>
-  <p><a class="btn btn--ink" href="https://hdl.handle.net/10045/170538" target="_blank" rel="noopener">{L("Leer la memoria en RUA", "Read the thesis (RUA, Spanish)")}{icon("ext", "arrow")}</a></p>
+  {L("Empezó en unas prácticas en la EPS en marzo de 2025 y acabó siendo el TFG en julio de 2026. Me obligó a bajar a capas que en la carrera solo había visto de pasada: interceptar llamadas de OpenGL, pelearme con drivers, compositores y servidores gráficos.", "It started as an internship at the EPS in March 2025 and became my thesis in July 2026. It pushed me into layers I'd only glimpsed at university: intercepting OpenGL calls, wrestling with drivers, compositors and display servers.", "p")}
+  {L("Lo que más me enseñó fueron los errores: medidas que tuve que repetir por dejar el juego abierto de fondo, o una pantalla virtual que durante semanas parecía hacer inviable la arquitectura y acabó siendo su mejor escenario. Lo siguiente sería pasar el postprocesado a la GPU, montar un pipeline asíncrono y probar la NPU del procesador.", "What taught me most were the mistakes: measurements I had to redo because the game was left running in the background, or a virtual display that for weeks seemed to kill the idea and ended up being its best setup. Next steps would be moving post-processing to the GPU, an asynchronous pipeline and trying the CPU's NPU.", "p")}
+  <div class="callout"><b>{L("Nota: 10 · Matrícula de Honor", "Grade: 10/10 · with distinction")}</b>{L("Tutores: Antonio Macía Lillo e Higinio Mora Mora (Dpto. de Tecnología Informática y Computación, Universidad de Alicante).", "Supervisors: Antonio Macía Lillo and Higinio Mora Mora (Dept. of Computer Technology, University of Alicante).")}</div>
+  <p style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn--ink" href="https://hdl.handle.net/10045/170538" target="_blank" rel="noopener">{L("Leer la memoria en RUA", "Read the thesis (RUA, Spanish)")}{icon("ext", "arrow")}</a><a class="btn" href="https://github.com/cloudlab-aia/game_external_proc" target="_blank" rel="noopener">{icon("github")}{L("Código en GitHub", "Code on GitHub")}</a></p>
 </section>
 """
-    cover = f"""<div class="case-cover"><div class="cover-type cover-type--tfg" aria-hidden="true"><span>dGPU (render) → glXSwapBuffers → POSIX shm → iGPU (IA)</span><b>{L("Dos GPUs,<br>un juego", "Two GPUs,<br>one game")}</b></div></div>"""
+    cover = f"""<figure class="case-cover-fig"><div class="case-cover skel">{img("assets/img/work/tfg-fsrcnn-1280.webp", "Minecraft con shaders Photon: un río entre bambú, reconstruido a 1080p por FSRCNN en la iGPU desde 640×360", 1280, 720, eager=True).replace('<img ', '<img data-en-alt="Minecraft with Photon shaders: a river among bamboo, rebuilt to 1080p by FSRCNN on the iGPU from 640×360" ')}</div><figcaption>{L("Frame reconstruido por la iGPU: el juego renderizó a 640×360 y lo que ves sale a 1080p.", "Frame rebuilt by the iGPU: the game rendered at 640×360 and what you see comes out at 1080p.")}</figcaption></figure>"""
     case_page(
         file="tfg-superresolucion.html",
         title="TFG: superresolución con IA",
         title_en="Thesis: AI super-resolution",
         h1=L("Reescalar juegos con IA usando la GPU que nadie usa", "Upscaling games with AI on the GPU nobody uses"),
-        lede=L("Trabajo de Fin de Grado: un sistema híbrido dGPU + iGPU que reconstruye cada frame a resolución completa en tiempo real. Nota: 10 con Matrícula de Honor.", "Bachelor's thesis: a hybrid dGPU + iGPU system that rebuilds every frame at full resolution in real time. Graded 10/10 with honours."),
+        lede=L("Trabajo de Fin de Grado: un sistema híbrido dGPU + iGPU que reconstruye cada frame a resolución completa en tiempo real, sin modificar el juego. Nota: 10 con mención a Matrícula de Honor.", "Bachelor's thesis: a hybrid dGPU + iGPU system that rebuilds every frame at full resolution in real time, without modifying the game. Graded 10/10 with distinction."),
         eyebrow=L("Caso de estudio · Investigación", "Case study · Research"),
-        facts=[("Año", "Year", "2025–2026"), ("Tipo", "Type", L("TFG · Universidad de Alicante", "Thesis · Univ. of Alicante")), ("Resultado", "Result", L("10 · Matrícula de Honor", "10/10 · honours")), ("Stack", "Stack", "OpenGL/GLX · OpenCL · OpenVINO · ONNX Runtime · Linux")],
+        facts=[("Periodo", "Period", L("Mar 2025 – Jul 2026", "Mar 2025 – Jul 2026")), ("Tipo", "Type", L("TFG · Universidad de Alicante", "Thesis · Univ. of Alicante")), ("Resultado", "Result", L("10 · Matrícula de Honor", "10/10 · distinction")), ("Stack", "Stack", "C · Python · OpenGL/GLX · OpenVINO · ONNX Runtime · Linux")],
         cover=cover,
-        toc=[("problema", "El problema", "The problem"), ("sistema", "Cómo funciona", "How it works"), ("resultados", "Qué salió", "Results"), ("aprendido", "Lo que me llevo", "Takeaways")],
+        toc=[("problema", "El problema", "The problem"), ("arquitectura", "La arquitectura", "The architecture"), ("sistema", "Cómo funciona", "How it works"), ("resultados", "Qué salió", "Results"), ("aprendido", "Lo que me llevo", "Takeaways")],
         body=body,
         prev=("tower-hero.html", "Tower Hero"),
         nxt=("castle-of-shadows.html", "Castle of Shadows"),
-        desc_es="TFG de Octavio Gregorio (10, Matrícula de Honor): sistema híbrido dGPU + iGPU para superresolución con IA en videojuegos en tiempo real, con OpenCL, OpenVINO y ONNX Runtime.",
-        desc_en="Octavio Gregorio's thesis (10/10, honours): a hybrid dGPU + iGPU system for real-time AI super-resolution in games, using OpenCL, OpenVINO and ONNX Runtime.",
-        extra_ld={"@type": "Thesis", "inSupportOf": "Grado en Ingeniería Multimedia", "sameAs": "https://hdl.handle.net/10045/170538", "datePublished": "2026-09-10", "sourceOrganization": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante"}, "keywords": "superresolución, upscaling, GPU integrada, GPU dedicada, arquitectura híbrida, videojuegos, FSRCNN, RealESRGAN, OpenCL"},
+        desc_es="TFG de Octavio Gregorio (10, Matrícula de Honor): sistema híbrido dGPU + iGPU para superresolución con IA en videojuegos. +33 % de FPS frente al render nativo a 1080p.",
+        desc_en="Octavio Gregorio's thesis (10/10, distinction): a hybrid dGPU + iGPU system for real-time AI super-resolution in games. +33% FPS over native rendering at 1080p.",
+        extra_ld={"@type": "Thesis", "inSupportOf": "Grado en Ingeniería Multimedia", "sameAs": ["https://hdl.handle.net/10045/170538", "https://github.com/cloudlab-aia/game_external_proc"], "datePublished": "2026-09-10", "image": BASE + "assets/img/work/tfg-fsrcnn-1280.webp", "sourceOrganization": {"@type": "CollegeOrUniversity", "name": "Universidad de Alicante"}, "keywords": "superresolución, upscaling, GPU integrada, GPU dedicada, arquitectura híbrida, videojuegos, FSRCNN, RealESRGAN, OpenCL, OpenVINO"},
+        lightbox_on=True,
     )
 
 
@@ -661,15 +765,16 @@ def castle():
   <h2>{L("El proyecto", "The project")}</h2>
   {L("Castle of Shadows es un videojuego 3D de acción y mazmorras hecho en equipo, dentro de Zero Studios, para la asignatura de Videojuegos de la carrera. La condición: nada de Unity ni Unreal. El motor lo construye el propio equipo en C++ sobre OpenGL y raylib.", "Castle of Shadows is a 3D action/dungeon game made as a team, under Zero Studios, for the Games course of my degree. The rule: no Unity, no Unreal. The team builds its own engine in C++ on top of OpenGL and raylib.", "p")}
   {L("Eso significa que cosas que un motor comercial da hechas (render, cámara, escena, entrada, colisiones) hay que diseñarlas, repartirlas y mantenerlas entre todos mientras el juego avanza.", "That means everything a commercial engine gives you for free (rendering, camera, scene, input, collisions) has to be designed, split up and maintained by the team while the game moves forward.", "p")}
+  {yt("oQshnOxXmU0", "Castle of Shadows — tráiler", "Castle of Shadows — trailer", "Ver vídeo", "Watch video")}
 </section>
 
 <section id="rol" data-reveal>
   <h2>{L("Mi papel", "My role")}</h2>
-  {L("Hice de coordinador del equipo, llevé el game design y programé en varias partes del juego según hiciera falta.", "I coordinated the team, owned the game design and programmed across different parts of the game as needed.", "p")}
+  {L("Coordiné al equipo, programé el motor y me encargué de que el producto saliera adelante.", "I led the team, programmed the engine and made sure the product shipped.", "p")}
   <ul>
     <li>{L("<strong>Planificación:</strong> reparto de tareas y ritmo de trabajo del equipo durante todo el curso.", "<strong>Planning:</strong> splitting tasks and setting the team's pace for the whole year.")}</li>
     <li>{L("<strong>Prioridades:</strong> decidir qué funcionalidades entraban en cada entrega y cuáles esperaban.", "<strong>Priorities:</strong> deciding which features made each milestone and which waited.")}</li>
-    <li>{L("<strong>Arquitectura:</strong> participar en las decisiones técnicas del motor.", "<strong>Architecture:</strong> taking part in the engine's technical decisions.")}</li>
+    <li>{L("<strong>Motor:</strong> programación del motor propio y participación en sus decisiones técnicas.", "<strong>Engine:</strong> programming the in-house engine and taking part in its technical decisions.")}</li>
     <li>{L("<strong>Seguimiento:</strong> controlar entregables para llegar a cada hito con algo jugable.", "<strong>Tracking:</strong> keeping an eye on deliverables so every milestone had something playable.")}</li>
   </ul>
 </section>
@@ -677,26 +782,26 @@ def castle():
 <section id="leccion" data-reveal>
   <h2>{L("Por qué lo cuento", "Why it matters")}</h2>
   {L("Es el proyecto donde más se juntan las dos cosas que quiero hacer: entender la parte técnica lo bastante como para tomar decisiones con criterio, y organizar a la gente para que esas decisiones se conviertan en un juego terminado.", "It's the project where the two things I want to do meet: understanding the tech well enough to make sound calls, and organising people so those calls turn into a finished game.", "p")}
-  <div class="callout"><b>{L("Capturas y vídeo, en camino", "Screenshots and video coming")}</b>{L('Estoy preparando material del juego. Mientras, el equipo publica avances en <a class="link" href="https://www.instagram.com/realzerostudios/" target="_blank" rel="noopener">Instagram @realzerostudios</a>.', 'I\'m putting together footage. Meanwhile the team posts progress on <a class="link" href="https://www.instagram.com/realzerostudios/" target="_blank" rel="noopener">Instagram @realzerostudios</a>.')}</div>
+  <div class="callout"><b>{L("Capturas y vídeo, en camino", "More screenshots and video coming")}</b>{L('Se trabajará en la mejora del producto para pulirlo. Mientras, el equipo publica avances en <a class="link" href="https://www.instagram.com/realzerostudios/" target="_blank" rel="noopener">Instagram @realzerostudios</a>.', 'We\'ll keep improving and polishing the game. Meanwhile the team posts progress on <a class="link" href="https://www.instagram.com/realzerostudios/" target="_blank" rel="noopener">Instagram @realzerostudios</a>.')}</div>
 </section>
 """
-    cover = """<div class="case-cover"><div class="cover-type" aria-hidden="true"><span>Zero Studios · C++ · OpenGL · raylib</span><b>Castle of Shadows</b></div></div>"""
+    cover = f"""<div class="case-cover skel">{img("assets/img/work/cos-cover-1600.webp", "Arte de Castle of Shadows: un caballero con armadura low-poly apoyado en su espada sobre fondo rojo, junto al logo del juego", 1600, 900, eager=True, srcset=work("cos-cover"), sizes="(max-width: 1200px) 100vw, 1120px").replace('<img ', '<img data-en-alt="Castle of Shadows key art: a low-poly armoured knight leaning on his sword over a red background, next to the game logo" ')}</div>"""
     case_page(
         file="castle-of-shadows.html",
         title="Castle of Shadows",
         title_en="Castle of Shadows",
         h1="Castle of Shadows",
-        lede=L("Un juego 3D de acción y mazmorras sobre un motor propio en C++. Mi papel: coordinar al equipo, llevar el game design y programar donde hiciera falta.", "A 3D action/dungeon game on an in-house C++ engine. My role: lead the team, own game design and program wherever needed."),
+        lede=L("Un juego 3D de acción y mazmorras sobre un motor propio en C++. Coordiné al equipo, programé el motor y sacamos el producto adelante.", "A 3D action/dungeon game on an in-house C++ engine. I led the team, programmed the engine and we shipped the product."),
         eyebrow=L("Caso de estudio · Videojuego en equipo", "Case study · Team game"),
-        facts=[("Año", "Year", "2025–2026"), ("Equipo", "Team", "Zero Studios"), ("Rol", "Role", L("Coordinación · game design · programación", "Team lead · game design · programming")), ("Stack", "Stack", "C++ · OpenGL · raylib")],
+        facts=[("Año", "Year", "2025–2026"), ("Equipo", "Team", "Zero Studios"), ("Rol", "Role", L("Coordinación · programación del motor", "Team lead · engine programming")), ("Stack", "Stack", "C++ · OpenGL · raylib")],
         cover=cover,
         toc=[("proyecto", "El proyecto", "The project"), ("rol", "Mi papel", "My role"), ("leccion", "Por qué lo cuento", "Why it matters")],
         body=body,
         prev=("tfg-superresolucion.html", L("TFG: superresolución", "Thesis: super-resolution")),
         nxt=("tower-hero.html", "Tower Hero"),
-        desc_es="Castle of Shadows: videojuego 3D de acción con motor propio en C++, OpenGL y raylib. Octavio Gregorio coordinó al equipo de Zero Studios, el game design y la programación.",
-        desc_en="Castle of Shadows: 3D action game on an in-house C++/OpenGL/raylib engine. Octavio Gregorio led the Zero Studios team, game design and programming.",
-        extra_ld={"@type": "VideoGame", "gamePlatform": "PC", "genre": "Action", "author": {"@type": "Organization", "name": "Zero Studios"}, "contributor": {"@id": BASE + "#person"}},
+        desc_es="Castle of Shadows: videojuego 3D de acción con motor propio en C++, OpenGL y raylib. Octavio Gregorio coordinó al equipo de Zero Studios y programó el motor.",
+        desc_en="Castle of Shadows: 3D action game on an in-house C++/OpenGL/raylib engine. Octavio Gregorio led the Zero Studios team and programmed the engine.",
+        extra_ld={"@type": "VideoGame", "gamePlatform": "PC", "genre": "Action", "image": BASE + "assets/img/work/cos-cover-1600.webp", "author": {"@type": "Organization", "name": "Zero Studios"}, "contributor": {"@id": BASE + "#person"}},
     )
 
 
@@ -969,7 +1074,7 @@ def archive():
     let n = 0;
     items.forEach(li => {{ const ok = (cat === 'all' || li.dataset.cat === cat) && (!term || li.dataset.search.includes(term)); li.hidden = !ok; if (ok) n++; }});
     empty.hidden = n > 0;
-    count.textContent = document.documentElement.lang === 'en' ? n + ' files' : n + ' archivos';
+    const lg = document.documentElement.lang; count.textContent = lg === 'en' ? n + ' files' : lg === 'zh-Hant' ? n + ' 個檔案' : n + ' archivos';
   }};
   q.addEventListener('input', run);
   chips.forEach(c => c.addEventListener('click', () => {{ cat = c.dataset.filter; chips.forEach(x => x.setAttribute('aria-pressed', String(x === c))); run(); }}));
@@ -1018,6 +1123,23 @@ def privacidad():
   <h2>Your rights</h2>
   <p>You can ask for access, correction or deletion of anything you've sent me by emailing <a class="link" href="mailto:{EMAIL}">{EMAIL}</a>. You can also complain to the Spanish data protection authority, the <a class="link" href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a>.</p>
 </div>"""
+    zhb = f"""<div lang="zh-Hant">
+  <p><strong>最後更新：</strong>2026 年 9 月 23 日。</p>
+  <h2>負責人</h2>
+  <p>Octavio Gregorio Guerrero，西班牙阿利坎特省埃爾達（Elda）。聯絡方式：<a class="link" href="mailto:{EMAIL}">{EMAIL}</a>。</p>
+  <h2>我收集哪些資料</h2>
+  <p>完全不收集。本網站沒有表單、沒有分析工具、沒有廣告，也沒有 Cookie。如果你透過電子郵件或 WhatsApp 聯絡我，我只會用你的訊息來回覆你；只要你提出要求，我就會刪除它。</p>
+  <h2>第三方服務</h2>
+  <ul>
+    <li><strong>GitHub Pages</strong>（GitHub Inc.）託管本網站，可能在技術日誌中記錄你的 IP。</li>
+    <li><strong>Google Fonts</strong> 提供網站字型。</li>
+    <li><strong>YouTube</strong>（隱私強化模式）只會在你點擊影片時載入。</li>
+  </ul>
+  <h2>本機儲存</h2>
+  <p>瀏覽器會在本機儲存 <code>theme</code> 與 <code>lang</code>，用來記住淺色／深色模式與語言。這是技術性資料，無法識別任何人，也不會離開你的裝置。</p>
+  <h2>你的權利</h2>
+  <p>你可以寫信到 <a class="link" href="mailto:{EMAIL}">{EMAIL}</a>，要求查閱、更正或刪除你寄給我的任何資料。你也可以向西班牙資料保護局 <a class="link" href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a> 提出申訴。</p>
+</div>"""
     out = head(
         path="privacidad.html",
         title_es="Política de privacidad · Octavio Gregorio",
@@ -1036,6 +1158,7 @@ def privacidad():
   <div class="prose legal" style="margin-top:40px">
 {es}
 {en}
+{zhb}
   </div>
 </section>
 </main>
@@ -1081,3 +1204,7 @@ def notfound():
 
 if __name__ == "__main__":
     index(); tfg(); castle(); tower(); interiorismo(); animation(); scripting(); archive(); privacidad(); notfound()
+    if ZH_MISSING:
+        miss = os.path.join(os.path.dirname(ZH_PATH), "zh_missing.json")
+        json.dump(ZH_MISSING, open(miss, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print(f"[zh] {len(ZH_MISSING)} strings without Traditional Chinese (English used) -> {miss}")

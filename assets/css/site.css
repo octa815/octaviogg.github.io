@@ -1808,3 +1808,10 @@ kbd {
 }
 .gb-controls { touch-action: none; }
 body.gb-in-view .to-top { opacity: 0; pointer-events: none; }
+.gb-keys div { grid-template-columns: minmax(0, 1fr) auto; }
+.gb-keys dt { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.gb-keys kbd { margin-right: 0; }
+.kbd-or { color: var(--ink-3); font-size: 0.85rem; margin: 0 4px; }
+.gb-keys div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.gb-keys dt { flex-wrap: nowrap; }
+.gb-keys dd { color: var(--ink); font-weight: 500; }

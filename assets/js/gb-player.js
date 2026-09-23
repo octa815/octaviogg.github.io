@@ -200,8 +200,8 @@
   const KEYS = {
     ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right",
     KeyW: "up", KeyS: "down", KeyA: "left", KeyD: "right",
-    KeyX: "a", KeyK: "a", KeyZ: "b", KeyJ: "b",
-    Enter: "start", ShiftLeft: "select", ShiftRight: "select", Backspace: "select",
+    KeyF: "a",
+    Enter: "start", NumpadEnter: "start",
   };
   const typing = (el) => el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
   function onKey(e, down) {

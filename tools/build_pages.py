@@ -863,11 +863,9 @@ def tower():
     <div class="gb-side">
       <p class="sub-h">{L("Controles con teclado", "Keyboard controls")}</p>
       <dl class="gb-keys">
-        <div><dt><kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd></dt><dd>{L("Cruceta", "D-pad")}</dd></div>
-        <div><dt><kbd>X</kbd></dt><dd>A</dd></div>
-        <div><dt><kbd>Z</kbd></dt><dd>B</dd></div>
-        <div><dt><kbd>Enter</kbd></dt><dd>Start</dd></div>
-        <div><dt><kbd>Shift</kbd></dt><dd>Select</dd></div>
+        <div><dt><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> {L("o", "or", "span", "kbd-or")} <kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd></dt><dd>{L("Moverse", "Move")}</dd></div>
+        <div><dt><kbd>F</kbd></dt><dd>{L("Botón A", "A button")}</dd></div>
+        <div><dt><kbd>Enter</kbd></dt><dd>{L("Pausar / reanudar", "Pause / resume")}</dd></div>
       </dl>
       <p class="muted" style="font-size:.92rem">{L("En móvil, usa los botones de la consola. También funciona con mando.", "On mobile, use the console's buttons. Gamepads work too.")}</p>
       <div class="gb-tools">

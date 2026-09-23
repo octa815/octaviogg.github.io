@@ -13,7 +13,7 @@ LINKEDIN = "https://www.linkedin.com/in/octagg"
 GITHUB = "https://github.com/octa815"
 ITCH = "https://pocketboy-games.itch.io/towerhero"
 PHONE_WA = "34694455979"
-V = "20260923c"  # cache-busting for css/js
+V = "20260923d"  # cache-busting for css/js
 
 from urllib.parse import quote
 MSG_ES = "Hola Octavio, he visto tu portfolio y me encantaría contratarte ;)"
@@ -605,7 +605,7 @@ def index():
 # =====================================================================
 # CASE STUDY helper
 # =====================================================================
-def case_page(*, file, title, h1, lede, eyebrow, facts, cover, toc, body, prev, nxt, desc_es, desc_en, title_en, extra_ld=None, lightbox_on=False, crumb_parent=("Proyectos", "Work", "index.html#trabajo")):
+def case_page(*, scripts=(), file, title, h1, lede, eyebrow, facts, cover, toc, body, prev, nxt, desc_es, desc_en, title_en, extra_ld=None, lightbox_on=False, crumb_parent=("Proyectos", "Work", "index.html#trabajo")):
     crumbs = [("Inicio", "Home", "index.html"), crumb_parent, (title, title, file)]
     art = {
         "@type": "CreativeWork",
@@ -653,6 +653,7 @@ def case_page(*, file, title, h1, lede, eyebrow, facts, cover, toc, body, prev, 
 {next_case(prev, nxt)}
 </main>
 {lightbox() if lightbox_on else ""}
+{"".join(scripts)}
 """
     out += footer()
     write(file, out)
@@ -827,6 +828,58 @@ def tower():
   {yt("ULPoZf-G2Yo", "Tower Hero — gameplay", "Tower Hero — gameplay", "Ver gameplay", "Watch gameplay")}
 </section>
 
+<section id="jugar" data-reveal>
+  <h2>{L("Juégalo aquí", "Play it here")}</h2>
+  {L("Es la misma ROM que presentamos al concurso, corriendo en un emulador de Game Boy dentro de la página. No se descarga nada hasta que pulses encender.", "It's the same ROM we entered in the jam, running in a Game Boy emulator right in the page. Nothing downloads until you press power.", "p")}
+  <div class="gb" id="gb" data-rom="assets/games/towerhero.gb" data-cta-hide>
+    <div class="gb-body">
+      <div class="gb-bezel">
+        <span class="gb-led" aria-hidden="true"></span>
+        <div class="gb-lcd">
+          <canvas id="gb-canvas" width="160" height="144" tabindex="-1" aria-label="Pantalla de la Game Boy" data-es-aria-label="Pantalla de la Game Boy" data-en-aria-label="Game Boy screen"></canvas>
+          <button class="gb-power" type="button" id="gb-power">{icon("play")}{L("Encender", "Power on")}</button>
+          <p class="gb-msg" id="gb-msg" role="status" hidden></p>
+        </div>
+        <p class="gb-brand">PocketBoy <i>TOWER HERO</i></p>
+      </div>
+      <div class="gb-controls" aria-label="Controles" data-es-aria-label="Controles" data-en-aria-label="Controls">
+        <div class="gb-dpad">
+          <button type="button" data-btn="up" aria-label="Arriba" data-es-aria-label="Arriba" data-en-aria-label="Up"></button>
+          <button type="button" data-btn="left" aria-label="Izquierda" data-es-aria-label="Izquierda" data-en-aria-label="Left"></button>
+          <span aria-hidden="true"></span>
+          <button type="button" data-btn="right" aria-label="Derecha" data-es-aria-label="Derecha" data-en-aria-label="Right"></button>
+          <button type="button" data-btn="down" aria-label="Abajo" data-es-aria-label="Abajo" data-en-aria-label="Down"></button>
+        </div>
+        <div class="gb-ab">
+          <button type="button" data-btn="b">B</button>
+          <button type="button" data-btn="a">A</button>
+        </div>
+        <div class="gb-ss">
+          <button type="button" data-btn="select">SELECT</button>
+          <button type="button" data-btn="start">START</button>
+        </div>
+      </div>
+    </div>
+    <div class="gb-side">
+      <p class="sub-h">{L("Controles con teclado", "Keyboard controls")}</p>
+      <dl class="gb-keys">
+        <div><dt><kbd>←</kbd><kbd>↑</kbd><kbd>→</kbd><kbd>↓</kbd></dt><dd>{L("Cruceta", "D-pad")}</dd></div>
+        <div><dt><kbd>X</kbd></dt><dd>A</dd></div>
+        <div><dt><kbd>Z</kbd></dt><dd>B</dd></div>
+        <div><dt><kbd>Enter</kbd></dt><dd>Start</dd></div>
+        <div><dt><kbd>Shift</kbd></dt><dd>Select</dd></div>
+      </dl>
+      <p class="muted" style="font-size:.92rem">{L("En móvil, usa los botones de la consola. También funciona con mando.", "On mobile, use the console's buttons. Gamepads work too.")}</p>
+      <div class="gb-tools">
+        <button class="btn btn--sm" type="button" id="gb-pause" disabled>{L("Pausa", "Pause")}</button>
+        <button class="btn btn--sm" type="button" id="gb-reset" disabled>{L("Reiniciar", "Reset")}</button>
+        <button class="btn btn--sm" type="button" id="gb-full" disabled>{L("Pantalla completa", "Fullscreen")}</button>
+        <button class="btn btn--sm" type="button" id="gb-sound" aria-pressed="true" disabled>{L("Sonido: sí", "Sound: on")}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="restricciones" data-reveal>
   <h2>{L("Programar para una Game Boy", "Programming for a Game Boy")}</h2>
   {L("No hay motor ni lenguaje de alto nivel: todo está escrito en ensamblador Z80 (el dialecto de la CPU de la Game Boy). La consola tiene una pantalla de 160×144 píxeles, cuatro tonos y unos pocos KB de RAM de trabajo, así que cada sprite, cada byte de memoria y cada ciclo cuentan.", "No engine, no high-level language: everything is written in Z80-style assembly for the Game Boy's CPU. The console has a 160×144 screen, four shades and a few KB of working RAM, so every sprite, byte and cycle counts.", "p")}
@@ -852,7 +905,7 @@ def tower():
         eyebrow=L("Caso de estudio · Game Boy", "Case study · Game Boy"),
         facts=[("Año", "Year", "2025"), ("Rol", "Role", L("PM · programación", "PM · programming")), ("Equipo", "Team", "PocketBoy (3) · Game Boy"), ("Stack", "Stack", L("Ensamblador Z80", "Z80 assembly"))],
         cover=cover,
-        toc=[("juego", "El juego", "The game"), ("restricciones", "Programar para Game Boy", "Game Boy constraints"), ("concurso", "GBRetroDev'25", "GBRetroDev'25")],
+        toc=[("juego", "El juego", "The game"), ("jugar", "Juégalo aquí", "Play it here"), ("restricciones", "Programar para Game Boy", "Game Boy constraints"), ("concurso", "GBRetroDev'25", "GBRetroDev'25")],
         body=body,
         prev=("castle-of-shadows.html", "Castle of Shadows"),
         nxt=("tfg-superresolucion.html", L("TFG: superresolución", "Thesis: super-resolution")),
@@ -860,6 +913,7 @@ def tower():
         desc_en="Tower Hero: a Game Boy tower defense in Z80 assembly, official GBRetroDev'25 entry. Case study by Octavio Gregorio with screenshots and gameplay.",
         extra_ld={"@type": "VideoGame", "gamePlatform": "Game Boy", "genre": "Tower defense", "url": BASE + "tower-hero.html", "sameAs": ITCH, "image": BASE + "assets/img/work/towerhero-cover.webp"},
         lightbox_on=True,
+        scripts=['<script src="assets/js/gb-player.js?v=' + V + '" defer></script>'],
     )
 
 
